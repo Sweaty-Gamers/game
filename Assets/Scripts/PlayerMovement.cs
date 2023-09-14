@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 {
     public float movementSpeed;
     public float jumpForce;
+    public float sprintFactor;
 
     private new Rigidbody rigidbody;
     private bool isAirborne = false;
@@ -23,16 +24,21 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
+        float speed = movementSpeed;
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            speed *= sprintFactor;
+        }
+
         if (horizontal > 0) {
-            rigidbody.AddRelativeForce(new Vector3(movementSpeed, 0, 0));
+            rigidbody.AddRelativeForce(new Vector3(speed, 0, 0));
         } else if (horizontal < 0) {
-            rigidbody.AddRelativeForce(new Vector3(-movementSpeed, 0, 0));
+            rigidbody.AddRelativeForce(new Vector3(-speed, 0, 0));
         }
 
         if (vertical > 0) {
-            rigidbody.AddRelativeForce(new Vector3(0, 0, movementSpeed));
+            rigidbody.AddRelativeForce(new Vector3(0, 0, speed));
         } else if (vertical < 0 ) {
-            rigidbody.AddRelativeForce(new Vector3(0, 0, -movementSpeed));
+            rigidbody.AddRelativeForce(new Vector3(0, 0, -speed));
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && !isAirborne) {
