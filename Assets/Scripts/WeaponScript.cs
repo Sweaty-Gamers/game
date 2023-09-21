@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponScript : MonoBehaviour
@@ -24,7 +22,7 @@ public class WeaponScript : MonoBehaviour
 
     IEnumerator DespawnBullet(GameObject bullet)
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
         Destroy(bullet);
     }
 
@@ -35,6 +33,7 @@ public class WeaponScript : MonoBehaviour
             StartCoroutine(Reload());
             return;
         } else if (bulletsLeftInMag <= 0) {
+            // TODO: play *click* sound for empty mag
             return;
         }
 
