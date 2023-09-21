@@ -25,8 +25,15 @@ public class WeaponScript : MonoBehaviour
     {
         bulletsLeftInMag = magSize;
         ammoText = ammoUi.GetComponent<TextMeshProUGUI>();
+    }
 
+    void OnEnable() {
         UpdateAmmoUi();
+    }
+
+    void OnDisable() {
+        isReloading = false;
+        // TODO: Cancel animation
     }
 
     void UpdateAmmoUi() {
@@ -91,6 +98,10 @@ public class WeaponScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
             Shoot();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R)) {
+            Reload();
         }
     }
 }

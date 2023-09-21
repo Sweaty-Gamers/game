@@ -8,14 +8,21 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed;
     public float jumpForce;
     public float sprintFactor;
+    public GameObject weapons;
 
     private new Rigidbody rigidbody;
     private bool isAirborne = false;
+    private int weaponIndex = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+
+        for (int i = 0; i < weapons.transform.childCount; i++) {
+            weapons.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        weapons.transform.GetChild(weaponIndex).gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -27,6 +34,18 @@ public class PlayerMovement : MonoBehaviour
         float speed = movementSpeed;
         if (Input.GetKey(KeyCode.LeftShift)) {
             speed *= sprintFactor;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1)) {
+            if (weaponIndex != 0) {
+                SwitchWeapon(0);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2)) {
+            if (weaponIndex != 1) {
+                SwitchWeapon(1);
+            }
         }
 
         if (horizontal > 0) {
@@ -45,6 +64,16 @@ public class PlayerMovement : MonoBehaviour
             isAirborne = true;
             rigidbody.AddRelativeForce(new Vector3(0, jumpForce, 0));
         }
+    }
+
+    void SwitchWeapon(int nextWeaponIndex) {
+        for (int i = 0; i < weapons.transform.childCount; i++) {
+            weapons.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        weaponIndex = nextWeaponIndex;
+        GameObject currentWeapon = weapons.transform.GetChild(weaponIndex).gameObject;
+        currentWeapon.SetActive(true);
     }
 
     void OnCollisionEnter(Collision collision)
