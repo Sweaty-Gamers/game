@@ -123,4 +123,6 @@ MonoBehaviour:
   fireRate: 0.3
   reloadTime: 3
   magSize: 10
+  bulletSpeed: 100
   bulletPrefab: {fileID: 5821097713484829643, guid: 62750108fddd1213aa1793076ce0dc2b, type: 3}
+  reserveBullets: 40
