@@ -39,6 +39,7 @@ public class WeaponScript : MonoBehaviour
     }
 
     void UpdateAmmoUi() {
+        if (ammoText == null) return;
         ammoText.text = bulletsLeftInMag + "/" + reserveBullets;
     }
 
@@ -107,7 +108,7 @@ public class WeaponScript : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.R)) {
-            Reload();
+            StartCoroutine(Reload());
         }
     }
 }
