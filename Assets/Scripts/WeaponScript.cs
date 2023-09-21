@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponScript : MonoBehaviour
 {
@@ -10,15 +12,25 @@ public class WeaponScript : MonoBehaviour
     public int magSize;
     public float bulletSpeed;
     public GameObject bulletPrefab;
+    public GameObject ammoUi;
 
     public float reserveBullets;
     private float bulletsLeftInMag = 0;
     private bool isReloading = false;
 
+    private TextMeshProUGUI ammoText;
+
     // Start is called before the first frame update
     void Start()
     {
         bulletsLeftInMag = magSize;
+        ammoText = ammoUi.GetComponent<TextMeshProUGUI>();
+
+        UpdateAmmoUi();
+    }
+
+    void UpdateAmmoUi() {
+        ammoText.text = bulletsLeftInMag + "/" + reserveBullets;
     }
 
     void Shoot() {
@@ -38,6 +50,7 @@ public class WeaponScript : MonoBehaviour
         bullet.GetComponent<Rigidbody>().velocity = Camera.main.transform.forward * bulletSpeed;
 
         bulletsLeftInMag--;
+        UpdateAmmoUi();
     }
 
     IEnumerator Reload()
@@ -45,6 +58,7 @@ public class WeaponScript : MonoBehaviour
         if (bulletsLeftInMag == magSize) yield break;
 
         isReloading = true;
+        UpdateAmmoUi();
         // TODO: play animation
         yield return new WaitForSeconds(reloadTime);
 
@@ -68,6 +82,8 @@ public class WeaponScript : MonoBehaviour
         bulletsLeftInMag += bulletsToLoad;
 
         isReloading = false;
+
+        UpdateAmmoUi();
     }
 
     // Update is called once per frame
