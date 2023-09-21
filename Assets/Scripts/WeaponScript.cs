@@ -11,6 +11,7 @@ public class WeaponScript : MonoBehaviour
     public float reloadTime;
     public int magSize;
     public float bulletSpeed;
+    public bool semiAuto;
     public GameObject bulletPrefab;
     public GameObject ammoUi;
 
@@ -97,7 +98,7 @@ public class WeaponScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0)) {
+        if ((!semiAuto && Input.GetKey(KeyCode.Mouse0)) || Input.GetKeyDown(KeyCode.Mouse0)) {
             float curTime = Time.time;
             if (curTime > timestampLastBulletFired + fireRate) {
                 timestampLastBulletFired = curTime;

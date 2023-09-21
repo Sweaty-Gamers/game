@@ -48,6 +48,12 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha3)) {
+            if (weaponIndex != 2) {
+                SwitchWeapon(2);
+            }
+        }
+
         if (horizontal > 0) {
             rigidbody.AddRelativeForce(new Vector3(speed, 0, 0));
         } else if (horizontal < 0) {
