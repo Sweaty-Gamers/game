@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WeaponScript : MonoBehaviour
@@ -17,13 +18,7 @@ public class WeaponScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    IEnumerator DespawnBullet(GameObject bullet)
-    {
-        yield return new WaitForSeconds(5);
-        Destroy(bullet);
+        bulletsLeftInMag = magSize;
     }
 
     void Shoot() {
@@ -41,8 +36,6 @@ public class WeaponScript : MonoBehaviour
         Vector3 screenCenter = Camera.main.ViewportToWorldPoint(screenSpaceCenter);
         GameObject bullet = Instantiate(bulletPrefab, screenCenter, Quaternion.identity);
         bullet.GetComponent<Rigidbody>().velocity = Camera.main.transform.forward * bulletSpeed;
-
-        StartCoroutine(DespawnBullet(bullet));
 
         bulletsLeftInMag--;
     }
