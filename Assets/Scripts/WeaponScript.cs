@@ -17,6 +17,7 @@ public class WeaponScript : MonoBehaviour
     public float reserveBullets;
     private float bulletsLeftInMag = 0;
     private bool isReloading = false;
+    private float timestampLastBulletFired = -1;
 
     private TextMeshProUGUI ammoText;
 
@@ -96,8 +97,12 @@ public class WeaponScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0)) {
-            Shoot();
+        if (Input.GetKey(KeyCode.Mouse0)) {
+            float curTime = Time.time;
+            if (curTime > timestampLastBulletFired + fireRate) {
+                timestampLastBulletFired = curTime;
+                Shoot();
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.R)) {
