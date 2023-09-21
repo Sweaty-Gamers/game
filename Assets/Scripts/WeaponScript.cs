@@ -24,10 +24,10 @@ public class WeaponScript : MonoBehaviour
     }
 
     void Shoot() {
-        Vector3 weaponPosition = transform.position;
-        Quaternion cameraRotation = Camera.main.transform.rotation;
-        GameObject bullet = Instantiate(bulletPrefab, weaponPosition, cameraRotation);
-        bullet.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
+        Vector3 screenSpaceCenter = new(0.5f, 0.5f, 1);
+        Vector3 screenCenter = Camera.main.ViewportToWorldPoint(screenSpaceCenter);
+        GameObject bullet = Instantiate(bulletPrefab, screenCenter, Quaternion.identity);
+        bullet.GetComponent<Rigidbody>().velocity = Camera.main.transform.forward * bulletSpeed;
 
         StartCoroutine(DespawnBullet(bullet));
     }
