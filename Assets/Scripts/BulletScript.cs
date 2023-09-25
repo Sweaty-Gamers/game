@@ -1,16 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
     public GameObject bulletMarkPrefab;
+    public int bulletDespawnTime;
     private bool hit = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(Despawn(gameObject, 5));
+        StartCoroutine(Despawn(gameObject, bulletDespawnTime));
     }
 
     // Update is called once per frame
@@ -32,8 +32,8 @@ public class BulletScript : MonoBehaviour
             collision.gameObject.tag != "Player"
         ) {
             foreach (ContactPoint contact in collision.contacts) {
-                GameObject bulletMark = Instantiate(bulletMarkPrefab, contact.point + contact.normal* 0.001f, Quaternion.LookRotation(contact.normal, Vector3.up) * bulletMarkPrefab.transform.rotation);
-                StartCoroutine(Despawn(bulletMark, 30));
+                Instantiate(bulletMarkPrefab, contact.point + contact.normal * 0.001f, Quaternion.LookRotation(contact.normal, Vector3.up) * bulletMarkPrefab.transform.rotation);
+                Destroy(gameObject);
             }
             hit = true;
         }
