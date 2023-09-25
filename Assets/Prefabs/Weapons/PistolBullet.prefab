@@ -87,9 +87,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae669c99f2deb86bbe9cedab7074f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletMarkPrefab: {fileID: 6367030102316214650, guid: 153be60e2c6d47348b934d7f4a7bd91d, type: 3}
+  bulletMarkPrefab: {fileID: 4032720450056389536, guid: 153be60e2c6d47348b934d7f4a7bd91d, type: 3}
   bulletDespawnTime: 5
-  bulletMarkDespawnTime: 30
 --- !u!54 &5636972773908220145
 Rigidbody:
   m_ObjectHideFlags: 0
