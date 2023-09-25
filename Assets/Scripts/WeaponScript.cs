@@ -56,7 +56,7 @@ public class WeaponScript : MonoBehaviour
 
         Vector3 screenSpaceCenter = new(0.5f, 0.5f, 1);
         Vector3 screenCenter = Camera.main.ViewportToWorldPoint(screenSpaceCenter);
-        GameObject bullet = Instantiate(bulletPrefab, screenCenter, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, screenCenter, Camera.main.transform.rotation);
         bullet.GetComponent<Rigidbody>().velocity = Camera.main.transform.forward * bulletSpeed;
 
         bulletsLeftInMag--;
