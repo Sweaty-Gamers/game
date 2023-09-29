@@ -16,6 +16,9 @@ public class WeaponScript : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject ammoUi;
 
+    public float reloadAnimationLength;
+    public float fireAnimationLength;
+
     public float reserveBullets;
     private float bulletsLeftInMag = 0;
     private bool isReloading = false;
@@ -66,6 +69,11 @@ public class WeaponScript : MonoBehaviour
             return;
         }
 
+        StartCoroutine(FireBullet());
+    }
+
+    IEnumerator FireBullet()
+    {
         animator.SetTrigger("Shoot");
 
         Vector3 screenSpaceCenter = new(0.5f, 0.5f, 1);
@@ -74,6 +82,10 @@ public class WeaponScript : MonoBehaviour
         bullet.GetComponent<Rigidbody>().velocity = Camera.main.transform.forward * bulletSpeed;
         bulletsLeftInMag--;
         UpdateAmmoUi();
+
+        yield return new WaitForSeconds(0.05f);
+
+        animator.ResetTrigger("Shoot");
     }
 
     IEnumerator Reload()

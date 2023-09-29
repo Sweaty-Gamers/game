@@ -20,7 +20,7 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0.925
-  m_HasExitTime: 0
+  m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
@@ -42,16 +42,16 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 61c0b3b29655e5f458da3a21eab5ab04, type: 2}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: FireSpeed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: FireRate
 --- !u!1101 &-3353014353454540527
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -161,6 +161,18 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
+  - m_Name: ReloadSpeed
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: FireSpeed
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -197,7 +209,7 @@ AnimatorStateMachine:
     m_Position: {x: -190, y: 320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6718440714298837546}
-    m_Position: {x: 350, y: 380, z: 0}
+    m_Position: {x: 350, y: 370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1076775366932271974}
     m_Position: {x: 30, y: 280, z: 0}
@@ -427,16 +439,16 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: 78fde9527e5f0ce4fb18f47dabecf0bb, type: 2}
   m_Tag: 
-  m_SpeedParameter: 
+  m_SpeedParameter: ReloadSpeed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: ReloadTime
 --- !u!1102 &7752417614714073334
 AnimatorState:
   serializedVersion: 6
