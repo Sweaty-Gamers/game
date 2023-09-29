@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,44 +22,54 @@ public class WeaponScript : MonoBehaviour
     private float timestampLastBulletFired = -1;
 
     private TextMeshProUGUI ammoText;
+    private Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         bulletsLeftInMag = magSize;
         ammoText = ammoUi.GetComponent<TextMeshProUGUI>();
+        animator = GetComponent<Animator>();
     }
 
-    void OnEnable() {
+    void OnEnable()
+    {
         UpdateAmmoUi();
     }
 
-    void OnDisable() {
+    void OnDisable()
+    {
         isReloading = false;
         // TODO: Cancel animation
     }
 
-    void UpdateAmmoUi() {
+    void UpdateAmmoUi()
+    {
         if (ammoText == null) return;
         ammoText.text = bulletsLeftInMag + "/" + reserveBullets;
     }
 
-    void Shoot() {
+    void Shoot()
+    {
         if (isReloading) return;
 
-        if (bulletsLeftInMag <= 0 && reserveBullets > 0) {
+        if (bulletsLeftInMag <= 0 && reserveBullets > 0)
+        {
             StartCoroutine(Reload());
             return;
-        } else if (bulletsLeftInMag <= 0) {
+        }
+        else if (bulletsLeftInMag <= 0)
+        {
             // TODO: play *click* sound for empty mag
             return;
         }
+
+        animator.SetTrigger("Shoot");
 
         Vector3 screenSpaceCenter = new(0.5f, 0.5f, 1);
         Vector3 screenCenter = Camera.main.ViewportToWorldPoint(screenSpaceCenter);
         GameObject bullet = Instantiate(bulletPrefab, screenCenter, Camera.main.transform.rotation);
         bullet.GetComponent<Rigidbody>().velocity = Camera.main.transform.forward * bulletSpeed;
-
         bulletsLeftInMag--;
         UpdateAmmoUi();
     }
@@ -69,7 +80,7 @@ public class WeaponScript : MonoBehaviour
 
         isReloading = true;
         UpdateAmmoUi();
-        // TODO: play animation
+        animator.SetTrigger("Reload");
         yield return new WaitForSeconds(reloadTime);
 
         /*
@@ -91,6 +102,7 @@ public class WeaponScript : MonoBehaviour
         reserveBullets -= bulletsToLoad;
         bulletsLeftInMag += bulletsToLoad;
 
+        animator.ResetTrigger("Reload");
         isReloading = false;
 
         UpdateAmmoUi();
@@ -99,15 +111,18 @@ public class WeaponScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if ((!semiAuto && Input.GetKey(KeyCode.Mouse0)) || Input.GetKeyDown(KeyCode.Mouse0)) {
+        if ((!semiAuto && Input.GetKey(KeyCode.Mouse0)) || Input.GetKeyDown(KeyCode.Mouse0))
+        {
             float curTime = Time.time;
-            if (curTime > timestampLastBulletFired + fireRate) {
+            if (curTime > timestampLastBulletFired + fireRate)
+            {
                 timestampLastBulletFired = curTime;
                 Shoot();
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R)) {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
             StartCoroutine(Reload());
         }
     }
