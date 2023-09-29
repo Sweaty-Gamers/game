@@ -23,6 +23,7 @@ public class WeaponScript : MonoBehaviour
 
     private TextMeshProUGUI ammoText;
     private Animator animator;
+    private PlayerScript playerScript;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class WeaponScript : MonoBehaviour
         bulletsLeftInMag = magSize;
         ammoText = ammoUi.GetComponent<TextMeshProUGUI>();
         animator = GetComponent<Animator>();
+        playerScript = GetComponentInParent<PlayerScript>();
     }
 
     void OnEnable()
@@ -125,5 +127,8 @@ public class WeaponScript : MonoBehaviour
         {
             StartCoroutine(Reload());
         }
+
+        animator.SetBool("Walk", playerScript.isWalking);
+        animator.SetBool("Run", playerScript.isRunning);
     }
 }

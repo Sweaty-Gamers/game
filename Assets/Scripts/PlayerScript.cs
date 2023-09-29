@@ -10,8 +10,11 @@ public class PlayerScript : MonoBehaviour
     public float sprintFactor;
     public GameObject weapons;
 
+    public bool isWalking = false;
+    public bool isRunning = false;
+    public bool isAirborne = false;
+
     private new Rigidbody rigidbody;
-    private bool isAirborne = false;
     private int weaponIndex = 0;
 
     // Start is called before the first frame update
@@ -19,7 +22,8 @@ public class PlayerScript : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody>();
 
-        for (int i = 0; i < weapons.transform.childCount; i++) {
+        for (int i = 0; i < weapons.transform.childCount; i++)
+        {
             weapons.transform.GetChild(i).gameObject.SetActive(false);
         }
         weapons.transform.GetChild(weaponIndex).gameObject.SetActive(true);
@@ -32,48 +36,71 @@ public class PlayerScript : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
 
         float speed = movementSpeed;
-        if (Input.GetKey(KeyCode.LeftShift)) {
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
             speed *= sprintFactor;
+            isRunning = isWalking && true;
+        }
+        else
+        {
+            isRunning = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) {
-            if (weaponIndex != 0) {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            if (weaponIndex != 0)
+            {
                 SwitchWeapon(0);
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha2)) {
-            if (weaponIndex != 1) {
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (weaponIndex != 1)
+            {
                 SwitchWeapon(1);
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha3)) {
-            if (weaponIndex != 2) {
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if (weaponIndex != 2)
+            {
                 SwitchWeapon(2);
             }
         }
 
-        if (horizontal > 0) {
+        isWalking = horizontal != 0 || vertical != 0;
+
+        if (horizontal > 0)
+        {
             rigidbody.AddRelativeForce(new Vector3(speed, 0, 0));
-        } else if (horizontal < 0) {
+        }
+        else if (horizontal < 0)
+        {
             rigidbody.AddRelativeForce(new Vector3(-speed, 0, 0));
         }
 
-        if (vertical > 0) {
+        if (vertical > 0)
+        {
             rigidbody.AddRelativeForce(new Vector3(0, 0, speed));
-        } else if (vertical < 0 ) {
+        }
+        else if (vertical < 0)
+        {
             rigidbody.AddRelativeForce(new Vector3(0, 0, -speed));
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isAirborne) {
+        if (Input.GetKeyDown(KeyCode.Space) && !isAirborne)
+        {
             isAirborne = true;
             rigidbody.AddRelativeForce(new Vector3(0, jumpForce, 0));
         }
     }
 
-    void SwitchWeapon(int nextWeaponIndex) {
-        for (int i = 0; i < weapons.transform.childCount; i++) {
+    void SwitchWeapon(int nextWeaponIndex)
+    {
+        for (int i = 0; i < weapons.transform.childCount; i++)
+        {
             weapons.transform.GetChild(i).gameObject.SetActive(false);
         }
 
@@ -84,14 +111,16 @@ public class PlayerScript : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Floor" && isAirborne) {
+        if (collision.gameObject.tag == "Floor" && isAirborne)
+        {
             isAirborne = false;
         }
     }
 
     void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.tag == "Floor" && !isAirborne) {
+        if (collision.gameObject.tag == "Floor" && !isAirborne)
+        {
             isAirborne = true;
         }
     }
