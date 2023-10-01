@@ -74,7 +74,8 @@ public class WeaponScript : MonoBehaviour
 
     IEnumerator FireBullet()
     {
-        animator.SetTrigger("Shoot");
+        animator.SetFloat("FireSpeed", fireAnimationLength / fireRate);
+        animator.SetBool("Shoot", true);
 
         Vector3 screenSpaceCenter = new(0.5f, 0.5f, 1);
         Vector3 screenCenter = Camera.main.ViewportToWorldPoint(screenSpaceCenter);
@@ -83,9 +84,9 @@ public class WeaponScript : MonoBehaviour
         bulletsLeftInMag--;
         UpdateAmmoUi();
 
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(fireRate * 0.9f);
 
-        animator.ResetTrigger("Shoot");
+        animator.SetBool("Shoot", false);
     }
 
     IEnumerator Reload()
@@ -94,7 +95,8 @@ public class WeaponScript : MonoBehaviour
 
         isReloading = true;
         UpdateAmmoUi();
-        animator.SetTrigger("Reload");
+        animator.SetFloat("ReloadSpeed", reloadAnimationLength / reloadTime);
+        animator.SetBool("Reload", true);
         yield return new WaitForSeconds(reloadTime);
 
         /*
@@ -116,7 +118,7 @@ public class WeaponScript : MonoBehaviour
         reserveBullets -= bulletsToLoad;
         bulletsLeftInMag += bulletsToLoad;
 
-        animator.ResetTrigger("Reload");
+        animator.SetBool("Reload", false);
         isReloading = false;
 
         UpdateAmmoUi();
