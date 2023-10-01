@@ -30,7 +30,8 @@ public class BulletScript : MonoBehaviour
         if (!hit &&
             collision.gameObject.tag != "BulletMark" &&
             collision.gameObject.tag != "Bullet" &&
-            collision.gameObject.tag != "Player"
+            collision.gameObject.tag != "Player" &&
+            collision.gameObject.tag != "Weapon"
         )
         {
             foreach (ContactPoint contact in collision.contacts)
