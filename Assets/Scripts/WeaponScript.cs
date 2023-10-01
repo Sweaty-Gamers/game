@@ -61,6 +61,10 @@ public class WeaponScript : MonoBehaviour
     {
         if (isReloading) return;
 
+        float curTime = Time.time;
+        if (curTime < timestampLastBulletFired + fireRate) return;
+        timestampLastBulletFired = curTime;
+
         if (bulletsLeftInMag <= 0 && reserveBullets > 0)
         {
             StartCoroutine(Reload());
@@ -141,12 +145,7 @@ public class WeaponScript : MonoBehaviour
     {
         if ((!semiAuto && Input.GetKey(KeyCode.Mouse0)) || Input.GetKeyDown(KeyCode.Mouse0))
         {
-            float curTime = Time.time;
-            if (curTime > timestampLastBulletFired + fireRate)
-            {
-                timestampLastBulletFired = curTime;
-                Shoot();
-            }
+            Shoot();
         }
 
         if (Input.GetKeyDown(KeyCode.R))
