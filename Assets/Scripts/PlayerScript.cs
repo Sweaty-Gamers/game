@@ -41,31 +41,17 @@ public class PlayerScript : MonoBehaviour
     void SwitchWeapons()
     {
         // TODO: scroll up and down
-        // TODO: work for keys 1-9
+        // TODO: JUMP VELOCITY IMPROVEMENT
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            if (weaponIndex != 0)
-            {
-                SwitchWeapon(0);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            if (weaponIndex != 1)
-            {
-                SwitchWeapon(1);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            if (weaponIndex != 2)
-            {
-                SwitchWeapon(2);
-            }
-        }
+        if (Input.GetKeyDown(KeyCode.Alpha1)) SwitchWeapon(0);
+        if (Input.GetKeyDown(KeyCode.Alpha2)) SwitchWeapon(1);
+        if (Input.GetKeyDown(KeyCode.Alpha3)) SwitchWeapon(2);
+        if (Input.GetKeyDown(KeyCode.Alpha4)) SwitchWeapon(3);
+        if (Input.GetKeyDown(KeyCode.Alpha5)) SwitchWeapon(4);
+        if (Input.GetKeyDown(KeyCode.Alpha6)) SwitchWeapon(5);
+        if (Input.GetKeyDown(KeyCode.Alpha7)) SwitchWeapon(6);
+        if (Input.GetKeyDown(KeyCode.Alpha8)) SwitchWeapon(7);
+        if (Input.GetKeyDown(KeyCode.Alpha9)) SwitchWeapon(8);
     }
 
     void Movement()
@@ -123,6 +109,7 @@ public class PlayerScript : MonoBehaviour
 
     void SwitchWeapon(int nextWeaponIndex)
     {
+        if (weaponIndex == nextWeaponIndex) return;
         for (int i = 0; i < weapons.transform.childCount; i++)
         {
             weapons.transform.GetChild(i).gameObject.SetActive(false);
