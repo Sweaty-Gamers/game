@@ -15,6 +15,7 @@ public class WeaponScript : MonoBehaviour
     public bool semiAuto;
     public GameObject bulletPrefab;
     public GameObject ammoUi;
+    public Recoil RecoilObject;
 
     public float bulletSpawnXOffset = 0.5f;
     public float bulletSpawnYOffset = 0.5f;
@@ -98,6 +99,9 @@ public class WeaponScript : MonoBehaviour
 
         bulletsLeftInMag--;
         UpdateAmmoUi();
+
+        // Recoil.
+        RecoilObject.recoil += 0.1f;
     }
 
     IEnumerator Reload()

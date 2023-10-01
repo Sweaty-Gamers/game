@@ -425,13 +425,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 224755868}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 892531805}
-  m_Father: {fileID: 970126534}
+  m_Father: {fileID: 1152767148}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!81 &224755870
 AudioListener:
@@ -662,7 +662,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 970126528}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -718,7 +718,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 224755869}
+  - {fileID: 1152767148}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &970126535
@@ -740,6 +740,57 @@ MonoBehaviour:
   maximumX: 360
   minimumY: -60
   maximumY: 60
+--- !u!1 &1152767147
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1152767148}
+  - component: {fileID: 1152767149}
+  m_Layer: 0
+  m_Name: Recoil
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1152767148
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152767147}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 224755869}
+  m_Father: {fileID: 970126534}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1152767149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152767147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d82f051f8e07cd1afb9737571cfe4be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxRecoil_x: -20
+  maxRecoil_y: -10
+  maxTrans_x: 1
+  maxTrans_z: -1
+  recoilSpeed: 10
+  recoil: 0
 --- !u!1 &1235048777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243,6 +1294,10 @@ PrefabInstance:
       propertyPath: ammoUi
       value: 
       objectReference: {fileID: 1603238331}
+    - target: {fileID: 5136425582456692031, guid: 764a58585e616b3978428f4e481fdf90, type: 3}
+      propertyPath: RecoilObject
+      value: 
+      objectReference: {fileID: 1152767149}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1312,6 +1367,10 @@ PrefabInstance:
       propertyPath: ammoUi
       value: 
       objectReference: {fileID: 1603238331}
+    - target: {fileID: 5755543776251302104, guid: 304f27f85c9a3bed4b5bdb0616aed8de, type: 3}
+      propertyPath: RecoilObject
+      value: 
+      objectReference: {fileID: 1152767149}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1329,6 +1388,10 @@ PrefabInstance:
       propertyPath: ammoUi
       value: 
       objectReference: {fileID: 1603238331}
+    - target: {fileID: 1116816040193324818, guid: 1db06ed4b6d134fc28c48e726df94ec7, type: 3}
+      propertyPath: RecoilObject
+      value: 
+      objectReference: {fileID: 1152767149}
     - target: {fileID: 4700801855409320385, guid: 1db06ed4b6d134fc28c48e726df94ec7, type: 3}
       propertyPath: m_Name
       value: Pistol
@@ -1442,6 +1505,10 @@ PrefabInstance:
       propertyPath: bulletSpeed
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8480373903793097650, guid: c914f24ed64dcbda29566a0cddc3eb4b, type: 3}
+      propertyPath: RecoilObject
+      value: 
+      objectReference: {fileID: 1152767149}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1464,6 +1531,10 @@ PrefabInstance:
       propertyPath: ammoUi
       value: 
       objectReference: {fileID: 1603238331}
+    - target: {fileID: 2402466592342209279, guid: 801a8413befb4c442a179b48ff21967c, type: 3}
+      propertyPath: RecoilObject
+      value: 
+      objectReference: {fileID: 1152767149}
     - target: {fileID: 7090941179708164044, guid: 801a8413befb4c442a179b48ff21967c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.176
