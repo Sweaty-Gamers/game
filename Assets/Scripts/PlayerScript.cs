@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -40,8 +41,10 @@ public class PlayerScript : MonoBehaviour
 
     void SwitchWeapons()
     {
-        // TODO: scroll up and down
-        // TODO: JUMP VELOCITY IMPROVEMENT
+        int len = weapons.transform.childCount;
+
+        if (Input.GetAxis("Mouse ScrollWheel") > 0) SwitchWeapon(Math.Min(weaponIndex + 1, len - 1));
+        if (Input.GetAxis("Mouse ScrollWheel") < 0) SwitchWeapon(Math.Max(weaponIndex - 1, 0));
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) SwitchWeapon(0);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SwitchWeapon(1);
