@@ -9,6 +9,7 @@ public class PlayerScript : MonoBehaviour
     public float movementSpeed;
     public float jumpForce;
     public float sprintFactor;
+    public float groundDrag;
     public GameObject weapons;
     public float maxSpeed;
 
@@ -61,6 +62,9 @@ public class PlayerScript : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         isWalking = horizontal != 0 || vertical != 0;
+
+        // Add drag.
+        rigidbody.drag = isJumping ? 0 : groundDrag;
 
         float speed = movementSpeed;
         if (Input.GetKey(KeyCode.LeftShift))
