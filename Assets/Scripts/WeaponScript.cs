@@ -16,6 +16,9 @@ public class WeaponScript : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject ammoUi;
 
+    public float bulletSpawnXOffset = 0.5f;
+    public float bulletSpawnYOffset = 0.5f;
+
     public float reloadAnimationLength;
     public float fireAnimationLength;
 
@@ -77,7 +80,7 @@ public class WeaponScript : MonoBehaviour
         animator.SetFloat("FireSpeed", fireAnimationLength / fireRate);
         animator.SetBool("Shoot", true);
 
-        Vector3 screenSpaceCenter = new(0.5f, 0.5f, 1);
+        Vector3 screenSpaceCenter = new(bulletSpawnXOffset, bulletSpawnYOffset, 1);
         Vector3 screenCenter = Camera.main.ViewportToWorldPoint(screenSpaceCenter);
         GameObject bullet = Instantiate(bulletPrefab, screenCenter, Camera.main.transform.rotation);
         bullet.GetComponent<Rigidbody>().velocity = Camera.main.transform.forward * bulletSpeed;
