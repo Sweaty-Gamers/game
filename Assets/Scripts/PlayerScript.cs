@@ -10,6 +10,7 @@ public class PlayerScript : MonoBehaviour
     public float sprintFactor;
     public float groundDrag;
     public GameObject weapons;
+    public float maxSpeed;
 
     public bool isWalking = false;
     public bool isRunning = false;
@@ -33,6 +34,15 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        SwitchWeapons();
+        Movement();
+    }
+
+    void SwitchWeapons()
+    {
+        // TODO: scroll up and down
+        // TODO: work for keys 1-9
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (weaponIndex != 0)
@@ -56,10 +66,15 @@ public class PlayerScript : MonoBehaviour
                 SwitchWeapon(2);
             }
         }
+    }
 
+    void Movement()
+    {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         isWalking = horizontal != 0 || vertical != 0;
+
+        // Add drag.
         rigidbody.drag = isJumping ? 0 : groundDrag;
 
         float speed = movementSpeed;
@@ -76,7 +91,7 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
             isJumping = true;
-            rigidbody.AddRelativeForce(new Vector3(0, jumpForce, 0));
+            rigidbody.AddRelativeForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
 
         if (horizontal > 0)
@@ -95,6 +110,14 @@ public class PlayerScript : MonoBehaviour
         else if (vertical < 0)
         {
             rigidbody.AddRelativeForce(new Vector3(0, 0, -speed), ForceMode.Force);
+        }
+
+        // Limit velocity.
+        Vector3 velocity = new(rigidbody.velocity.x, 0, rigidbody.velocity.z);
+        if ((isRunning && velocity.magnitude > maxSpeed * sprintFactor) || (!isRunning && velocity.magnitude > maxSpeed))
+        {
+            Vector3 limitedVelocity = velocity.normalized * movementSpeed;
+            rigidbody.velocity = new(limitedVelocity.x, rigidbody.velocity.y, limitedVelocity.z);
         }
     }
 
