@@ -81,7 +81,6 @@ public class WeaponScript : MonoBehaviour
 
     IEnumerator FireBullet()
     {
-        animator.SetFloat("FireSpeed", fireAnimationLength / fireRate);
         animator.SetBool("Shoot", true);
 
         Vector3 screenSpaceBulletSpawn = new(bulletSpawnXOffset, bulletSpawnYOffset, 1);
