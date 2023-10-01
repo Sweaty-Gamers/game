@@ -20,6 +20,7 @@ public class PlayerScript : MonoBehaviour
     private new Rigidbody rigidbody;
     private int weaponIndex = 0;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -67,14 +68,18 @@ public class PlayerScript : MonoBehaviour
         rigidbody.drag = isJumping ? 0 : groundDrag;
 
         float speed = movementSpeed;
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            speed *= sprintFactor;
-            isRunning = isWalking && true;
+            isRunning = isWalking;
         }
-        else
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             isRunning = false;
+        }
+
+        if (isRunning)
+        {
+            speed *= sprintFactor;
         }
 
         if (Input.GetKey(KeyCode.Space) && !isJumping)
@@ -87,7 +92,8 @@ public class PlayerScript : MonoBehaviour
         {
             rigidbody.AddRelativeForce(new Vector3(speed, 0, 0), ForceMode.Force);
         }
-        else if (horizontal < 0)
+
+        if (horizontal < 0)
         {
             rigidbody.AddRelativeForce(new Vector3(-speed, 0, 0), ForceMode.Force);
         }
@@ -96,14 +102,15 @@ public class PlayerScript : MonoBehaviour
         {
             rigidbody.AddRelativeForce(new Vector3(0, 0, speed), ForceMode.Force);
         }
-        else if (vertical < 0)
+
+        if (vertical < 0)
         {
             rigidbody.AddRelativeForce(new Vector3(0, 0, -speed), ForceMode.Force);
         }
 
         // Limit velocity.
         Vector3 velocity = new(rigidbody.velocity.x, 0, rigidbody.velocity.z);
-        if ((isRunning && velocity.magnitude > maxSpeed * sprintFactor) || (!isRunning && velocity.magnitude > maxSpeed))
+        if (velocity.magnitude > maxSpeed)
         {
             Vector3 limitedVelocity = velocity.normalized * movementSpeed;
             rigidbody.velocity = new(limitedVelocity.x, rigidbody.velocity.y, limitedVelocity.z);
