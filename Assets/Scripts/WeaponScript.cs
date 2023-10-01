@@ -107,6 +107,7 @@ public class WeaponScript : MonoBehaviour
     IEnumerator Reload()
     {
         if (bulletsLeftInMag == magSize) yield break;
+        if (bulletsLeftInMag == 0) yield break;
 
         isReloading = true;
         UpdateAmmoUi();
