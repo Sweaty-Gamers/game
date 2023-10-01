@@ -9,6 +9,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 103b89bf599bf4844990447bba2b460f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 103b89bf599bf4844990447bba2b460f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 103b89bf599bf4844990447bba2b460f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -50,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 103b89bf599bf4844990447bba2b460f, type: 3}
       propertyPath: m_Name
-      value: Bullet
+      value: ShotgunBullet
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 103b89bf599bf4844990447bba2b460f, type: 3}
       propertyPath: m_TagString
@@ -87,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae669c99f2deb86bbe9cedab7074f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletMarkPrefab: {fileID: 4032720450056389536, guid: 153be60e2c6d47348b934d7f4a7bd91d, type: 3}
+  bulletMarkPrefab: {fileID: 4032720450056389536, guid: a30841066d45e50caa21ebc6773a5ff9, type: 3}
   bulletDespawnTime: 1
 --- !u!54 &5636972773908220145
 Rigidbody:
@@ -135,7 +143,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.05
-  m_Height: 0.3
+  m_Radius: 0.03
+  m_Height: 0.35
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0.05}
+  m_Center: {x: 0, y: 0, z: 0.03}
