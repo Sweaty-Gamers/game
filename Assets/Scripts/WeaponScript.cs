@@ -76,10 +76,10 @@ public class WeaponScript : MonoBehaviour
             return;
         }
 
-        StartCoroutine(FireBullet());
+        FireBullet();
     }
 
-    IEnumerator FireBullet()
+    void FireBullet()
     {
         animator.SetBool("Shoot", true);
 
@@ -98,16 +98,12 @@ public class WeaponScript : MonoBehaviour
 
         bulletsLeftInMag--;
         UpdateAmmoUi();
-
-        yield return new WaitForSeconds(fireRate * 0.25f);
-
-        animator.SetBool("Shoot", false);
     }
 
     IEnumerator Reload()
     {
         if (bulletsLeftInMag == magSize) yield break;
-        if (bulletsLeftInMag == 0) yield break;
+        if (reserveBullets == 0) yield break;
 
         isReloading = true;
         UpdateAmmoUi();
@@ -146,6 +142,11 @@ public class WeaponScript : MonoBehaviour
         if ((!semiAuto && Input.GetKey(KeyCode.Mouse0)) || Input.GetKeyDown(KeyCode.Mouse0))
         {
             Shoot();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            animator.SetBool("Shoot", false);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
