@@ -8,11 +8,12 @@ public class PlayerScript : MonoBehaviour
     public float movementSpeed;
     public float jumpForce;
     public float sprintFactor;
+    public float groundDrag;
     public GameObject weapons;
 
     public bool isWalking = false;
     public bool isRunning = false;
-    public bool isAirborne = false;
+    public bool isJumping = false;
 
     private new Rigidbody rigidbody;
     private int weaponIndex = 0;
@@ -32,20 +33,6 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
-        float speed = movementSpeed;
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed *= sprintFactor;
-            isRunning = isWalking && true;
-        }
-        else
-        {
-            isRunning = false;
-        }
-
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             if (weaponIndex != 0)
@@ -70,30 +57,44 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
         isWalking = horizontal != 0 || vertical != 0;
+        rigidbody.drag = isJumping ? 0 : groundDrag;
+
+        float speed = movementSpeed;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed *= sprintFactor;
+            isRunning = isWalking && true;
+        }
+        else
+        {
+            isRunning = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+        {
+            isJumping = true;
+            rigidbody.AddRelativeForce(new Vector3(0, jumpForce, 0));
+        }
 
         if (horizontal > 0)
         {
-            rigidbody.AddRelativeForce(new Vector3(speed, 0, 0));
+            rigidbody.AddRelativeForce(new Vector3(speed, 0, 0), ForceMode.Force);
         }
         else if (horizontal < 0)
         {
-            rigidbody.AddRelativeForce(new Vector3(-speed, 0, 0));
+            rigidbody.AddRelativeForce(new Vector3(-speed, 0, 0), ForceMode.Force);
         }
 
         if (vertical > 0)
         {
-            rigidbody.AddRelativeForce(new Vector3(0, 0, speed));
+            rigidbody.AddRelativeForce(new Vector3(0, 0, speed), ForceMode.Force);
         }
         else if (vertical < 0)
         {
-            rigidbody.AddRelativeForce(new Vector3(0, 0, -speed));
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) && !isAirborne)
-        {
-            isAirborne = true;
-            rigidbody.AddRelativeForce(new Vector3(0, jumpForce, 0));
+            rigidbody.AddRelativeForce(new Vector3(0, 0, -speed), ForceMode.Force);
         }
     }
 
@@ -111,17 +112,9 @@ public class PlayerScript : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Floor" && isAirborne)
+        if (collision.gameObject.tag == "Floor" && isJumping)
         {
-            isAirborne = false;
-        }
-    }
-
-    void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Floor" && !isAirborne)
-        {
-            isAirborne = true;
+            isJumping = false;
         }
     }
 }
