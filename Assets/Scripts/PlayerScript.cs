@@ -77,7 +77,7 @@ public class PlayerScript : MonoBehaviour
             isRunning = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
+        if (Input.GetKey(KeyCode.Space) && !isJumping)
         {
             isJumping = true;
             rigidbody.AddRelativeForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);

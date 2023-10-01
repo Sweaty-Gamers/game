@@ -597,10 +597,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 8
-  jumpForce: 10
+  jumpForce: 5
   sprintFactor: 1.5
+  groundDrag: 8
   weapons: {fileID: 892531804}
-  maxSpeed: 15
+  maxSpeed: 10
   isWalking: 0
   isRunning: 0
   isJumping: 0
