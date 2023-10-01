@@ -84,23 +84,23 @@ public class WeaponScript : MonoBehaviour
         animator.SetFloat("FireSpeed", fireAnimationLength / fireRate);
         animator.SetBool("Shoot", true);
 
-        Vector3 screenSpaceCenter = new(0.5f, 0.5f, 1);
         Vector3 screenSpaceBulletSpawn = new(bulletSpawnXOffset, bulletSpawnYOffset, 1);
-        Vector3 screenCenter = Camera.main.ViewportToWorldPoint(screenSpaceCenter);
         Vector3 bulletSpawn = Camera.main.ViewportToWorldPoint(screenSpaceBulletSpawn);
 
-        // Ray ray = new(Camera.main.transform.position, Camera.main.transform.forward);
-
-
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn, Camera.main.transform.rotation);
-        var ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
-        bullet.GetComponent<Rigidbody>().velocity = ray.direction * bulletSpeed;
+        var ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
 
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            bullet.transform.LookAt(hit.point);
+        }
+
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
 
         bulletsLeftInMag--;
         UpdateAmmoUi();
 
-        yield return new WaitForSeconds(fireRate * 0.9f);
+        yield return new WaitForSeconds(fireRate * 0.25f);
 
         animator.SetBool("Shoot", false);
     }
