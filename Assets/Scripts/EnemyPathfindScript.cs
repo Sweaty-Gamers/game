@@ -43,6 +43,9 @@ public class EnemyPathfindScript : MonoBehaviour
             isWalking = false;
             agent.isStopped = true; // Stop the NavMeshAgent
             isAttacking = true;
+
+            // Set a new destination to the current position to ensure immediate stopping
+            agent.destination = transform.position;
         }
 
         this.UpdateStateTransition();
