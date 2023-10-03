@@ -27,16 +27,12 @@ public class BulletScript : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!hit &&
-            collision.gameObject.tag != "BulletMark" &&
-            collision.gameObject.tag != "Bullet" &&
-            collision.gameObject.tag != "Player" &&
-            collision.gameObject.tag != "Weapon"
-        )
+        // TODO: destroy bullet on impact always
+        if (!hit && collision.gameObject.tag == "Floor")
         {
             foreach (ContactPoint contact in collision.contacts)
             {
-                GameObject decalObject = Instantiate(bulletMarkPrefab, contact.point + (contact.normal * 0.025f), Quaternion.identity) as GameObject;
+                GameObject decalObject = Instantiate(bulletMarkPrefab, contact.point + (contact.normal * 0.025f), Quaternion.identity);
                 decalObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, contact.normal);
                 Destroy(gameObject);
             }
