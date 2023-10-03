@@ -7,6 +7,8 @@ TagManager:
   - Floor
   - Bullet
   - Weapon
+  - Enemy_Ranged
+  - Enemy_Melee
   layers:
   - Default
   - TransparentFX
