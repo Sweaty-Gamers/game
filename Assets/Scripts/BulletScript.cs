@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// Bullet functionality.
 public class BulletScript : MonoBehaviour
 {
     public GameObject bulletMarkPrefab;
@@ -11,8 +11,11 @@ public class BulletScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Disable bullet collisions with the player.
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), player.GetComponent<Collider>());
+
+        // Despawn after a certain amount of time.
         StartCoroutine(Despawn(gameObject, bulletDespawnTime));
     }
 

@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyScript : MonoBehaviour
+/// Activate blood effects when hit with a bullet.
+public class BloodSprayScript : MonoBehaviour
 {
 
     private new ParticleSystem particleSystem;

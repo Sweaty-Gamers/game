@@ -6,11 +6,17 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    /// How fast the player walks.
     public float movementSpeed;
+    /// Jump strength.
     public float jumpForce;
+    /// Movement speed multiplier when sprinting.
     public float sprintFactor;
+    /// The drag to apply when on the floor.
     public float groundDrag;
+    /// The child empty GameObject that holds the weapons.
     public GameObject weapons;
+    /// The max player speed.
     public float maxSpeed;
 
     public bool isWalking = false;
@@ -40,6 +46,7 @@ public class PlayerScript : MonoBehaviour
         Movement();
     }
 
+    /// Switch weapons using the number keys or the mouse wheel.
     void SwitchWeapons()
     {
         int len = weapons.transform.childCount;
@@ -64,30 +71,24 @@ public class PlayerScript : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         isWalking = horizontal != 0 || vertical != 0;
 
-        // Add drag.
+        // Add drag to make movement feel natural.
         rigidbody.drag = isJumping ? 1 : groundDrag;
 
+        // Set the player speed depending on if we are sprinting or not.
         float speed = movementSpeed;
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            isRunning = isWalking;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            isRunning = false;
-        }
+        isRunning = Input.GetKey(KeyCode.LeftShift) && isWalking;
 
         if (isRunning)
-        {
             speed *= sprintFactor;
-        }
 
+        // Jumping.
         if (Input.GetKey(KeyCode.Space) && !isJumping)
         {
             isJumping = true;
             rigidbody.AddRelativeForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
 
+        // Flat movement.
         if (horizontal > 0)
         {
             rigidbody.AddRelativeForce(new Vector3(speed, 0, 0), ForceMode.Force);

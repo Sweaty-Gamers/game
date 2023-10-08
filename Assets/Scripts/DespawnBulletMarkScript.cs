@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletMarkScript : MonoBehaviour
+/// Automatically despawn a bullet impact mark.
+public class DespawnBulletMarkScript : MonoBehaviour
 {
     public int bulletMarkDespawnTime;
 
@@ -21,6 +21,6 @@ public class BulletMarkScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

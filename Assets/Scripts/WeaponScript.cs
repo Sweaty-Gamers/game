@@ -1,30 +1,43 @@
 using System;
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.UI;
 
+/// Used for weapon functionality.
 public class WeaponScript : MonoBehaviour
 {
+    /// How many shots-per-second.
     public float fireRate;
+    /// How many seconds to reload.
     public float reloadTime;
+    /// The size of each mag.
     public int magSize;
+    /// The speed of the bullet projectile.
     public float bulletSpeed;
+    /// Whether or not the player can hold down the trigger.
     public bool semiAuto;
+    /// The prefab for the bullet.
     public GameObject bulletPrefab;
+    /// The UI component for the Ammo text.
     public GameObject ammoUi;
+    /// The empty parent object to the player to rotate the camera's offsets.
     public Recoil RecoilObject;
 
+    /// The bullet spawn X offset relative to the screen center.
     public float bulletSpawnXOffset = 0.5f;
+    /// The bullet spawn Y offset relative to the screen center.
     public float bulletSpawnYOffset = 0.5f;
 
+    /// The length of the reload animation.
     public float reloadAnimationLength;
+    /// The length of the fire animation.
     public float fireAnimationLength;
 
+    /// How many bullets come with the weapon as backup ammo.
     public float reserveBullets;
+    /// How many bullets are currently in the mag.
     private float bulletsLeftInMag = 0;
+
     private bool isReloading = false;
     private float timestampLastBulletFired = -1;
 
@@ -49,7 +62,6 @@ public class WeaponScript : MonoBehaviour
     void OnDisable()
     {
         isReloading = false;
-        // TODO: Cancel animation
     }
 
     void UpdateAmmoUi()
@@ -100,7 +112,6 @@ public class WeaponScript : MonoBehaviour
         bulletsLeftInMag--;
         UpdateAmmoUi();
 
-        // Recoil.
         RecoilObject.recoil += 0.1f;
     }
 
