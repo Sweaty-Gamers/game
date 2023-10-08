@@ -224,7 +224,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73742431}
-  m_Material: {fileID: 13400000, guid: 3256d7dd64515039cbed91c75cb81560, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -411,7 +411,7 @@ GameObject:
   - component: {fileID: 224755870}
   - component: {fileID: 224755872}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: FPS Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -596,12 +596,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c66141e17a5a0838ade9bbcecec3f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 8
-  jumpForce: 5
-  sprintFactor: 2
+  movementSpeed: 10
+  jumpForce: 7
+  sprintFactor: 2.5
   groundDrag: 5
   weapons: {fileID: 892531804}
-  maxSpeed: 15
+  maxSpeed: 10
   isWalking: 0
   isRunning: 0
   isJumping: 0

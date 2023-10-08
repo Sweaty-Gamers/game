@@ -65,7 +65,7 @@ public class PlayerScript : MonoBehaviour
         isWalking = horizontal != 0 || vertical != 0;
 
         // Add drag.
-        rigidbody.drag = isJumping ? 0 : groundDrag;
+        rigidbody.drag = isJumping ? 1 : groundDrag;
 
         float speed = movementSpeed;
         if (Input.GetKeyDown(KeyCode.LeftShift))
