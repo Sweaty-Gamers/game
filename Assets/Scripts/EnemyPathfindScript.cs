@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnemyPathfindScript : MonoBehaviour
 {
     public Transform player;
-    private NavMeshAgent agent;
+    public NavMeshAgent agent;
     public bool isWalking;
     public bool isAttacking;
     public EnemyStateController enemy;
@@ -25,7 +25,7 @@ public class EnemyPathfindScript : MonoBehaviour
         //enemy = new MinotaurStateController();
 
         string objectTag = gameObject.tag;
-        Debug.Log("Object Tag: " + objectTag);
+        //Debug.Log("Object Tag: " + objectTag);
 
         if (objectTag == "Enemy_Ranged")
         {
@@ -41,7 +41,7 @@ public class EnemyPathfindScript : MonoBehaviour
 
         // Check if there is a clear line of sight to the player
         bool hasLineOfSight = HasLineOfSightToPlayer();
-        Debug.Log(hasLineOfSight);
+        //Debug.Log(hasLineOfSight);
 
         if (distanceToPlayer > stoppingDistance)
         {
@@ -63,7 +63,7 @@ public class EnemyPathfindScript : MonoBehaviour
           
            
             // No valid path found, fallback to the original logic
-            RaycastHit hit;
+            //RaycastHit hit;
             if (!HasLineOfSightToPlayer())
             {
                 agent.isStopped = false;
