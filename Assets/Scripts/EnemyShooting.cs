@@ -8,6 +8,7 @@ public class EnemyShooting : MonoBehaviour
     public float bulletForce = 100f;
     public float initialBulletVelocity = 100f;
     public float bulletAcceleration = 500f; // Acceleration per second
+    public float accuracy = 0.1f; // Adjust as needed, higher values make the shots less accurate
     public GameObject bullet;
 
     public float rotationSpeed = 5f; // Adjust as needed
@@ -51,6 +52,8 @@ public class EnemyShooting : MonoBehaviour
 
             // Calculate the direction from the bullet to the player
             forceDirection = (enemyPathfindScript.player.position - bullet.transform.position).normalized;
+
+            forceDirection += Random.insideUnitSphere * accuracy;
 
             Debug.Log("Applying Force Direction: " + forceDirection);
 

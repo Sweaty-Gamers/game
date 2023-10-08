@@ -29,7 +29,7 @@ public class EnemyPathfindScript : MonoBehaviour
 
         if (objectTag == "Enemy_Ranged")
         {
-            stoppingDistance = 30f;
+            stoppingDistance = 100f;
         }
     }
 
@@ -69,6 +69,7 @@ public class EnemyPathfindScript : MonoBehaviour
                 agent.isStopped = false;
                 isWalking = true;
                 isAttacking = false;
+                agent.destination = player.position;
                 // Calculate the path to the player
                 //NavMeshPath path = new NavMeshPath();
                 //agent.CalculatePath(player.position, path);
@@ -82,7 +83,7 @@ public class EnemyPathfindScript : MonoBehaviour
             {
                 //Debug.Log("no obstacle");
                 // No obstacle detected, move towards the player
-                agent.isStopped = true;
+                //agent.isStopped = true;
 
                 // Calculate the rotation towards the player
                 Vector3 directionToPlayer = player.position - transform.position;
@@ -93,7 +94,10 @@ public class EnemyPathfindScript : MonoBehaviour
 
                 isWalking = false;
                 isAttacking = true;
-                agent.SetDestination(player.position);
+
+  
+                agent.isStopped = true;
+                agent.destination = transform.position;  //make sure to stop
             }
             
     }
