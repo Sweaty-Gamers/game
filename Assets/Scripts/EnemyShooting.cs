@@ -1,10 +1,13 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyShooting : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
-    public float bulletForce = 10f;
+    public float bulletForce = 100f;
+    public float initialBulletVelocity = 100f;
+    public float bulletAcceleration = 500f; // Acceleration per second
     public GameObject bullet;
 
     public float rotationSpeed = 5f; // Adjust as needed
@@ -41,6 +44,7 @@ public class EnemyShooting : MonoBehaviour
         // Get the Rigidbody component of the bullet
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
 
+
         if (bulletRb != null)
         {
             Vector3 forceDirection;
@@ -50,8 +54,14 @@ public class EnemyShooting : MonoBehaviour
 
             Debug.Log("Applying Force Direction: " + forceDirection);
 
+            // Add initial velocity in addition to the force
+            bulletRb.velocity = forceDirection * initialBulletVelocity;
+
             // Use the calculated direction for the force
             bulletRb.AddForce(forceDirection * bulletForce, ForceMode.Impulse);
+
+            // Apply acceleration over time
+            StartCoroutine(AccelerateBullet(bulletRb, forceDirection));
         }
         else
         {
@@ -78,5 +88,24 @@ public class EnemyShooting : MonoBehaviour
             bullet.transform.Rotate(Vector3.right, 90f);
         }
     }
+
+    private IEnumerator AccelerateBullet(Rigidbody bulletRb, Vector3 forceDirection)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < 4f) // You can adjust the duration of acceleration
+        {
+            elapsedTime += Time.deltaTime;
+            float currentForce = Mathf.Lerp(bulletForce, bulletForce + bulletAcceleration, elapsedTime / 4f);
+
+            // Apply continuous force using AddForce with ForceMode.Force
+            bulletRb.AddForce(forceDirection * currentForce, ForceMode.Force);
+
+            yield return null;
+        }
+    }
+
+
+
 
 }
