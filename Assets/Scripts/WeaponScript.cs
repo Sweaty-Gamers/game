@@ -18,8 +18,6 @@ public class WeaponScript : MonoBehaviour
     public bool semiAuto;
     /// The prefab for the bullet.
     public GameObject bulletPrefab;
-    /// The UI component for the Ammo text.
-    public GameObject ammoUi;
     /// The empty parent object to the player to rotate the camera's offsets.
     public Recoil RecoilObject;
 
@@ -40,10 +38,12 @@ public class WeaponScript : MonoBehaviour
     private Animator animator;
     private PlayerScript playerScript;
     private Transform bulletSpawn;
+    private GameObject ammoUi;
 
     // Start is called before the first frame update
     void Start()
     {
+        ammoUi = GameObject.Find("Ammo");
         bulletsLeftInMag = magSize;
         ammoText = ammoUi.GetComponent<TextMeshProUGUI>();
         animator = GetComponent<Animator>();
