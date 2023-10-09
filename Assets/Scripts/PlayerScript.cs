@@ -6,16 +6,25 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
+    /// How fast the player walks.
     public float movementSpeed;
+    /// How fast the player dashes.
+    public float dashSpeed;
+    /// Jump strength.
     public float jumpForce;
+    /// Movement speed multiplier when sprinting.
     public float sprintFactor;
+    /// The drag to apply when on the floor.
     public float groundDrag;
+    /// The child empty GameObject that holds the weapons.
     public GameObject weapons;
+    /// The max player speed.
     public float maxSpeed;
 
     public bool isWalking = false;
     public bool isRunning = false;
     public bool isJumping = false;
+    public bool isDashing = false;
 
     private new Rigidbody rigidbody;
     private int weaponIndex = 0;
@@ -40,6 +49,7 @@ public class PlayerScript : MonoBehaviour
         Movement();
     }
 
+    /// Switch weapons using the number keys or the mouse wheel.
     void SwitchWeapons()
     {
         int len = weapons.transform.childCount;
@@ -64,48 +74,68 @@ public class PlayerScript : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         isWalking = horizontal != 0 || vertical != 0;
 
-        // Add drag.
-        rigidbody.drag = isJumping ? 0 : groundDrag;
+        // Add drag to make movement feel natural.
+        rigidbody.drag = isJumping ? 1 : groundDrag;
 
+        // Set the player speed depending on if we are sprinting or not.
         float speed = movementSpeed;
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            isRunning = isWalking;
-        }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            isRunning = false;
-        }
+        isRunning = Input.GetKey(KeyCode.LeftShift) && isWalking;
+
+        // Player can dash if starts moving while holding shift.
+        isDashing = Input.GetKey(KeyCode.LeftShift) && !isWalking;
 
         if (isRunning)
-        {
             speed *= sprintFactor;
-        }
 
+        // Jumping.
         if (Input.GetKey(KeyCode.Space) && !isJumping)
         {
             isJumping = true;
             rigidbody.AddRelativeForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
 
-        if (horizontal > 0)
-        {
-            rigidbody.AddRelativeForce(new Vector3(speed, 0, 0), ForceMode.Force);
-        }
+        if (isDashing) {
+            // Dashing movement.
+            if (horizontal > 0)
+            {
+                rigidbody.AddRelativeForce(new Vector3(dashSpeed, 0, 0), ForceMode.Force);
+            }
 
-        if (horizontal < 0)
-        {
-            rigidbody.AddRelativeForce(new Vector3(-speed, 0, 0), ForceMode.Force);
-        }
+            if (horizontal < 0)
+            {
+                rigidbody.AddRelativeForce(new Vector3(-dashSpeed, 0, 0), ForceMode.Force);
+            }
 
-        if (vertical > 0)
-        {
-            rigidbody.AddRelativeForce(new Vector3(0, 0, speed), ForceMode.Force);
-        }
+            if (vertical > 0)
+            {
+                rigidbody.AddRelativeForce(new Vector3(0, 0, dashSpeed), ForceMode.Force);
+            }
 
-        if (vertical < 0)
-        {
-            rigidbody.AddRelativeForce(new Vector3(0, 0, -speed), ForceMode.Force);
+            if (vertical < 0)
+            {
+                rigidbody.AddRelativeForce(new Vector3(0, 0, -dashSpeed), ForceMode.Force);
+            }
+        } else {
+            // Flat movement.
+            if (horizontal > 0)
+            {
+                rigidbody.AddRelativeForce(new Vector3(speed, 0, 0), ForceMode.Force);
+            }
+
+            if (horizontal < 0)
+            {
+                rigidbody.AddRelativeForce(new Vector3(-speed, 0, 0), ForceMode.Force);
+            }
+
+            if (vertical > 0)
+            {
+                rigidbody.AddRelativeForce(new Vector3(0, 0, speed), ForceMode.Force);
+            }
+
+            if (vertical < 0)
+            {
+                rigidbody.AddRelativeForce(new Vector3(0, 0, -speed), ForceMode.Force);
+            }
         }
 
         // Limit velocity.

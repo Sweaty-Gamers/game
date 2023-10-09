@@ -1,15 +1,21 @@
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
+/// Bullet functionality.
 public class BulletScript : MonoBehaviour
 {
     public GameObject bulletMarkPrefab;
     public int bulletDespawnTime;
-    private bool hit = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Disable bullet collisions with the player.
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), player.GetComponent<Collider>());
+
+        // Despawn after a certain amount of time.
         StartCoroutine(Despawn(gameObject, bulletDespawnTime));
     }
 
@@ -27,20 +33,21 @@ public class BulletScript : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!hit &&
-            collision.gameObject.tag != "BulletMark" &&
-            collision.gameObject.tag != "Bullet" &&
-            collision.gameObject.tag != "Player" &&
-            collision.gameObject.tag != "Weapon"
-        )
+        // Put bullet mark at first bullet impact point.
+        if (collision.gameObject.tag == "Floor")
         {
-            foreach (ContactPoint contact in collision.contacts)
-            {
-                GameObject decalObject = Instantiate(bulletMarkPrefab, contact.point + (contact.normal * 0.025f), Quaternion.identity) as GameObject;
-                decalObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, contact.normal);
-                Destroy(gameObject);
-            }
-            hit = true;
+            ContactPoint firstContact = collision.contacts.First();
+            GameObject decalObject = Instantiate(bulletMarkPrefab, firstContact.point + (firstContact.normal * 0.025f), Quaternion.identity);
+            decalObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, firstContact.normal);
+
+            // Destroy bullet.
+            Destroy(gameObject);
+        }
+        // If it hit something (except the player themselves), destroy it w/o a bullet impact point.
+        else if (collision.gameObject.tag != "Player")
+        {
+            // Destroy bullet.
+            Destroy(gameObject);
         }
     }
 }

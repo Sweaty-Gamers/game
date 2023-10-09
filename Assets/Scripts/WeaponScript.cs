@@ -1,44 +1,54 @@
 using System;
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Animations;
 using UnityEngine;
-using UnityEngine.UI;
 
+/// Used for weapon functionality.
 public class WeaponScript : MonoBehaviour
 {
+    /// How many shots-per-second.
     public float fireRate;
+    /// How many seconds to reload.
     public float reloadTime;
+    /// The size of each mag.
     public int magSize;
+    /// The speed of the bullet projectile.
     public float bulletSpeed;
+    /// Whether or not the player can hold down the trigger.
     public bool semiAuto;
+    /// The prefab for the bullet.
     public GameObject bulletPrefab;
-    public GameObject ammoUi;
+    /// The empty parent object to the player to rotate the camera's offsets.
     public Recoil RecoilObject;
 
-    public float bulletSpawnXOffset = 0.5f;
-    public float bulletSpawnYOffset = 0.5f;
-
+    /// The length of the reload animation.
     public float reloadAnimationLength;
+    /// The length of the fire animation.
     public float fireAnimationLength;
 
+    /// How many bullets come with the weapon as backup ammo.
     public float reserveBullets;
+    /// How many bullets are currently in the mag.
     private float bulletsLeftInMag = 0;
+
     private bool isReloading = false;
     private float timestampLastBulletFired = -1;
 
     private TextMeshProUGUI ammoText;
     private Animator animator;
     private PlayerScript playerScript;
+    private Transform bulletSpawn;
+    private GameObject ammoUi;
 
     // Start is called before the first frame update
     void Start()
     {
+        ammoUi = GameObject.Find("Ammo");
         bulletsLeftInMag = magSize;
         ammoText = ammoUi.GetComponent<TextMeshProUGUI>();
         animator = GetComponent<Animator>();
         playerScript = GetComponentInParent<PlayerScript>();
+        bulletSpawn = transform.Find("Spawn");
     }
 
     void OnEnable()
@@ -49,7 +59,6 @@ public class WeaponScript : MonoBehaviour
     void OnDisable()
     {
         isReloading = false;
-        // TODO: Cancel animation
     }
 
     void UpdateAmmoUi()
@@ -84,10 +93,7 @@ public class WeaponScript : MonoBehaviour
     {
         animator.SetBool("Shoot", true);
 
-        Vector3 screenSpaceBulletSpawn = new(bulletSpawnXOffset, bulletSpawnYOffset, 1);
-        Vector3 bulletSpawn = Camera.main.ViewportToWorldPoint(screenSpaceBulletSpawn);
-
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn, Camera.main.transform.rotation);
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Camera.main.transform.rotation);
         var ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
 
         if (Physics.Raycast(ray, out RaycastHit hit))
@@ -100,7 +106,6 @@ public class WeaponScript : MonoBehaviour
         bulletsLeftInMag--;
         UpdateAmmoUi();
 
-        // Recoil.
         RecoilObject.recoil += 0.1f;
     }
 
