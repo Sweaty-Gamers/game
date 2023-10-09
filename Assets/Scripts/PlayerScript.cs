@@ -8,6 +8,8 @@ public class PlayerScript : MonoBehaviour
 {
     /// How fast the player walks.
     public float movementSpeed;
+    /// How fast the player dashes.
+    public float dashSpeed;
     /// Jump strength.
     public float jumpForce;
     /// Movement speed multiplier when sprinting.
@@ -22,6 +24,7 @@ public class PlayerScript : MonoBehaviour
     public bool isWalking = false;
     public bool isRunning = false;
     public bool isJumping = false;
+    public bool isDashing = false;
 
     private new Rigidbody rigidbody;
     private int weaponIndex = 0;
@@ -78,6 +81,9 @@ public class PlayerScript : MonoBehaviour
         float speed = movementSpeed;
         isRunning = Input.GetKey(KeyCode.LeftShift) && isWalking;
 
+        // Player can dash if starts moving while holding shift.
+        isDashing = Input.GetKey(KeyCode.LeftShift) && !isWalking;
+
         if (isRunning)
             speed *= sprintFactor;
 
@@ -88,25 +94,48 @@ public class PlayerScript : MonoBehaviour
             rigidbody.AddRelativeForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
 
-        // Flat movement.
-        if (horizontal > 0)
-        {
-            rigidbody.AddRelativeForce(new Vector3(speed, 0, 0), ForceMode.Force);
-        }
+        if (isDashing) {
+            // Dashing movement.
+            if (horizontal > 0)
+            {
+                rigidbody.AddRelativeForce(new Vector3(dashSpeed, 0, 0), ForceMode.Force);
+            }
 
-        if (horizontal < 0)
-        {
-            rigidbody.AddRelativeForce(new Vector3(-speed, 0, 0), ForceMode.Force);
-        }
+            if (horizontal < 0)
+            {
+                rigidbody.AddRelativeForce(new Vector3(-dashSpeed, 0, 0), ForceMode.Force);
+            }
 
-        if (vertical > 0)
-        {
-            rigidbody.AddRelativeForce(new Vector3(0, 0, speed), ForceMode.Force);
-        }
+            if (vertical > 0)
+            {
+                rigidbody.AddRelativeForce(new Vector3(0, 0, dashSpeed), ForceMode.Force);
+            }
 
-        if (vertical < 0)
-        {
-            rigidbody.AddRelativeForce(new Vector3(0, 0, -speed), ForceMode.Force);
+            if (vertical < 0)
+            {
+                rigidbody.AddRelativeForce(new Vector3(0, 0, -dashSpeed), ForceMode.Force);
+            }
+        } else {
+            // Flat movement.
+            if (horizontal > 0)
+            {
+                rigidbody.AddRelativeForce(new Vector3(speed, 0, 0), ForceMode.Force);
+            }
+
+            if (horizontal < 0)
+            {
+                rigidbody.AddRelativeForce(new Vector3(-speed, 0, 0), ForceMode.Force);
+            }
+
+            if (vertical > 0)
+            {
+                rigidbody.AddRelativeForce(new Vector3(0, 0, speed), ForceMode.Force);
+            }
+
+            if (vertical < 0)
+            {
+                rigidbody.AddRelativeForce(new Vector3(0, 0, -speed), ForceMode.Force);
+            }
         }
 
         // Limit velocity.
