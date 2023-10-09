@@ -21,6 +21,8 @@ public class PlayerScript : MonoBehaviour
     /// The max player speed.
     public float maxSpeed;
 
+    public bool iceSkates;
+
     public bool isWalking = false;
     public bool isRunning = false;
     public bool isJumping = false;
@@ -75,7 +77,7 @@ public class PlayerScript : MonoBehaviour
         isWalking = horizontal != 0 || vertical != 0;
 
         // Add drag to make movement feel natural.
-        rigidbody.drag = isJumping ? 1 : groundDrag;
+        rigidbody.drag = isJumping ? (iceSkates ? 0 : 1) : groundDrag;
 
         // Set the player speed depending on if we are sprinting or not.
         float speed = movementSpeed;
@@ -94,28 +96,31 @@ public class PlayerScript : MonoBehaviour
             rigidbody.AddRelativeForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
 
-        if (isDashing) {
+        if (isDashing)
+        {
             // Dashing movement.
             if (horizontal > 0)
             {
-                rigidbody.AddRelativeForce(new Vector3(dashSpeed, 0, 0), ForceMode.Force);
+                rigidbody.AddRelativeForce(new Vector3(dashSpeed, 0, 0), ForceMode.Impulse);
             }
 
             if (horizontal < 0)
             {
-                rigidbody.AddRelativeForce(new Vector3(-dashSpeed, 0, 0), ForceMode.Force);
+                rigidbody.AddRelativeForce(new Vector3(-dashSpeed, 0, 0), ForceMode.Impulse);
             }
 
             if (vertical > 0)
             {
-                rigidbody.AddRelativeForce(new Vector3(0, 0, dashSpeed), ForceMode.Force);
+                rigidbody.AddRelativeForce(new Vector3(0, 0, dashSpeed), ForceMode.Impulse);
             }
 
             if (vertical < 0)
             {
-                rigidbody.AddRelativeForce(new Vector3(0, 0, -dashSpeed), ForceMode.Force);
+                rigidbody.AddRelativeForce(new Vector3(0, 0, -dashSpeed), ForceMode.Impulse);
             }
-        } else {
+        }
+        else
+        {
             // Flat movement.
             if (horizontal > 0)
             {
@@ -139,12 +144,12 @@ public class PlayerScript : MonoBehaviour
         }
 
         // Limit velocity.
-        Vector3 velocity = new(rigidbody.velocity.x, 0, rigidbody.velocity.z);
-        if (velocity.magnitude > maxSpeed)
-        {
-            Vector3 limitedVelocity = velocity.normalized * movementSpeed;
-            rigidbody.velocity = new(limitedVelocity.x, rigidbody.velocity.y, limitedVelocity.z);
-        }
+        // Vector3 velocity = new(rigidbody.velocity.x, 0, rigidbody.velocity.z);
+        // if (velocity.magnitude > maxSpeed)
+        // {
+        //     Vector3 limitedVelocity = velocity.normalized * movementSpeed;
+        //     rigidbody.velocity = new(limitedVelocity.x, rigidbody.velocity.y, limitedVelocity.z);
+        // }
     }
 
     void SwitchWeapon(int nextWeaponIndex)
