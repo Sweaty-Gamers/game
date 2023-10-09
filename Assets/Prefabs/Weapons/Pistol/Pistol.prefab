@@ -445,6 +445,37 @@ Transform:
   - {fileID: 2092606467453168015}
   m_Father: {fileID: 1906475413716614739}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1645339776561700309
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3446881003820517545}
+  m_Layer: 0
+  m_Name: Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3446881003820517545
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1645339776561700309}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.358, y: 0.147, z: 1.392}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8185109375027102448}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1668413438308435810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,6 +1092,7 @@ Transform:
   - {fileID: 788485203646347616}
   - {fileID: 2429073124052394789}
   - {fileID: 5092886538248485432}
+  - {fileID: 3446881003820517545}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1116816040193324818
@@ -1082,6 +1114,7 @@ MonoBehaviour:
   semiAuto: 1
   bulletPrefab: {fileID: 4819610306315137784, guid: 0c4bd847628c5136ea3b92d58d8af96e, type: 3}
   ammoUi: {fileID: 0}
+  RecoilObject: {fileID: 0}
   bulletSpawnXOffset: 0.6
   bulletSpawnYOffset: 0.35
   reloadAnimationLength: 1.667

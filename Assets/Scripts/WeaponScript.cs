@@ -23,11 +23,6 @@ public class WeaponScript : MonoBehaviour
     /// The empty parent object to the player to rotate the camera's offsets.
     public Recoil RecoilObject;
 
-    /// The bullet spawn X offset relative to the screen center.
-    public float bulletSpawnXOffset = 0.5f;
-    /// The bullet spawn Y offset relative to the screen center.
-    public float bulletSpawnYOffset = 0.5f;
-
     /// The length of the reload animation.
     public float reloadAnimationLength;
     /// The length of the fire animation.
@@ -44,6 +39,7 @@ public class WeaponScript : MonoBehaviour
     private TextMeshProUGUI ammoText;
     private Animator animator;
     private PlayerScript playerScript;
+    private Transform bulletSpawn;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +48,7 @@ public class WeaponScript : MonoBehaviour
         ammoText = ammoUi.GetComponent<TextMeshProUGUI>();
         animator = GetComponent<Animator>();
         playerScript = GetComponentInParent<PlayerScript>();
+        bulletSpawn = transform.Find("Spawn");
     }
 
     void OnEnable()
@@ -96,10 +93,7 @@ public class WeaponScript : MonoBehaviour
     {
         animator.SetBool("Shoot", true);
 
-        Vector3 screenSpaceBulletSpawn = new(bulletSpawnXOffset, bulletSpawnYOffset, 1);
-        Vector3 bulletSpawn = Camera.main.ViewportToWorldPoint(screenSpaceBulletSpawn);
-
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn, Camera.main.transform.rotation);
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Camera.main.transform.rotation);
         var ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
 
         if (Physics.Raycast(ray, out RaycastHit hit))
