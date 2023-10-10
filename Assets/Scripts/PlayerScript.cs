@@ -84,7 +84,7 @@ public class PlayerScript : MonoBehaviour
         isRunning = Input.GetKey(KeyCode.LeftShift) && isWalking;
 
         // Player can dash if starts moving while holding shift.
-        isDashing = Input.GetKey(KeyCode.LeftShift) && !isWalking;
+        isDashing = Input.GetKey(KeyCode.LeftShift) && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D));
 
         if (isRunning)
             speed *= sprintFactor;
@@ -101,22 +101,22 @@ public class PlayerScript : MonoBehaviour
             // Dashing movement.
             if (horizontal > 0)
             {
-                rigidbody.AddRelativeForce(new Vector3(dashSpeed, 0, 0), ForceMode.Impulse);
+                rigidbody.AddForce(Camera.main.transform.forward * dashSpeed, ForceMode.Impulse);
             }
 
             if (horizontal < 0)
             {
-                rigidbody.AddRelativeForce(new Vector3(-dashSpeed, 0, 0), ForceMode.Impulse);
+                rigidbody.AddForce(Camera.main.transform.forward * -dashSpeed, ForceMode.Impulse);
             }
 
             if (vertical > 0)
             {
-                rigidbody.AddRelativeForce(new Vector3(0, 0, dashSpeed), ForceMode.Impulse);
+                rigidbody.AddForce(Camera.main.transform.forward * dashSpeed, ForceMode.Impulse);
             }
 
             if (vertical < 0)
             {
-                rigidbody.AddRelativeForce(new Vector3(0, 0, -dashSpeed), ForceMode.Impulse);
+                rigidbody.AddForce(Camera.main.transform.forward * -dashSpeed, ForceMode.Impulse);
             }
         }
         else
@@ -144,12 +144,12 @@ public class PlayerScript : MonoBehaviour
         }
 
         // Limit velocity.
-        // Vector3 velocity = new(rigidbody.velocity.x, 0, rigidbody.velocity.z);
-        // if (velocity.magnitude > maxSpeed)
-        // {
-        //     Vector3 limitedVelocity = velocity.normalized * movementSpeed;
-        //     rigidbody.velocity = new(limitedVelocity.x, rigidbody.velocity.y, limitedVelocity.z);
-        // }
+        Vector3 velocity = new(rigidbody.velocity.x, 0, rigidbody.velocity.z);
+        if (velocity.magnitude > maxSpeed)
+        {
+            Vector3 limitedVelocity = velocity.normalized * movementSpeed;
+            rigidbody.velocity = new(limitedVelocity.x, rigidbody.velocity.y, limitedVelocity.z);
+        }
     }
 
     void SwitchWeapon(int nextWeaponIndex)
