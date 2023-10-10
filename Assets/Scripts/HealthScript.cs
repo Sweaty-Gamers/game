@@ -19,8 +19,10 @@ public class HealthScript : MonoBehaviour {
     }
 
     void Update() {
-        float healthPercent = (int) (health / maxHealth * 100f);
-        healthText.text = healthPercent.ToString() + "%";
+        if (gameObject.tag == "Player") {
+            float healthPercent = (int) (health / maxHealth * 100f);
+            healthText.text = healthPercent.ToString() + "%";
+        }
     }
 
     void TakeDamage(GameObject bullet) {
@@ -35,6 +37,7 @@ public class HealthScript : MonoBehaviour {
 
     void Death() {
         // TODO: what happens when you get hit
+        Destroy(gameObject);
     }
 
     void OnCollisionEnter(Collision collision) {
