@@ -84,7 +84,7 @@ public class PlayerScript : MonoBehaviour
         isRunning = Input.GetKey(KeyCode.LeftShift) && isWalking;
 
         // Player can dash if starts moving while holding shift.
-        isDashing = Input.GetKey(KeyCode.Q) && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D));
+        isDashing = Input.GetKeyDown(KeyCode.Q) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D));
 
         if (isRunning)
             speed *= sprintFactor;
