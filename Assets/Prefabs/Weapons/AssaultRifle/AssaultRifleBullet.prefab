@@ -50,7 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 103b89bf599bf4844990447bba2b460f, type: 3}
       propertyPath: m_Name
-      value: Bullet
+      value: AssaultRifleBullet
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 103b89bf599bf4844990447bba2b460f, type: 3}
       propertyPath: m_TagString
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletMarkPrefab: {fileID: 4032720450056389536, guid: 153be60e2c6d47348b934d7f4a7bd91d, type: 3}
   bulletDespawnTime: 1
-  damage: 10
+  damage: 15
 --- !u!54 &5636972773908220145
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -17,6 +17,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 103b89bf599bf4844990447bba2b460f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 103b89bf599bf4844990447bba2b460f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -26,7 +30,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 103b89bf599bf4844990447bba2b460f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.0076159
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 103b89bf599bf4844990447bba2b460f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -97,6 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletMarkPrefab: {fileID: 4032720450056389536, guid: a30841066d45e50caa21ebc6773a5ff9, type: 3}
   bulletDespawnTime: 1
+  damage: 50
 --- !u!54 &5636972773908220145
 Rigidbody:
   m_ObjectHideFlags: 0
