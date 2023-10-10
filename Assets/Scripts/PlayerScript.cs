@@ -27,12 +27,14 @@ public class PlayerScript : MonoBehaviour
 
     private new Rigidbody rigidbody;
     private int weaponIndex = 0;
+    private HealthScript healthScript;
 
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        healthScript = GetComponent<HealthScript>();
 
         for (int i = 0; i < weapons.transform.childCount; i++)
         {

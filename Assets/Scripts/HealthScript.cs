@@ -1,4 +1,6 @@
 using Unity.VisualScripting;
+using TMPro;
+
 using UnityEngine;
 
 public class HealthScript : MonoBehaviour {
@@ -8,12 +10,17 @@ public class HealthScript : MonoBehaviour {
     /// Max health points;
     public float maxHealth;
 
-    void Start() {
+    private GameObject healthUi;
+    private TextMeshProUGUI healthText;
 
+    void Start() {
+        healthUi = GameObject.Find("Health");
+        healthText = healthUi.GetComponent<TextMeshProUGUI>();
     }
 
     void Update() {
-
+        float healthPercent = (int) (health / maxHealth * 100f);
+        healthText.text = healthPercent.ToString() + "%";
     }
 
     void TakeDamage(GameObject bullet) {
