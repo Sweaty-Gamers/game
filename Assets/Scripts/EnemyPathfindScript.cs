@@ -29,7 +29,7 @@ public class EnemyPathfindScript : MonoBehaviour
 
         if (objectTag == "Enemy_Ranged")
         {
-            stoppingDistance = 100f;
+            stoppingDistance = 3.5f; //100f;
         }
     }
 
