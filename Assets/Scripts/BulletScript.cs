@@ -7,6 +7,7 @@ public class BulletScript : MonoBehaviour
 {
     public GameObject bulletMarkPrefab;
     public int bulletDespawnTime;
+    public float damage = 1;
 
     // Start is called before the first frame update
     void Start()
