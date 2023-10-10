@@ -84,7 +84,7 @@ public class PlayerScript : MonoBehaviour
         isRunning = Input.GetKey(KeyCode.LeftShift) && isWalking;
 
         // Player can dash if starts moving while holding shift.
-        isDashing = Input.GetKey(KeyCode.LeftShift) && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D));
+        isDashing = Input.GetKey(KeyCode.Q) && (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D));
 
         if (isRunning)
             speed *= sprintFactor;
@@ -119,29 +119,28 @@ public class PlayerScript : MonoBehaviour
                 rigidbody.AddForce(Camera.main.transform.forward * -dashSpeed, ForceMode.Impulse);
             }
         }
-        else
+
+        // Flat movement.
+        if (horizontal > 0)
         {
-            // Flat movement.
-            if (horizontal > 0)
-            {
-                rigidbody.AddRelativeForce(new Vector3(speed, 0, 0), ForceMode.Force);
-            }
-
-            if (horizontal < 0)
-            {
-                rigidbody.AddRelativeForce(new Vector3(-speed, 0, 0), ForceMode.Force);
-            }
-
-            if (vertical > 0)
-            {
-                rigidbody.AddRelativeForce(new Vector3(0, 0, speed), ForceMode.Force);
-            }
-
-            if (vertical < 0)
-            {
-                rigidbody.AddRelativeForce(new Vector3(0, 0, -speed), ForceMode.Force);
-            }
+            rigidbody.AddRelativeForce(new Vector3(speed, 0, 0), ForceMode.Force);
         }
+
+        if (horizontal < 0)
+        {
+            rigidbody.AddRelativeForce(new Vector3(-speed, 0, 0), ForceMode.Force);
+        }
+
+        if (vertical > 0)
+        {
+            rigidbody.AddRelativeForce(new Vector3(0, 0, speed), ForceMode.Force);
+        }
+
+        if (vertical < 0)
+        {
+            rigidbody.AddRelativeForce(new Vector3(0, 0, -speed), ForceMode.Force);
+        }
+
 
         // Limit velocity.
         Vector3 velocity = new(rigidbody.velocity.x, 0, rigidbody.velocity.z);
