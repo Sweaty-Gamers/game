@@ -30,6 +30,8 @@ public class HealthScript : MonoBehaviour {
         BulletScript bulletScript = bullet.GetComponent<BulletScript>();
         health -= bulletScript.damage;
 
+        print(health);
+
         // Cap min health at zero
         if (health < 0) health = 0;
         if (health == 0) Death();
@@ -41,8 +43,14 @@ public class HealthScript : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision collision) {
-        if (collision.gameObject.tag == "Bullet") {
+        if (gameObject.tag.Contains("Enemy") && collision.gameObject.tag == "Bullet") {
             TakeDamage(collision.gameObject);
+        }
+
+        print(gameObject.tag + " -> " + collision.gameObject.tag);
+        if (gameObject.tag == "Player" && collision.gameObject.tag == "EnemyBullet") {
+            TakeDamage(collision.gameObject);
+            print("AWDHAIUDWUADHU AIUHWDAWDI ADIW HUAWDIU");
         }
     }
 }
