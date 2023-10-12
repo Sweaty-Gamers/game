@@ -120,6 +120,11 @@ public class EnemyPathfindScript : MonoBehaviour
                 // There is a clear line of sight to the player
                 return true;
             }
+            else
+            {
+                // Debug the tag of the object when it's not the player
+                Debug.Log("Hit object's tag: " + hit.collider.tag);
+            }
         }
 
         // There is an obstacle or no player in sight
