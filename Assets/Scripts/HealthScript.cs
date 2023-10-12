@@ -12,10 +12,13 @@ public class HealthScript : MonoBehaviour {
 
     private GameObject healthUi;
     private TextMeshProUGUI healthText;
+    private Rigidbody playerRigidbody;
+
 
     void Start() {
         healthUi = GameObject.Find("Health");
         healthText = healthUi.GetComponent<TextMeshProUGUI>();
+        playerRigidbody = GetComponent<Rigidbody>();
     }
 
     void Update() {
@@ -35,6 +38,31 @@ public class HealthScript : MonoBehaviour {
         // Cap min health at zero
         if (health < 0) health = 0;
         if (health == 0) Death();
+    }
+
+    public void TakeMeleeDamage(float damage)
+    {
+        // Take damage for bullet damage
+        health -= damage;
+
+        print(health);
+
+        // Cap min health at zero
+        if (health < 0) health = 0;
+        if (health == 0) Death();
+
+        // Apply knockback
+        if (playerRigidbody != null)
+        {
+            // Calculate the direction from the player to the object
+            Vector3 knockbackDirection = (playerRigidbody.position - transform.position).normalized;
+
+            // Apply the knockback force upwards
+            knockbackDirection.x = 0.25f; // You can adjust this value to control the upward force
+
+            playerRigidbody.AddForce(knockbackDirection * AxeScript.knockbackForce, ForceMode.Impulse);
+        }
+
     }
 
     void Death() {
