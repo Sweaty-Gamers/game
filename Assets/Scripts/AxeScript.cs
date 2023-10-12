@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class AxeScript : MonoBehaviour
 {
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        // Check if the collider entering the trigger is the one you're interested in
+        if (other.CompareTag("Player"))
         {
-            // Handle collision with the player
-            // ...
-            Debug.Log("Hereee");
-        }
-        else
-        {
-            Debug.Log("Hit object's tag: " + collision.gameObject.tag);
+            Debug.Log("Player got attacked");
         }
     }
 }
