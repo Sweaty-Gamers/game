@@ -320,7 +320,7 @@ Rigidbody:
   m_GameObject: {fileID: 5443323960298137777}
   serializedVersion: 4
   m_Mass: 1
-  m_Drag: 10
+  m_Drag: 1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -354,7 +354,6 @@ MonoBehaviour:
   dashSpeed: 30
   jumpForce: 7
   sprintFactor: 2.5
-  groundDrag: 5
   weapons: {fileID: 3617086069172367579}
   maxSpeed: 9999999
   iceSkates: 0
