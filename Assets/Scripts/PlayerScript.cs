@@ -19,6 +19,10 @@ public class PlayerScript : MonoBehaviour
     public float sprintRegenerationSpeed;
     /// How quickly sprint drains.
     public float sprintDegenerationSpeed;
+    /// How much drag to apply on the floor.
+    public float groundDrag;
+    /// How much drag to apply on the air.
+    public float airDrag;
 
     public bool iceSkates;
 
@@ -154,6 +158,8 @@ public class PlayerScript : MonoBehaviour
             rigidbody.AddRelativeForce(new Vector3(0, 0, -speed), ForceMode.Force);
         }
 
+        // Add drag to make movement feel natural.
+        rigidbody.drag = isJumping ? airDrag : groundDrag;
 
         // Limit velocity.
         Vector3 velocity = new(rigidbody.velocity.x, 0, rigidbody.velocity.z);

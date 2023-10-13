@@ -350,14 +350,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c66141e17a5a0838ade9bbcecec3f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
+  movementSpeed: 20
   dashSpeed: 30
   jumpForce: 7
   sprintFactor: 2.5
   weapons: {fileID: 3617086069172367579}
-  maxSpeed: 9999999
+  maxSpeed: 100
   sprintRegenerationSpeed: 0.01
   sprintDegenerationSpeed: 0.05
+  groundDrag: 3
+  airDrag: 2
   iceSkates: 0
   isWalking: 0
   isRunning: 0
