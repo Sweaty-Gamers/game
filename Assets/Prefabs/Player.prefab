@@ -356,11 +356,14 @@ MonoBehaviour:
   sprintFactor: 2.5
   weapons: {fileID: 3617086069172367579}
   maxSpeed: 9999999
+  sprintRegenerationSpeed: 0.01
+  sprintDegenerationSpeed: 0.05
   iceSkates: 0
   isWalking: 0
   isRunning: 0
   isJumping: 0
   isDashing: 0
+  sprintMeter: 100
 --- !u!114 &7606864552337583877
 MonoBehaviour:
   m_ObjectHideFlags: 0

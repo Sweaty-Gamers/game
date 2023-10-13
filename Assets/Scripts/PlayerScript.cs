@@ -15,6 +15,10 @@ public class PlayerScript : MonoBehaviour
     public GameObject weapons;
     /// The max player speed.
     public float maxSpeed;
+    /// How quickly sprint fills back up.
+    public float sprintRegenerationSpeed;
+    /// How quickly sprint drains.
+    public float sprintDegenerationSpeed;
 
     public bool iceSkates;
 
@@ -22,6 +26,7 @@ public class PlayerScript : MonoBehaviour
     public bool isRunning = false;
     public bool isJumping = false;
     public bool isDashing = false;
+    public float sprintMeter = 100f;
 
     private new Rigidbody rigidbody;
     private int weaponIndex = 0;
@@ -43,6 +48,21 @@ public class PlayerScript : MonoBehaviour
     {
         SwitchWeapons();
         Movement();
+    }
+
+    void FixedUpdate()
+    {
+        print(sprintMeter);
+        if (isRunning)
+        {
+            sprintMeter -= sprintDegenerationSpeed;
+        }
+        else
+        {
+            sprintMeter += sprintRegenerationSpeed;
+        }
+
+        sprintMeter = Mathf.Clamp(sprintMeter, 0, 1);
     }
 
     /// Switch weapons using the number keys or the mouse wheel.
@@ -77,7 +97,7 @@ public class PlayerScript : MonoBehaviour
         // Player can dash if starts moving while holding shift.
         bool wantsToDash = Input.GetKeyDown(KeyCode.Q) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D));
 
-        if (isRunning)
+        if (isRunning && sprintMeter > 0)
             speed *= sprintFactor;
 
         // Jumping.
