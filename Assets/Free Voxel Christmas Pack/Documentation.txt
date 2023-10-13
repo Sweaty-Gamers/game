@@ -1,0 +1,77 @@
+ENG.
+------------------------------
+
+This model of jeep is absolutely free. This model is allowed to be used for any purpose (training, personal purposes, as well as in commercial projects).
+This package contains:
+These models are absolutely free. These models are allowed to be used for any purpose (training, personal purposes, as well as in commercial projects).
+This package contains:
+- 42 prefabs of voxel models.
+- 4 Christmas trees
+- 2 benches
+- 1 bridge
+- 2 fences
+- 2 garlands
+- 4 snow drifts
+- 1 street lamp
+- 5 large gifts
+- 5 small gifts
+As well as parts for assembling various snowmen!
+- 4 snowman bodies
+- 4 snowman heads
+- 3 snowman hands
+- 3 hats 
+- 1 caramel stick
+Additionally:
+- 1 demo scene
+- 1 texture for all models
+- 1 material for all models
+All models are made in voxel style, and have 256-6310 vertices, 148-4180 triangles.
+
+------------------------------
+
+If you liked this asset, please leave a review :)
+
+And also see my other projects:
+- 36 Animated Pixel Humans: https://assetstore.unity.com/packages/2d/characters/36-animated-pixel-humans-150852
+- Free Voxel Cartoon SUV: https://assetstore.unity.com/packages/3d/vehicles/free-voxel-cartoon-suv-192980
+- 100+ Modern Pixel Decorations: https://assetstore.unity.com/packages/2d/textures-materials/100-modern-pixel-decorations-179540
+
+------------------------------
+
+Ru.
+------------------------------
+
+Данные модели являются абсолютно бесплатными. Данные модели разрешено использовать в любых целях (обучении, личных целях, а также в коммерческих проектах).
+Данный пакет содержит в себе:
+- 42 префаба воксельных моделей.
+- 4 ёлки
+- 2 скамейки
+- 1 мост
+- 2 забора
+- 2 гирлянды
+- 4 снежных сугроба
+- 1 уличный фонарь
+- 5 больших подарка
+- 5 маленьких подарка
+А также части для сборки различных снеговиков!
+- 4 тела снеговика
+- 4 головы снеговика
+- 3 руки снеговика
+- 3 шляпы 
+- 1 карамельная палочка
+Дополнительно:
+- 1 демонстрационная сцена
+- 1 текстура для всех моделей
+- 1 материал для всех моделей
+Все модели выполнены в воксельном стиле, и имеют 256-6310 vertices, 148-4180 triangles.
+
+------------------------------
+
+Если вам понравился данный ассет, прошу оставьте отзыв :)
+
+А также посмотрите другие мои проекты:
+- 36 Animated Pixel Humans: https://assetstore.unity.com/packages/2d/characters/36-animated-pixel-humans-150852
+- Free Voxel Cartoon SUV: https://assetstore.unity.com/packages/3d/vehicles/free-voxel-cartoon-suv-192980
+- 100+ Modern Pixel Decorations: https://assetstore.unity.com/packages/2d/textures-materials/100-modern-pixel-decorations-179540
+
+------------------------------
