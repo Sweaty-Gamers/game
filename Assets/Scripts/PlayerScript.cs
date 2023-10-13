@@ -32,7 +32,7 @@ public class PlayerScript : MonoBehaviour
     public bool isDashing = false;
     public float sprintMeter = 100f;
 
-    private new Rigidbody rigidbody;
+    private Rigidbody rigidbody;
     private int weaponIndex = 0;
 
     // Start is called before the first frame update
@@ -56,7 +56,6 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        print(sprintMeter);
         if (isRunning)
         {
             sprintMeter -= sprintDegenerationSpeed;
