@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465878, g: 0.4964224, b: 0.57482475, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -179,14 +179,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmas tree_1 (12)
       objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -273,14 +265,6 @@ PrefabInstance:
     - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
       propertyPath: m_Name
       value: Christmas tree_1 (10)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -369,14 +353,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmas tree_1 (13)
       objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -390,10 +366,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 280.08588
@@ -437,10 +409,6 @@ PrefabInstance:
     - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_Name
       value: Christmas tree_2 (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -573,10 +541,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 268.1068
@@ -620,10 +584,6 @@ PrefabInstance:
     - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_Name
       value: Christmas tree_2 (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -686,14 +646,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmas tree_1 (16)
       objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -707,10 +659,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 231.00876
@@ -754,10 +702,6 @@ PrefabInstance:
     - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_Name
       value: Christmas tree_2 (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -812,7 +756,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.0006668293, y: -0.00046624435, z: -0.0014217256, w: 0.9999987}
   m_LocalPosition: {x: 250, y: 0, z: 500}
-  m_LocalScale: {x: 526.2351, y: 100, z: 1}
+  m_LocalScale: {x: 526.2351, y: 1000, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -825,17 +769,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1799800800741876532, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 7311566140752108525, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
       propertyPath: m_Name
       value: Christmas tree_4 (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7311566140752108525, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: 7943283243011129687, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1099,17 +1035,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1799800800741876532, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 7311566140752108525, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
       propertyPath: m_Name
       value: Christmas tree_4 (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7311566140752108525, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: 7943283243011129687, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1156,6 +1084,87 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
+--- !u!21 &301378645
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SingleLine-LightSaber(Clone)
+  m_Shader: {fileID: 4800000, guid: 2d9a4ca4b2730b64e8aade7030f8caeb, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 5
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailAlbedoMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailMask:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _DetailNormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _EmissionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _OcclusionMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _ParallaxMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _BumpScale: 1
+    - _Cutoff: 0.5
+    - _DetailNormalMapScale: 1
+    - _DstBlend: 0
+    - _Glossiness: 0.5
+    - _LightSaberFactor: 0.8
+    - _LineScale: 0.040000014
+    - _LineWidth: 20
+    - _Metallic: 0
+    - _Mode: 0
+    - _OcclusionStrength: 1
+    - _Parallax: 0.02
+    - _SrcBlend: 1
+    - _UVSec: 0
+    - _UvBasedLightSaberFactor: 0
+    - _ZWrite: 1
+    m_Colors:
+    - _Color: {r: 0, g: 0.2934997, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+  m_BuildTextureStacks: []
 --- !u!1 &329127288
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,7 +1213,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.0006668293, y: -0.00046624435, z: -0.0014217256, w: 0.9999987}
   m_LocalPosition: {x: 250, y: 0, z: 0}
-  m_LocalScale: {x: 526.2351, y: 100, z: 1}
+  m_LocalScale: {x: 526.2351, y: 1000, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1291,14 +1300,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmas tree_1 (17)
       objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1338,10 +1339,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1504875562687465152, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 7071917043896034467, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 211.04779
@@ -1385,10 +1382,6 @@ PrefabInstance:
     - target: {fileID: 7597484308332576281, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
       propertyPath: m_Name
       value: Christmas tree_3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7597484308332576281, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1447,14 +1440,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snowman_Head_4 (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 2931323558926877723, guid: 014c67893fa3b364da90e948375892e0, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 6135007558629424322, guid: 014c67893fa3b364da90e948375892e0, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1468,10 +1453,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1504875562687465152, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 7071917043896034467, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 270.57016
@@ -1516,10 +1497,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmas tree_3 (6)
       objectReference: {fileID: 0}
-    - target: {fileID: 7597484308332576281, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1533,10 +1510,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 285.82736
@@ -1580,10 +1553,6 @@ PrefabInstance:
     - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_Name
       value: Christmas tree_2 (7)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1668,14 +1637,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snowman_Head_4
       objectReference: {fileID: 0}
-    - target: {fileID: 2931323558926877723, guid: 014c67893fa3b364da90e948375892e0, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 6135007558629424322, guid: 014c67893fa3b364da90e948375892e0, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1736,14 +1697,6 @@ PrefabInstance:
     - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
       propertyPath: m_Name
       value: Christmas tree_1 (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1946,10 +1899,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1504875562687465152, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 7071917043896034467, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 254.6555
@@ -1993,10 +1942,6 @@ PrefabInstance:
     - target: {fileID: 7597484308332576281, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
       propertyPath: m_Name
       value: Christmas tree_3 (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7597484308332576281, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2252,7 +2197,6 @@ RectTransform:
   - {fileID: 974095768}
   - {fileID: 1441165287}
   - {fileID: 1648970582}
-  - {fileID: 1584101963}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2331,17 +2275,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1799800800741876532, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 7311566140752108525, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
       propertyPath: m_Name
       value: Christmas tree_4 (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7311566140752108525, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: 7943283243011129687, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2396,10 +2332,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 229.46875
@@ -2443,10 +2375,6 @@ PrefabInstance:
     - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_Name
       value: Christmas tree_2 (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2508,10 +2436,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 212.2435
@@ -2555,10 +2479,6 @@ PrefabInstance:
     - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_Name
       value: Christmas tree_2 (13)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2653,14 +2573,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmas tree_1 (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2674,10 +2586,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1504875562687465152, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 7071917043896034467, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 209.388
@@ -2722,10 +2630,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmas tree_3 (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 7597484308332576281, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2739,10 +2643,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 227.56097
@@ -2786,10 +2686,6 @@ PrefabInstance:
     - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_Name
       value: Christmas tree_2 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2991,14 +2887,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmas tree_1 (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3038,17 +2926,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1799800800741876532, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 7311566140752108525, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
       propertyPath: m_Name
       value: Christmas tree_4 (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7311566140752108525, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: 7943283243011129687, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3146,10 +3026,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 293.3858
@@ -3194,10 +3070,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmas tree_2 (9)
       objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3211,10 +3083,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1504875562687465152, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 7071917043896034467, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 220.18365
@@ -3258,10 +3126,6 @@ PrefabInstance:
     - target: {fileID: 7597484308332576281, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
       propertyPath: m_Name
       value: Christmas tree_3 (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7597484308332576281, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3377,17 +3241,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1799800800741876532, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 7311566140752108525, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
       propertyPath: m_Name
       value: Christmas tree_4 (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7311566140752108525, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: 7943283243011129687, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3442,10 +3298,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1504875562687465152, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 7071917043896034467, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 232.25743
@@ -3489,10 +3341,6 @@ PrefabInstance:
     - target: {fileID: 7597484308332576281, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
       propertyPath: m_Name
       value: Christmas tree_3 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7597484308332576281, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3681,14 +3529,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmas tree_1 (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3783,17 +3623,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1799800800741876532, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 7311566140752108525, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
       propertyPath: m_Name
       value: Christmas tree_4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7311566140752108525, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: 7943283243011129687, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4625,87 +4457,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 2113658378}
   m_SourcePrefab: {fileID: 100100000, guid: a4ca3752b206e944cb28d6eff2862a42, type: 3}
---- !u!21 &1110138238
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: SingleLine-LightSaber(Clone)
-  m_Shader: {fileID: 4800000, guid: 2d9a4ca4b2730b64e8aade7030f8caeb, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 5
-  m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - _BumpMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailAlbedoMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailMask:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _DetailNormalMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _EmissionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _OcclusionMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _ParallaxMap:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _BumpScale: 1
-    - _Cutoff: 0.5
-    - _DetailNormalMapScale: 1
-    - _DstBlend: 0
-    - _Glossiness: 0.5
-    - _LightSaberFactor: 0.8
-    - _LineScale: 0.040000014
-    - _LineWidth: 20
-    - _Metallic: 0
-    - _Mode: 0
-    - _OcclusionStrength: 1
-    - _Parallax: 0.02
-    - _SrcBlend: 1
-    - _UVSec: 0
-    - _UvBasedLightSaberFactor: 0
-    - _ZWrite: 1
-    m_Colors:
-    - _Color: {r: 0, g: 0.2934997, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-  m_BuildTextureStacks: []
 --- !u!1001 &1119190561
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4761,14 +4512,6 @@ PrefabInstance:
     - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
       propertyPath: m_Name
       value: Christmas tree_1 (7)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4830,14 +4573,6 @@ PrefabInstance:
     - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
       propertyPath: m_Name
       value: Christmas tree_1 (18)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5578,10 +5313,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1504875562687465152, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 7071917043896034467, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 280.92307
@@ -5625,10 +5356,6 @@ PrefabInstance:
     - target: {fileID: 7597484308332576281, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
       propertyPath: m_Name
       value: Christmas tree_3 (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7597484308332576281, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5749,14 +5476,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmas tree_1
       objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5822,10 +5541,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 253.83965
@@ -5869,10 +5584,6 @@ PrefabInstance:
     - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_Name
       value: Christmas tree_2 (15)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5939,10 +5650,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 207.93741
@@ -5986,10 +5693,6 @@ PrefabInstance:
     - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_Name
       value: Christmas tree_2 (12)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6048,14 +5751,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snowman_Head_1
       objectReference: {fileID: 0}
-    - target: {fileID: 1058124394545861191, guid: 4ef1e23a0f47bb94a96cedec9629b18b, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 8296472084825483934, guid: 4ef1e23a0f47bb94a96cedec9629b18b, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6095,10 +5790,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1504875562687465152, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 7071917043896034467, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 276.26956
@@ -6142,10 +5833,6 @@ PrefabInstance:
     - target: {fileID: 7597484308332576281, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
       propertyPath: m_Name
       value: Christmas tree_3 (7)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7597484308332576281, guid: fe4a39498efe61c47937f5d418f0c6cc, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6207,14 +5894,6 @@ PrefabInstance:
     - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
       propertyPath: m_Name
       value: Christmas tree_1 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6441,14 +6120,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmas tree_1 (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6462,10 +6133,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 240.93428
@@ -6510,10 +6177,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmas tree_2 (14)
       objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6527,10 +6190,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 268.6955
@@ -6574,10 +6233,6 @@ PrefabInstance:
     - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_Name
       value: Christmas tree_2 (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6775,189 +6430,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1547380866
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1547380868}
-  - component: {fileID: 1547380867}
-  m_Layer: 0
-  m_Name: GameMaster
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1547380867
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547380866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 836d384a97d1e844bab87a52b95bdb79, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  secondsBeforeNextRound: 5
-  currentRound: 1
-  roundStarted: 0
---- !u!4 &1547380868
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547380866}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 248.72098, y: 4.9925866, z: 225.69626}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1584101962
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1584101963}
-  - component: {fileID: 1584101965}
-  - component: {fileID: 1584101964}
-  m_Layer: 5
-  m_Name: Round
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1584101963
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1584101962}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 688329275}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -10, y: -40}
-  m_SizeDelta: {x: 50, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1584101964
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1584101962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_text: '0
-
-'
-  m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_fontSharedMaterials: []
-  m_fontMaterial: {fileID: 0}
-  m_fontMaterials: []
-  m_fontColor32:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
-  m_colorMode: 3
-  m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
-    topRight: {r: 1, g: 1, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
-  m_fontColorGradientPreset: {fileID: 0}
-  m_spriteAsset: {fileID: 0}
-  m_tintAllSprites: 0
-  m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: -1183493901
-  m_overrideHtmlColors: 0
-  m_faceColor:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
-  m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
-  m_textAlignment: 65535
-  m_characterSpacing: 0
-  m_wordSpacing: 0
-  m_lineSpacing: 0
-  m_lineSpacingMax: 0
-  m_paragraphSpacing: 0
-  m_charWidthMaxAdj: 0
-  m_enableWordWrapping: 1
-  m_wordWrappingRatios: 0.4
-  m_overflowMode: 0
-  m_linkedTextComponent: {fileID: 0}
-  parentLinkedComponent: {fileID: 0}
-  m_enableKerning: 1
-  m_enableExtraPadding: 0
-  checkPaddingRequired: 0
-  m_isRichText: 1
-  m_parseCtrlCharacters: 1
-  m_isOrthographic: 1
-  m_isCullingEnabled: 0
-  m_horizontalMapping: 0
-  m_verticalMapping: 0
-  m_uvLineOffset: 0
-  m_geometrySortingOrder: 0
-  m_IsTextObjectScaleStatic: 0
-  m_VertexBufferAutoSizeReduction: 0
-  m_useMaxVisibleDescender: 1
-  m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
-  m_isUsingLegacyAnimationComponent: 0
-  m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_baseMaterial: {fileID: 0}
-  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!222 &1584101965
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1584101962}
-  m_CullTransparentMesh: 1
 --- !u!1001 &1625082151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6966,17 +6438,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1799800800741876532, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 7311566140752108525, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
       propertyPath: m_Name
       value: Christmas tree_4 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7311566140752108525, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     - target: {fileID: 7943283243011129687, guid: 24e679e3308dc084b966ff8decc0eff2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7167,10 +6631,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 532566958108489563, guid: 46eac2874d7559a4b87f72fb1f0d3e8f, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 8188130847144645944, guid: 46eac2874d7559a4b87f72fb1f0d3e8f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 231.888
@@ -7255,10 +6715,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snowman_Hand_3
       objectReference: {fileID: 0}
-    - target: {fileID: 8856826969007443842, guid: 46eac2874d7559a4b87f72fb1f0d3e8f, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7272,10 +6728,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 251.40091
@@ -7319,10 +6771,6 @@ PrefabInstance:
     - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_Name
       value: Christmas tree_2 (16)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7385,14 +6833,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmas tree_1 (14)
       objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7406,10 +6846,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 245.68472
@@ -7453,10 +6889,6 @@ PrefabInstance:
     - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_Name
       value: Christmas tree_2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7519,14 +6951,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmas tree_1 (15)
       objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7540,10 +6964,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 280.93875
@@ -7587,10 +7007,6 @@ PrefabInstance:
     - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_Name
       value: Christmas tree_2 (8)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7739,14 +7155,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Christmas tree_1 (9)
       objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7812,10 +7220,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 212.70311
@@ -7859,10 +7263,6 @@ PrefabInstance:
     - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_Name
       value: Christmas tree_2 (11)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7949,7 +7349,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 250}
-  m_LocalScale: {x: 0.7470078, y: 100, z: 500}
+  m_LocalScale: {x: 0.7470078, y: 1000, z: 500}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -7962,10 +7362,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1632415272440982708, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 6945001726971170519, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_LocalPosition.x
       value: 280.44
@@ -8009,10 +7405,6 @@ PrefabInstance:
     - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
       propertyPath: m_Name
       value: Christmas tree_2 (10)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7722066883690042477, guid: 4097080ed2ff4d94fa6c29fb2db01006, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8074,14 +7466,6 @@ PrefabInstance:
     - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
       propertyPath: m_Name
       value: Christmas tree_1 (8)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8219,7 +7603,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 500, y: 0, z: 250}
-  m_LocalScale: {x: 0.7470078, y: 100, z: 500}
+  m_LocalScale: {x: 0.7470078, y: 1000, z: 500}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -8305,10 +7689,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 532566958108489563, guid: 46eac2874d7559a4b87f72fb1f0d3e8f, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     - target: {fileID: 8188130847144645944, guid: 46eac2874d7559a4b87f72fb1f0d3e8f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 235.977
@@ -8393,10 +7773,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Snowman_Hand_3 (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 8856826969007443842, guid: 46eac2874d7559a4b87f72fb1f0d3e8f, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8457,14 +7833,6 @@ PrefabInstance:
     - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
       propertyPath: m_Name
       value: Christmas tree_1 (11)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
-      objectReference: {fileID: 0}
-    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
-      propertyPath: m_TagString
-      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8670,4 +8038,3 @@ SceneRoots:
   - {fileID: 1360226041}
   - {fileID: 1652692589}
   - {fileID: 2091170497}
-  - {fileID: 1547380868}
