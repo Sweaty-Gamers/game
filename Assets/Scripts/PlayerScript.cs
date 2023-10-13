@@ -75,7 +75,7 @@ public class PlayerScript : MonoBehaviour
         isRunning = Input.GetKey(KeyCode.LeftShift) && isWalking;
 
         // Player can dash if starts moving while holding shift.
-        isDashing = Input.GetKeyDown(KeyCode.Q) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D));
+        bool wantsToDash = Input.GetKeyDown(KeyCode.Q) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D));
 
         if (isRunning)
             speed *= sprintFactor;
@@ -87,7 +87,7 @@ public class PlayerScript : MonoBehaviour
             rigidbody.AddRelativeForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
 
-        if (isDashing)
+        if (wantsToDash && !isDashing && isJumping)
         {
             // Dashing movement.
             if (horizontal > 0)
@@ -109,6 +109,8 @@ public class PlayerScript : MonoBehaviour
             {
                 rigidbody.AddForce(Camera.main.transform.forward * -dashSpeed, ForceMode.Impulse);
             }
+
+            isDashing = true;
         }
 
         // Flat movement.
@@ -160,6 +162,7 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.tag == "Floor" && isJumping)
         {
             isJumping = false;
+            isDashing = false;
         }
     }
 }
