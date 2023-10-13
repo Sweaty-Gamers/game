@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2180034292964360736, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
+      propertyPath: m_DirtyAABB
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3952419378060170610, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 252.17633
@@ -51,6 +55,14 @@ PrefabInstance:
     - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
       propertyPath: m_Name
       value: Christmas tree_1 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436609507708489672, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
+      propertyPath: m_TagString
+      value: Floor
+      objectReference: {fileID: 0}
+    - target: {fileID: 4620635180258211601, guid: 2fa5038357e0ef04d9d96a0a86bc26b5, type: 3}
+      propertyPath: m_TagString
+      value: Floor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
