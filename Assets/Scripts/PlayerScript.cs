@@ -11,8 +11,6 @@ public class PlayerScript : MonoBehaviour
     public float jumpForce;
     /// Movement speed multiplier when sprinting.
     public float sprintFactor;
-    /// The drag to apply when on the floor.
-    public float groundDrag;
     /// The child empty GameObject that holds the weapons.
     public GameObject weapons;
     /// The max player speed.
@@ -27,14 +25,11 @@ public class PlayerScript : MonoBehaviour
 
     private new Rigidbody rigidbody;
     private int weaponIndex = 0;
-    private HealthScript healthScript;
-
 
     // Start is called before the first frame update
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
-        healthScript = GetComponent<HealthScript>();
 
         for (int i = 0; i < weapons.transform.childCount; i++)
         {
@@ -74,9 +69,6 @@ public class PlayerScript : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         isWalking = horizontal != 0 || vertical != 0;
-
-        // Add drag to make movement feel natural.
-        rigidbody.drag = isJumping ? (iceSkates ? 0 : 1) : groundDrag;
 
         // Set the player speed depending on if we are sprinting or not.
         float speed = movementSpeed;
