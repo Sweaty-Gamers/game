@@ -32,12 +32,16 @@ public class PlayerScript : MonoBehaviour
     public bool isDashing = false;
     public float sprintMeter = 100f;
 
+    public int maxJumpsLeft = 2;
+    private int jumpsLeft;
+
     private Rigidbody rigidbody;
     private int weaponIndex = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        jumpsLeft = maxJumpsLeft;
         rigidbody = GetComponent<Rigidbody>();
 
         for (int i = 0; i < weapons.transform.childCount; i++)
@@ -104,9 +108,10 @@ public class PlayerScript : MonoBehaviour
             speed *= sprintFactor;
 
         // Jumping.
-        if (Input.GetKey(KeyCode.Space) && !isJumping)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpsLeft > 0)
         {
             isJumping = true;
+            jumpsLeft--;
             rigidbody.AddRelativeForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
 
@@ -188,6 +193,7 @@ public class PlayerScript : MonoBehaviour
         {
             isJumping = false;
             isDashing = false;
+            jumpsLeft = 2;
         }
     }
 }
