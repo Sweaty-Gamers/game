@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using TMPro;
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthScript : MonoBehaviour {
     /// Health points.
@@ -13,6 +14,7 @@ public class HealthScript : MonoBehaviour {
     private GameObject healthUi;
     private TextMeshProUGUI healthText;
     private Rigidbody playerRigidbody;
+    public string gameover;
 
 
     void Start() {
@@ -67,7 +69,13 @@ public class HealthScript : MonoBehaviour {
 
     void Death() {
         // TODO: what happens when you get hit
-        Destroy(gameObject);
+        if (gameObject.tag == "Player")
+        {
+            SceneManager.LoadScene(gameover);
+        } else
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnCollisionEnter(Collision collision) {
