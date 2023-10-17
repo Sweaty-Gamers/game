@@ -25,6 +25,9 @@ public class GameMasterScript : MonoBehaviour
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
 
         StartNextRound();
+
+        // Test modifiers:
+        ApplyModifier(new PlayerGrowModifier());
     }
 
     // Update is called once per frame
@@ -33,6 +36,10 @@ public class GameMasterScript : MonoBehaviour
         roundText.text = currentRound.ToString();
 
         CheckRoundEnd();
+    }
+
+    void ApplyModifier(Modifier modifier) {
+        StartCoroutine(modifier.apply(this));
     }
 
     GameObject[] GetActiveEnemies()
