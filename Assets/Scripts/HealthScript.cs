@@ -3,6 +3,7 @@ using TMPro;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HealthScript : MonoBehaviour {
     /// Health points.
@@ -12,7 +13,9 @@ public class HealthScript : MonoBehaviour {
     public float maxHealth;
 
     private GameObject healthUi;
+    private GameObject healthBarUi;
     private TextMeshProUGUI healthText;
+    private Slider healthBar;
     private Rigidbody playerRigidbody;
     public string gameover;
 
@@ -20,13 +23,16 @@ public class HealthScript : MonoBehaviour {
     void Start() {
         healthUi = GameObject.Find("Health");
         healthText = healthUi.GetComponent<TextMeshProUGUI>();
+        healthBarUi = GameObject.Find("HealthBar");
+        healthBar = healthBarUi.GetComponent<Slider>();
+
         playerRigidbody = GetComponent<Rigidbody>();
     }
 
     void Update() {
         if (gameObject.tag == "Player") {
-            float healthPercent = (int) (health / maxHealth * 100f);
-            healthText.text = healthPercent.ToString() + "%";
+            healthText.text = health.ToString() + " / " + maxHealth.ToString();
+            healthBar.value = health;
         }
     }
 
