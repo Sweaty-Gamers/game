@@ -5,7 +5,7 @@ using UnityEngine;
 public class BloodSprayScript : MonoBehaviour
 {
 
-    private new ParticleSystem particleSystem;
+    private ParticleSystem particleSystem;
 
     // Start is called before the first frame update
     void Start()

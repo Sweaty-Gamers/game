@@ -29,7 +29,7 @@ public class EnemyPathfindScript : MonoBehaviour
 
         if (objectTag == "Enemy_Ranged")
         {
-            stoppingDistance = 100f;
+            stoppingDistance = 3.5f; //100f;
         }
     }
 
@@ -119,6 +119,11 @@ public class EnemyPathfindScript : MonoBehaviour
             {
                 // There is a clear line of sight to the player
                 return true;
+            }
+            else
+            {
+                // Debug the tag of the object when it's not the player
+                Debug.Log("Hit object's tag: " + hit.collider.tag);
             }
         }
 

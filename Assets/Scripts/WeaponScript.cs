@@ -43,8 +43,8 @@ public class WeaponScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ammoUi = GameObject.Find("Ammo");
         bulletsLeftInMag = magSize;
+        ammoUi = GameObject.Find("Ammo");
         ammoText = ammoUi.GetComponent<TextMeshProUGUI>();
         animator = GetComponent<Animator>();
         playerScript = GetComponentInParent<PlayerScript>();

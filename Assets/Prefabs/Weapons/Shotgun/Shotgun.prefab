@@ -123,16 +123,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa104611aa2d584a1966144ced00d543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireRate: 0.75
-  reloadTime: 3
-  magSize: 4
+  fireRate: 0.01
+  reloadTime: 2
+  magSize: 2
   bulletSpeed: 100
   semiAuto: 1
   bulletPrefab: {fileID: 4819610306315137784, guid: 38c8ead106c16b749a3472e42e8dde2c, type: 3}
-  ammoUi: {fileID: 0}
   RecoilObject: {fileID: 0}
-  bulletSpawnXOffset: 0.6
-  bulletSpawnYOffset: 0.35
   reloadAnimationLength: 1.5
   fireAnimationLength: 0.667
   reserveBullets: 24

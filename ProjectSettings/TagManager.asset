@@ -10,6 +10,8 @@ TagManager:
   - Enemy
   - Enemy_Ranged
   - Enemy_Melee
+  - EnemyBullet
+  - Blade
   layers:
   - Default
   - TransparentFX

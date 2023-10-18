@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
@@ -14,26 +11,38 @@ public class PlayerScript : MonoBehaviour
     public float jumpForce;
     /// Movement speed multiplier when sprinting.
     public float sprintFactor;
-    /// The drag to apply when on the floor.
-    public float groundDrag;
     /// The child empty GameObject that holds the weapons.
     public GameObject weapons;
     /// The max player speed.
     public float maxSpeed;
+    /// How quickly sprint fills back up.
+    public float sprintRegenerationSpeed;
+    /// How quickly sprint drains.
+    public float sprintDegenerationSpeed;
+    /// How much drag to apply on the floor.
+    public float groundDrag;
+    /// How much drag to apply on the air.
+    public float airDrag;
+
+    public bool iceSkates;
 
     public bool isWalking = false;
     public bool isRunning = false;
     public bool isJumping = false;
     public bool isDashing = false;
+    public float sprintMeter = 100f;
 
-    private new Rigidbody rigidbody;
+    public int maxJumpsLeft = 2;
+    private int jumpsLeft;
+
+    private Rigidbody playerRigidBody;
     private int weaponIndex = 0;
-
 
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        jumpsLeft = maxJumpsLeft;
+        playerRigidBody = GetComponent<Rigidbody>();
 
         for (int i = 0; i < weapons.transform.childCount; i++)
         {
@@ -47,6 +56,20 @@ public class PlayerScript : MonoBehaviour
     {
         SwitchWeapons();
         Movement();
+    }
+
+    void FixedUpdate()
+    {
+        if (isRunning)
+        {
+            sprintMeter -= sprintDegenerationSpeed;
+        }
+        else
+        {
+            sprintMeter += sprintRegenerationSpeed;
+        }
+
+        sprintMeter = Mathf.Clamp(sprintMeter, 0, 1);
     }
 
     /// Switch weapons using the number keys or the mouse wheel.
@@ -74,76 +97,80 @@ public class PlayerScript : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
         isWalking = horizontal != 0 || vertical != 0;
 
-        // Add drag to make movement feel natural.
-        rigidbody.drag = isJumping ? 1 : groundDrag;
-
         // Set the player speed depending on if we are sprinting or not.
         float speed = movementSpeed;
         isRunning = Input.GetKey(KeyCode.LeftShift) && isWalking;
 
         // Player can dash if starts moving while holding shift.
-        isDashing = Input.GetKey(KeyCode.LeftShift) && !isWalking;
+        bool wantsToDash = Input.GetKeyDown(KeyCode.Q) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D));
 
-        if (isRunning)
+        if (isRunning && sprintMeter > 0)
             speed *= sprintFactor;
 
         // Jumping.
-        if (Input.GetKey(KeyCode.Space) && !isJumping)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpsLeft > 0)
         {
             isJumping = true;
-            rigidbody.AddRelativeForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            jumpsLeft--;
+            playerRigidBody.AddRelativeForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
 
-        if (isDashing) {
+        if (wantsToDash && !isDashing && isJumping)
+        {
             // Dashing movement.
             if (horizontal > 0)
             {
-                rigidbody.AddRelativeForce(new Vector3(dashSpeed, 0, 0), ForceMode.Force);
+                playerRigidBody.AddForce(Camera.main.transform.forward * dashSpeed, ForceMode.Impulse);
             }
 
             if (horizontal < 0)
             {
-                rigidbody.AddRelativeForce(new Vector3(-dashSpeed, 0, 0), ForceMode.Force);
+                playerRigidBody.AddForce(Camera.main.transform.forward * -dashSpeed, ForceMode.Impulse);
             }
 
             if (vertical > 0)
             {
-                rigidbody.AddRelativeForce(new Vector3(0, 0, dashSpeed), ForceMode.Force);
+                playerRigidBody.AddForce(Camera.main.transform.forward * dashSpeed, ForceMode.Impulse);
             }
 
             if (vertical < 0)
             {
-                rigidbody.AddRelativeForce(new Vector3(0, 0, -dashSpeed), ForceMode.Force);
-            }
-        } else {
-            // Flat movement.
-            if (horizontal > 0)
-            {
-                rigidbody.AddRelativeForce(new Vector3(speed, 0, 0), ForceMode.Force);
+                playerRigidBody.AddForce(Camera.main.transform.forward * -dashSpeed, ForceMode.Impulse);
             }
 
-            if (horizontal < 0)
-            {
-                rigidbody.AddRelativeForce(new Vector3(-speed, 0, 0), ForceMode.Force);
-            }
-
-            if (vertical > 0)
-            {
-                rigidbody.AddRelativeForce(new Vector3(0, 0, speed), ForceMode.Force);
-            }
-
-            if (vertical < 0)
-            {
-                rigidbody.AddRelativeForce(new Vector3(0, 0, -speed), ForceMode.Force);
-            }
+            isDashing = true;
         }
 
+        // Flat movement.
+        if (horizontal > 0)
+        {
+            playerRigidBody.AddRelativeForce(new Vector3(speed, 0, 0), ForceMode.Force);
+        }
+
+        if (horizontal < 0)
+        {
+            playerRigidBody.AddRelativeForce(new Vector3(-speed, 0, 0), ForceMode.Force);
+        }
+
+        if (vertical > 0)
+        {
+            playerRigidBody.AddRelativeForce(new Vector3(0, 0, speed), ForceMode.Force);
+        }
+
+        if (vertical < 0)
+        {
+            playerRigidBody.AddRelativeForce(new Vector3(0, 0, -speed), ForceMode.Force);
+        }
+
+        // Add drag to make movement feel natural.
+        playerRigidBody.drag = isJumping ? airDrag : groundDrag;
+
         // Limit velocity.
-        Vector3 velocity = new(rigidbody.velocity.x, 0, rigidbody.velocity.z);
+        Vector3 velocity = new(playerRigidBody.velocity.x, 0, playerRigidBody.velocity.z);
         if (velocity.magnitude > maxSpeed)
         {
             Vector3 limitedVelocity = velocity.normalized * movementSpeed;
-            rigidbody.velocity = new(limitedVelocity.x, rigidbody.velocity.y, limitedVelocity.z);
+            playerRigidBody.velocity = new(limitedVelocity.x, playerRigidBody.velocity.y, limitedVelocity.z);
         }
     }
 
@@ -165,6 +192,8 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.tag == "Floor" && isJumping)
         {
             isJumping = false;
+            isDashing = false;
+            jumpsLeft = 2;
         }
     }
 }

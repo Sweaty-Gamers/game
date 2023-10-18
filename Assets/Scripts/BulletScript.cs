@@ -7,13 +7,16 @@ public class BulletScript : MonoBehaviour
 {
     public GameObject bulletMarkPrefab;
     public int bulletDespawnTime;
+    public float damage = 1;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Disable bullet collisions with the player.
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), player.GetComponent<Collider>());
+        // Disable player-fired bullet collisions with the player.
+        if (gameObject.tag == "Bullet") {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), player.GetComponent<Collider>());
+        }
 
         // Despawn after a certain amount of time.
         StartCoroutine(Despawn(gameObject, bulletDespawnTime));
@@ -34,7 +37,7 @@ public class BulletScript : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         // Put bullet mark at first bullet impact point.
-        if (collision.gameObject.tag == "Floor")
+        if (collision.gameObject.tag == "Floor" && bulletMarkPrefab != null)
         {
             ContactPoint firstContact = collision.contacts.First();
             GameObject decalObject = Instantiate(bulletMarkPrefab, firstContact.point + (firstContact.normal * 0.025f), Quaternion.identity);

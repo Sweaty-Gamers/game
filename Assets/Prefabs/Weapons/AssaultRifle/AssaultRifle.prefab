@@ -2041,11 +2041,8 @@ MonoBehaviour:
   magSize: 30
   bulletSpeed: 150
   semiAuto: 0
-  bulletPrefab: {fileID: 4819610306315137784, guid: 0c4bd847628c5136ea3b92d58d8af96e, type: 3}
-  ammoUi: {fileID: 0}
+  bulletPrefab: {fileID: 4819610306315137784, guid: de14cc23e96574d79b24be05b9ccf97a, type: 3}
   RecoilObject: {fileID: 0}
-  bulletSpawnXOffset: 0.6
-  bulletSpawnYOffset: 0.35
   reloadAnimationLength: 1.5
   fireAnimationLength: 0.667
   reserveBullets: 120

@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyShooting : MonoBehaviour
@@ -102,7 +103,9 @@ public class EnemyShooting : MonoBehaviour
             float currentForce = Mathf.Lerp(bulletForce, bulletForce + bulletAcceleration, elapsedTime / 4f);
 
             // Apply continuous force using AddForce with ForceMode.Force
-            bulletRb.AddForce(forceDirection * currentForce, ForceMode.Force);
+            if (!bullet.IsDestroyed()) {
+                bulletRb?.AddForce(forceDirection * currentForce, ForceMode.Force);
+            }
 
             yield return null;
         }
