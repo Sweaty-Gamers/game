@@ -6,11 +6,12 @@ public class FlyingDragonScript : MonoBehaviour
     public Transform player;
     public NavMeshAgent agent;
     public EnemyStateController enemy;
+    public bool isWalking;
     public bool isAttacking;
     public float rotationSpeed = 5f;
     public float circlingRadius = 50f;
-    public float stoppingDistance = 20f;
-    public float tangentDistance = 30f; // Adjust the tangent distance based on your requirements
+    public float stoppingDistance = 50f;
+    public float tangentDistance = 50f; // Adjust the tangent distance based on your requirements
 
     private float timeSinceLastDestinationChange;
 
@@ -30,15 +31,17 @@ public class FlyingDragonScript : MonoBehaviour
         timeSinceLastDestinationChange += Time.deltaTime;
 
         // Check if it's time to change the destination
-        if (timeSinceLastDestinationChange >= GetRandomChangeDestinationInterval())
+        /*if (timeSinceLastDestinationChange >= GetRandomChangeDestinationInterval())
         {
             SetRandomDestinationAroundPlayer();
-        }
+        }*/
 
         // If within the stopping distance, move along a tangent line
         if (Vector3.Distance(transform.position, player.position) <= stoppingDistance)
         {
             MoveAlongTangentLine();
+            isAttacking = true;
+            isWalking = false;
         }
         else
         {
@@ -50,6 +53,8 @@ public class FlyingDragonScript : MonoBehaviour
             // Move towards the current destination
             agent.isStopped = false;
             isAttacking = false;
+            isWalking = true;
+            agent.destination = player.position;
         }
 
         UpdateStateTransition();

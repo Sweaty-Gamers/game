@@ -5,13 +5,13 @@ using UnityEngine;
 public class DragonStateController : MonoBehaviour, EnemyStateController
 {
     Animator animator;
-    EnemyPathfindScript dragon;
+    FlyingDragonScript dragon;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        dragon = GetComponent<EnemyPathfindScript>();
+        dragon = GetComponent<FlyingDragonScript>();
     }
 
     // Update is called once per frame
