@@ -16,11 +16,12 @@ public class HealthScript : MonoBehaviour {
     private GameObject healthBarUi;
     private TextMeshProUGUI healthText;
     public Slider healthBar;
-    public Rigidbody playerRigidbody;
+    private Rigidbody playerRigidbody;
     public string gameover;
 
 
     void Start() {
+        playerRigidbody = GetComponent<Rigidbody>();
         healthUi = GameObject.Find("Health");
         healthText = healthUi.GetComponent<TextMeshProUGUI>();
         healthBarUi = GameObject.Find("HealthBar");
@@ -34,8 +35,13 @@ public class HealthScript : MonoBehaviour {
             healthBar.maxValue = maxHealth;
         }
 
-        playerRigidbody = GetComponent<Rigidbody>();
-        
+    }
+
+    void Update() {
+        if (gameObject.tag == "Player") {
+            healthText.text = health.ToString() + " / " + maxHealth.ToString();
+            //healthBar.value = health;
+        }
         if (playerRigidbody == null)
         {
             Debug.Log("this is not good");
@@ -43,13 +49,6 @@ public class HealthScript : MonoBehaviour {
         else
         {
             Debug.Log("good");
-        }
-    }
-
-    void Update() {
-        if (gameObject.tag == "Player") {
-            healthText.text = health.ToString() + " / " + maxHealth.ToString();
-            //healthBar.value = health;
         }
     }
 

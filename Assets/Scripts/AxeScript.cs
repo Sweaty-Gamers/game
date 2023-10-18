@@ -5,7 +5,7 @@ using UnityEngine;
 public class AxeScript : MonoBehaviour
 {
     public float axeDamage = 10f; // Set the damage amount in the Inspector
-    public static float knockbackForce = 50f; // Adjust the force based on your preference
+    public static float knockbackForce = .4f; // Adjust the force based on your preference
     
     void OnTriggerEnter(Collider other)
     {
