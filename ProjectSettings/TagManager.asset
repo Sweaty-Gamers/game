@@ -12,6 +12,7 @@ TagManager:
   - Enemy_Melee
   - EnemyBullet
   - Blade
+  - Enemy_Flying
   layers:
   - Default
   - TransparentFX

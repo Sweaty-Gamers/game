@@ -100,7 +100,7 @@ public class EnemyPathfindScript : MonoBehaviour
                 agent.destination = transform.position;  //make sure to stop
             }
             
-    }
+        }
 
         this.UpdateStateTransition();
     }
