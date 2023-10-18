@@ -18,12 +18,17 @@ public class HealthScript : MonoBehaviour {
     public Slider healthBar;
     private Rigidbody playerRigidbody;
     public string gameover;
+    public Slider playerHealthBar;
 
 
     void Start() {
         playerRigidbody = GetComponent<Rigidbody>();
         healthUi = GameObject.Find("Health");
         healthText = healthUi.GetComponent<TextMeshProUGUI>();
+
+        healthUi = GameObject.Find("PlayerHealthBar");
+        playerHealthBar = healthUi.GetComponent<Slider>();
+
         healthBarUi = GameObject.Find("HealthBar");
         healthBar = healthBarUi.GetComponent<Slider>();
 
@@ -41,15 +46,16 @@ public class HealthScript : MonoBehaviour {
         if (gameObject.tag == "Player") {
             healthText.text = health.ToString() + " / " + maxHealth.ToString();
             //healthBar.value = health;
+            if (playerHealthBar != null)
+            {
+                playerHealthBar.value = health;
+                Debug.Log(playerHealthBar.value);
+
+            }
+
         }
-        if (playerRigidbody == null)
-        {
-            Debug.Log("this is not good");
-        }
-        else
-        {
-            Debug.Log("good");
-        }
+        
+
     }
 
     void TakeDamage(GameObject bullet) {
