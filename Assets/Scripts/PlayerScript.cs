@@ -35,14 +35,14 @@ public class PlayerScript : MonoBehaviour
     public int maxJumpsLeft = 2;
     private int jumpsLeft;
 
-    private Rigidbody rigidbody;
+    private Rigidbody playerRigidBody;
     private int weaponIndex = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         jumpsLeft = maxJumpsLeft;
-        rigidbody = GetComponent<Rigidbody>();
+        playerRigidBody = GetComponent<Rigidbody>();
 
         for (int i = 0; i < weapons.transform.childCount; i++)
         {
@@ -112,7 +112,7 @@ public class PlayerScript : MonoBehaviour
         {
             isJumping = true;
             jumpsLeft--;
-            rigidbody.AddRelativeForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            playerRigidBody.AddRelativeForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
 
         if (wantsToDash && !isDashing && isJumping)
@@ -120,22 +120,22 @@ public class PlayerScript : MonoBehaviour
             // Dashing movement.
             if (horizontal > 0)
             {
-                rigidbody.AddForce(Camera.main.transform.forward * dashSpeed, ForceMode.Impulse);
+                playerRigidBody.AddForce(Camera.main.transform.forward * dashSpeed, ForceMode.Impulse);
             }
 
             if (horizontal < 0)
             {
-                rigidbody.AddForce(Camera.main.transform.forward * -dashSpeed, ForceMode.Impulse);
+                playerRigidBody.AddForce(Camera.main.transform.forward * -dashSpeed, ForceMode.Impulse);
             }
 
             if (vertical > 0)
             {
-                rigidbody.AddForce(Camera.main.transform.forward * dashSpeed, ForceMode.Impulse);
+                playerRigidBody.AddForce(Camera.main.transform.forward * dashSpeed, ForceMode.Impulse);
             }
 
             if (vertical < 0)
             {
-                rigidbody.AddForce(Camera.main.transform.forward * -dashSpeed, ForceMode.Impulse);
+                playerRigidBody.AddForce(Camera.main.transform.forward * -dashSpeed, ForceMode.Impulse);
             }
 
             isDashing = true;
@@ -144,33 +144,33 @@ public class PlayerScript : MonoBehaviour
         // Flat movement.
         if (horizontal > 0)
         {
-            rigidbody.AddRelativeForce(new Vector3(speed, 0, 0), ForceMode.Force);
+            playerRigidBody.AddRelativeForce(new Vector3(speed, 0, 0), ForceMode.Force);
         }
 
         if (horizontal < 0)
         {
-            rigidbody.AddRelativeForce(new Vector3(-speed, 0, 0), ForceMode.Force);
+            playerRigidBody.AddRelativeForce(new Vector3(-speed, 0, 0), ForceMode.Force);
         }
 
         if (vertical > 0)
         {
-            rigidbody.AddRelativeForce(new Vector3(0, 0, speed), ForceMode.Force);
+            playerRigidBody.AddRelativeForce(new Vector3(0, 0, speed), ForceMode.Force);
         }
 
         if (vertical < 0)
         {
-            rigidbody.AddRelativeForce(new Vector3(0, 0, -speed), ForceMode.Force);
+            playerRigidBody.AddRelativeForce(new Vector3(0, 0, -speed), ForceMode.Force);
         }
 
         // Add drag to make movement feel natural.
-        rigidbody.drag = isJumping ? airDrag : groundDrag;
+        playerRigidBody.drag = isJumping ? airDrag : groundDrag;
 
         // Limit velocity.
-        Vector3 velocity = new(rigidbody.velocity.x, 0, rigidbody.velocity.z);
+        Vector3 velocity = new(playerRigidBody.velocity.x, 0, playerRigidBody.velocity.z);
         if (velocity.magnitude > maxSpeed)
         {
             Vector3 limitedVelocity = velocity.normalized * movementSpeed;
-            rigidbody.velocity = new(limitedVelocity.x, rigidbody.velocity.y, limitedVelocity.z);
+            playerRigidBody.velocity = new(limitedVelocity.x, playerRigidBody.velocity.y, limitedVelocity.z);
         }
     }
 

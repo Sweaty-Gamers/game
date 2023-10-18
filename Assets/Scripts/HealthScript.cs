@@ -16,7 +16,7 @@ public class HealthScript : MonoBehaviour {
     private GameObject healthBarUi;
     private TextMeshProUGUI healthText;
     public Slider healthBar;
-    private Rigidbody playerRigidbody;
+    public Rigidbody playerRigidbody;
     public string gameover;
 
 
@@ -35,12 +35,21 @@ public class HealthScript : MonoBehaviour {
         }
 
         playerRigidbody = GetComponent<Rigidbody>();
+        
+        if (playerRigidbody == null)
+        {
+            Debug.Log("this is not good");
+        }
+        else
+        {
+            Debug.Log("good");
+        }
     }
 
     void Update() {
         if (gameObject.tag == "Player") {
             healthText.text = health.ToString() + " / " + maxHealth.ToString();
-            healthBar.value = health;
+            //healthBar.value = health;
         }
     }
 
@@ -70,13 +79,18 @@ public class HealthScript : MonoBehaviour {
         // Apply knockback
         if (playerRigidbody != null)
         {
+            Debug.Log("hereeee");
             // Calculate the direction from the player to the object
             Vector3 knockbackDirection = (playerRigidbody.position - transform.position).normalized;
 
-            // Apply the knockback force upwards
-            knockbackDirection.x = 0.25f; // You can adjust this value to control the upward force
+            // Apply the knockback force
+            knockbackDirection.x = 10.0f; // You can adjust this value to control the upward force
 
             playerRigidbody.AddForce(knockbackDirection * AxeScript.knockbackForce, ForceMode.Impulse);
+        }
+        else
+        {
+            Debug.Log("cant find rigid body..");
         }
 
     }
