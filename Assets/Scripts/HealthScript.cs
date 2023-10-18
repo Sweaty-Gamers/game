@@ -45,7 +45,7 @@ public class HealthScript : MonoBehaviour {
     void Update() {
         if (gameObject.tag == "Player") {
             healthText.text = health.ToString() + " / " + maxHealth.ToString();
-            //healthBar.value = health;
+            healthBar.value = health;
             if (playerHealthBar != null)
             {
                 playerHealthBar.value = health;
