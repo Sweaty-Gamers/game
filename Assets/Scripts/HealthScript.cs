@@ -26,9 +26,6 @@ public class HealthScript : MonoBehaviour {
         healthUi = GameObject.Find("Health");
         healthText = healthUi.GetComponent<TextMeshProUGUI>();
 
-        healthUi = GameObject.Find("PlayerHealthBar");
-        playerHealthBar = healthUi.GetComponent<Slider>();
-
         healthBarUi = GameObject.Find("HealthBar");
         healthBar = healthBarUi.GetComponent<Slider>();
 
@@ -46,13 +43,6 @@ public class HealthScript : MonoBehaviour {
         if (gameObject.tag == "Player") {
             healthText.text = health.ToString() + " / " + maxHealth.ToString();
             healthBar.value = health;
-            if (playerHealthBar != null)
-            {
-                playerHealthBar.value = health;
-                Debug.Log(playerHealthBar.value);
-
-            }
-
         }
         
 
