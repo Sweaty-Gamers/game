@@ -12,6 +12,12 @@ public class FlyingDragonScript : MonoBehaviour
     public float circlingRadius = 50f;
     public float stoppingDistance = 50f;
     public float tangentDistance = 50f; // Adjust the tangent distance based on your requirements
+    public GameObject flamethrowerPrefab; // Reference to the flamethrower prefab
+    public GameObject activeFire;
+    public GameObject activeFire2;
+    public float flamethrowerRange = 20f; // Set the range at which the flamethrower can be used
+    public Transform spawnPoint; // Reference to the spawn point empty GameObject
+    public Transform spawnPoint2; // Reference to the spawn point empty GameObject
 
     private float timeSinceLastDestinationChange;
 
@@ -30,18 +36,19 @@ public class FlyingDragonScript : MonoBehaviour
         // Update the time since the last destination change
         timeSinceLastDestinationChange += Time.deltaTime;
 
-        // Check if it's time to change the destination
-        /*if (timeSinceLastDestinationChange >= GetRandomChangeDestinationInterval())
-        {
-            SetRandomDestinationAroundPlayer();
-        }*/
+        // Check the distance between the dragon and the player
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
         // If within the stopping distance, move along a tangent line
-        if (Vector3.Distance(transform.position, player.position) <= stoppingDistance)
+        if (distanceToPlayer <= stoppingDistance)
         {
             MoveAlongTangentLine();
             isAttacking = true;
             isWalking = false;
+
+
+            //SpawnFlamethrower();
+ 
         }
         else
         {
@@ -58,6 +65,36 @@ public class FlyingDragonScript : MonoBehaviour
         }
 
         UpdateStateTransition();
+    }
+
+    void SpawnFlamethrower()
+    {
+        Debug.Log("testttttttttttt");
+
+        // Instantiate the flamethrower prefab at the spawn point's position and rotation
+        Quaternion rotation = Quaternion.Euler(45f, spawnPoint.rotation.eulerAngles.y, spawnPoint.rotation.eulerAngles.z);
+        this.activeFire = Instantiate(flamethrowerPrefab, spawnPoint.position, rotation);
+        this.activeFire.transform.SetParent(transform);
+        this.activeFire.SetActive(true);
+
+       
+        // Use the Invoke method to spawn the second flamethrower after a delay
+        float delay = 0.35f; // Delay in seconds
+        Invoke("SpawnSecondFlamethrower", delay);
+    }
+
+    void SpawnSecondFlamethrower()
+    {
+        Quaternion rotation = Quaternion.Euler(45f, spawnPoint.rotation.eulerAngles.y, spawnPoint.rotation.eulerAngles.z);
+        this.activeFire2 = Instantiate(flamethrowerPrefab, spawnPoint2.position , rotation);
+        this.activeFire2.transform.SetParent(transform);
+        this.activeFire2.SetActive(true);
+    }
+
+
+    void StopFlamethrower()
+    {
+        this.activeFire.SetActive(false);
     }
 
     float GetRandomChangeDestinationInterval()
