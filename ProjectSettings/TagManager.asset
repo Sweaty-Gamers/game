@@ -13,6 +13,7 @@ TagManager:
   - EnemyBullet
   - Blade
   - Enemy_Flying
+  - Fire
   layers:
   - Default
   - TransparentFX

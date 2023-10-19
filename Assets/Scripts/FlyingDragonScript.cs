@@ -15,9 +15,12 @@ public class FlyingDragonScript : MonoBehaviour
     public GameObject flamethrowerPrefab; // Reference to the flamethrower prefab
     public GameObject activeFire;
     public GameObject activeFire2;
+    public GameObject activeFire3;
     public float flamethrowerRange = 20f; // Set the range at which the flamethrower can be used
     public Transform spawnPoint; // Reference to the spawn point empty GameObject
     public Transform spawnPoint2; // Reference to the spawn point empty GameObject
+    public Transform spawnPoint3; // Reference to the spawn point empty GameObject
+
 
     private float timeSinceLastDestinationChange;
 
@@ -89,12 +92,25 @@ public class FlyingDragonScript : MonoBehaviour
         this.activeFire2 = Instantiate(flamethrowerPrefab, spawnPoint2.position , rotation);
         this.activeFire2.transform.SetParent(transform);
         this.activeFire2.SetActive(true);
+
+        // Use the Invoke method to spawn the second flamethrower after a delay
+        float delay = 0.45f; // Delay in seconds
+        Invoke("SpawnThirdFlamethrower", delay);
+    }
+
+    void SpawnThirdFlamethrower()
+    {
+        Quaternion rotation = Quaternion.Euler(10f, spawnPoint.rotation.eulerAngles.y, spawnPoint.rotation.eulerAngles.z);
+        this.activeFire3 = Instantiate(flamethrowerPrefab, spawnPoint3.position, rotation);
+        this.activeFire3.transform.SetParent(transform);
+        this.activeFire3.SetActive(true);
     }
 
 
     void StopFlamethrower()
     {
         this.activeFire.SetActive(false);
+        this.activeFire2.SetActive(false);
     }
 
     float GetRandomChangeDestinationInterval()
@@ -118,20 +134,18 @@ public class FlyingDragonScript : MonoBehaviour
     void MoveAlongTangentLine()
     {
         // Calculate the direction from the player to the dragon
-        Vector3 directionToDragon = transform.position - player.position;
+        Vector3 directionToPlayer = player.position - transform.position;
 
-        // Calculate a tangent direction
-        Vector3 tangentDirection = Vector3.Cross(directionToDragon.normalized, Vector3.up);
+        // Calculate the point just outside the stopping distance
+        Vector3 stoppingPoint = player.position + directionToPlayer.normalized * (stoppingDistance + 1.0f);
 
-        // Calculate the point on the tangent line outside the stopping distance
-        Vector3 tangentPoint = player.position + tangentDirection * tangentDistance;
-
-        // Set the destination for the NavMeshAgent
-        agent.destination = tangentPoint;
+        // Set the destination for the NavMeshAgent to the stopping point
+        agent.destination = stoppingPoint;
 
         // Reset the timer
         timeSinceLastDestinationChange = 0f;
     }
+
 
     void UpdateStateTransition()
     {
