@@ -10,11 +10,15 @@ public class EnemyPathfindScript : MonoBehaviour
     public bool isWalking;
     public bool isAttacking;
     public EnemyStateController enemy;
+    public EnemyShooting shootingScript;
     //public MinotaurStateController minotaur;
 
     public float rotationSpeed = 5f;
 
     public float stoppingDistance = 15f; // Adjust this distance based on your requirements
+    public float shootingDistance = 30f;
+    private float timeSinceLastShot = 0f;
+
     // make one for ranged soon
 
     // Start is called before the first frame update
@@ -22,6 +26,7 @@ public class EnemyPathfindScript : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         enemy = GetComponent<EnemyStateController>() ?? GetComponentInChildren<EnemyStateController>();
+        shootingScript = GetComponent<EnemyShooting>();
         //enemy = new MinotaurStateController();
 
         string objectTag = gameObject.tag;
@@ -29,7 +34,7 @@ public class EnemyPathfindScript : MonoBehaviour
 
         if (objectTag == "Enemy_Ranged")
         {
-            stoppingDistance = 3.5f; //100f;
+            stoppingDistance = 7f; //100f;
         }
     }
 
@@ -49,6 +54,20 @@ public class EnemyPathfindScript : MonoBehaviour
             agent.destination = player.position;
             isWalking = true;
             isAttacking = false;
+
+            if (distanceToPlayer <= shootingDistance && gameObject.tag == "Enemy_Ranged")
+            {
+                timeSinceLastShot += Time.deltaTime;
+                if (timeSinceLastShot >= 3f)
+                {
+                    shootingScript.Shoot(.33f); // Call the Shoot method when 3 seconds have passed
+                    timeSinceLastShot = 0f; // Reset the timer
+                }
+            }
+            else
+            {
+                Debug.Log("WHAT?");
+            }
         }
         else
         {

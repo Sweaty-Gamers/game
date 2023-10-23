@@ -9,7 +9,7 @@ public class EnemyShooting : MonoBehaviour
     public float bulletForce = 100f;
     public float initialBulletVelocity = 100f;
     public float bulletAcceleration = 500f; // Acceleration per second
-    public float accuracy = 0.1f; // Adjust as needed, higher values make the shots less accurate
+    //public float accuracy = 0.1f; // Adjust as needed, higher values make the shots less accurate
     public GameObject bullet;
 
     public float rotationSpeed = 5f; // Adjust as needed
@@ -29,7 +29,7 @@ public class EnemyShooting : MonoBehaviour
     }
 
     // This method is called by Animation Event
-    public void Shoot()
+    public void Shoot(float accuracy = 0.1f)
     {
         Debug.Log("Animation Event: Shoot");
 
