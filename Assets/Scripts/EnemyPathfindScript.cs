@@ -36,6 +36,17 @@ public class EnemyPathfindScript : MonoBehaviour
         {
             stoppingDistance = 7f; //100f;
         }
+
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+        else
+        {
+            Debug.LogError("No GameObject with the tag 'Player' found.");
+        }
+
     }
 
     // Update is called once per frame
