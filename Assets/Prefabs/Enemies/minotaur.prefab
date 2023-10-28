@@ -554,7 +554,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4414871117303439921, guid: aef9a3e063e740f4d8100584de73ceb4, type: 3}
       propertyPath: m_Name
-      value: minotaur1 Variant
+      value: minotaur
       objectReference: {fileID: 0}
     - target: {fileID: 4414871117303439921, guid: aef9a3e063e740f4d8100584de73ceb4, type: 3}
       propertyPath: m_IsActive
@@ -883,7 +883,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 056f65a9eb5ab3371bb1c1915b6cfaca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowTime: 0.5
+  slowTime: 0.05
   slowFactor: 10
 --- !u!1 &612802165944191715 stripped
 GameObject:
