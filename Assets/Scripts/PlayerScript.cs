@@ -56,6 +56,7 @@ public class PlayerScript : MonoBehaviour
     {
         SwitchWeapons();
         Movement();
+        Pause();
     }
 
     void FixedUpdate()
@@ -70,6 +71,14 @@ public class PlayerScript : MonoBehaviour
         }
 
         sprintMeter = Mathf.Clamp(sprintMeter, 0, 1);
+    }
+
+    void Pause()
+    {
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            Time.timeScale = Time.timeScale == 0 ? 1f : 0f;
+        }
     }
 
     /// Switch weapons using the number keys or the mouse wheel.
@@ -195,5 +204,39 @@ public class PlayerScript : MonoBehaviour
             isDashing = false;
             jumpsLeft = 2;
         }
+<<<<<<< Updated upstream:Assets/Scripts/PlayerScript.cs
+=======
+
+        if (collision.gameObject.tag == "EnemyBullet")
+        {
+            BulletScript bullet = collision.gameObject.GetComponent<BulletScript>();
+            damageTaken(bullet.damage);
+            print(gameObject.tag + " -> " + collision.gameObject.tag);
+        }
+    }
+
+    public override void Die()
+    {
+        SceneManager.LoadScene(deathScreen);
+    }
+
+    // Since only player takes melee damage, made unique only to player
+    public void TakeMeleeDamage(float damage)
+    {
+        print("melee stoooof");
+        // Applies damage to player
+        damageTaken(damage);
+        // Applies Knockback
+        if (rigidBody != null)
+        {
+            // Calculate the direction from the player to the object
+            Vector3 knockbackDirection = (rigidBody.position - transform.position).normalized;
+
+            // Apply the knockback force upwards
+            knockbackDirection.x = 0.25f; // You can adjust this value to control the upward force
+
+            rigidBody.AddForce(knockbackDirection * AxeScript.knockbackForce, ForceMode.Impulse);
+        }
+>>>>>>> Stashed changes:Assets/Scripts/Entity/PlayerScript.cs
     }
 }
