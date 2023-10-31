@@ -12,6 +12,7 @@ public class TitleScreen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 0f;
         startGameScene = "New Scene";
     }
 
@@ -24,6 +25,7 @@ public class TitleScreen : MonoBehaviour
     //
     public void StartGame()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(startGameScene);
     }
 

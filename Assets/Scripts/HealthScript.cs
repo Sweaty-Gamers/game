@@ -2,8 +2,6 @@ using Unity.VisualScripting;
 using TMPro;
 
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class HealthScript : MonoBehaviour {
     /// Health points.
@@ -11,19 +9,6 @@ public class HealthScript : MonoBehaviour {
 
     /// Max health points;
     public float maxHealth;
-    private Rigidbody playerRigidbody;
-    public string gameover;
-    public Slider playerHealthBar;
-
-
-    void Start() {
-        playerRigidbody = GetComponent<Rigidbody>();
-
-        // Health bar max now depends on player
-        // TODO ~~ take health from player specifically for UI, Create UI Script which will only take in player health
-        // Have less if statements making sure player stats are being shown.
-
-    }
 
     void TakeDamage(GameObject bullet) {
         // Take damage for bullet damage
@@ -37,45 +22,8 @@ public class HealthScript : MonoBehaviour {
         if (health == 0) Death();
     }
 
-    public void TakeMeleeDamage(float damage)
-    {
-        // Take damage for bullet damage
-        health -= damage;
-
-        print(health);
-
-        // Cap min health at zero
-        if (health < 0) health = 0;
-        if (health == 0) Death();
-
-        // Apply knockback
-        if (playerRigidbody != null)
-        {
-            Debug.Log("hereeee");
-            // Calculate the direction from the player to the object
-            Vector3 knockbackDirection = (playerRigidbody.position - transform.position).normalized;
-
-            // Apply the knockback force
-            knockbackDirection.x = 10.0f; // You can adjust this value to control the upward force
-
-            playerRigidbody.AddForce(knockbackDirection * AxeScript.knockbackForce, ForceMode.Impulse);
-        }
-        else
-        {
-            Debug.Log("cant find rigid body..");
-        }
-
-    }
-
     void Death() {
-        // TODO: what happens when you get hit
-        if (gameObject.tag == "Player")
-        {
-            SceneManager.LoadScene(gameover);
-        } else
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
 
     void OnCollisionEnter(Collision collision) {

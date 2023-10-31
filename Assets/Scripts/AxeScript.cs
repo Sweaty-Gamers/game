@@ -2,26 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AxeScript : MonoBehaviour
+public class AxeScript : MeleeWeapon
 {
-    public float axeDamage = 10f; // Set the damage amount in the Inspector
-    public static float knockbackForce = .4f; // Adjust the force based on your preference
-    
-    void OnTriggerEnter(Collider other)
+    private void Start()
     {
-        // Check if the collider entering the trigger is the one you're interested in
-        if (other.CompareTag("Player"))
-        {
-            Debug.Log("Player got attacked");
-
-            // Attempt to get the HealthScript component on the player
-            PlayerScript player = other.GetComponent<PlayerScript>();
-
-            // If the player has a HealthScript component, apply damage
-            if (player != null)
-            {
-                player.TakeMeleeDamage(axeDamage);
-            }
-        }
+        damage = 10f;
+        knockBack = .4f;
     }
 }

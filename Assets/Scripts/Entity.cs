@@ -12,7 +12,6 @@ public class Entity : MonoBehaviour
     public virtual void TakeDamage(float damage)
     {
         SetNewHealth(health - damage);
-        print("entity stuff");
         CheckHealth();
     }
 

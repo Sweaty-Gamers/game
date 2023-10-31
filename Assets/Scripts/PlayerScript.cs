@@ -250,9 +250,8 @@ public class PlayerScript : Entity
     }
 
     // Since only player takes melee damage, made unique only to player
-    public void TakeMeleeDamage(float damage)
+    public void TakeMeleeDamage(float damage, float knockBack)
     {
-        print("melee stoooof");
         // Applies damage to player
         damageTaken(damage);
         // Applies Knockback
@@ -264,7 +263,7 @@ public class PlayerScript : Entity
             // Apply the knockback force upwards
             knockbackDirection.x = 0.25f; // You can adjust this value to control the upward force
 
-            rigidBody.AddForce(knockbackDirection * AxeScript.knockbackForce, ForceMode.Impulse);
+            rigidBody.AddForce(knockbackDirection * knockBack, ForceMode.Impulse);
         }
     }
 }

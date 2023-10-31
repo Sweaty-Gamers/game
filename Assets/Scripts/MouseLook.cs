@@ -1,5 +1,8 @@
 using UnityEngine;
 using System.Collections;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
+using Scene = UnityEngine.SceneManagement.Scene;
 
 /// MouseLook rotates the transform based on the mouse delta.
 /// Minimum and Maximum values can be used to constrain the possible rotation
@@ -35,7 +38,6 @@ public class MouseLook : MonoBehaviour {
 
     void Update ()
     {
-
         if (Time.timeScale == 0)
         {
             Cursor.lockState = CursorLockMode.None;
