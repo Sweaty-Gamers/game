@@ -125,6 +125,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2836004475591695743, guid: f432554f564e69242897607d34218939, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4922280178895615517}
+    - targetCorrespondingSourceObject: {fileID: 2836004475591695743, guid: f432554f564e69242897607d34218939, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -908595793063686200}
   m_SourcePrefab: {fileID: 100100000, guid: f432554f564e69242897607d34218939, type: 3}
 --- !u!4 &4199480677447711570 stripped
 Transform:
@@ -174,8 +177,10 @@ MonoBehaviour:
   agent: {fileID: 0}
   isWalking: 0
   isAttacking: 0
+  shootingScript: {fileID: 0}
   rotationSpeed: 5
   stoppingDistance: 15
+  shootingDistance: 30
 --- !u!114 &5073975319728968506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,9 +210,22 @@ MonoBehaviour:
   bulletForce: 10
   initialBulletVelocity: 100
   bulletAcceleration: 5
-  accuracy: 0.1
   bullet: {fileID: 0}
   rotationSpeed: 5
+--- !u!114 &-908595793063686200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4199480677447804786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 056f65a9eb5ab3371bb1c1915b6cfaca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slowTime: 0.25
+  slowFactor: 2
 --- !u!1001 &3912787988540168077
 PrefabInstance:
   m_ObjectHideFlags: 0
