@@ -38,14 +38,8 @@ public class MouseLook : MonoBehaviour {
 
     void Update ()
     {
-        if (Time.timeScale == 0)
-        {
-            Cursor.lockState = CursorLockMode.None;
-            return;
-        } else
-        {
-            Cursor.lockState = CursorLockMode.Locked;
-        }
+
+        if (Cursor.lockState == CursorLockMode.None) return;
 
         if (axes == RotationAxes.MouseXAndY)
         {

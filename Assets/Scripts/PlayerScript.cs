@@ -44,6 +44,7 @@ public class PlayerScript : Entity
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         maxHealth = 100;
         health = 100;
 
@@ -102,6 +103,7 @@ public class PlayerScript : Entity
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             Time.timeScale = Time.timeScale == 0 ? 1f : 0f;
+            Cursor.lockState = Time.timeScale == 1f ? CursorLockMode.Locked : CursorLockMode.None;
         }
     }
 
@@ -245,7 +247,7 @@ public class PlayerScript : Entity
 
     public override void Die()
     {
-        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene(deathScreen);
     }
 
