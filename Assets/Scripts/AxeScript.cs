@@ -15,12 +15,12 @@ public class AxeScript : MonoBehaviour
             Debug.Log("Player got attacked");
 
             // Attempt to get the HealthScript component on the player
-            HealthScript healthScript = other.GetComponent<HealthScript>();
+            PlayerScript player = other.GetComponent<PlayerScript>();
 
             // If the player has a HealthScript component, apply damage
-            if (healthScript != null)
+            if (player != null)
             {
-                healthScript.TakeMeleeDamage(axeDamage);
+                player.TakeMeleeDamage(axeDamage);
             }
         }
     }

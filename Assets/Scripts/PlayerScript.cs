@@ -1,10 +1,9 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class PlayerScript : MonoBehaviour
+public class PlayerScript : Entity
 {
-    /// How fast the player walks.
-    public float movementSpeed;
     /// How fast the player dashes.
     public float dashSpeed;
     /// Jump strength.
@@ -31,18 +30,27 @@ public class PlayerScript : MonoBehaviour
     public bool isJumping = false;
     public bool isDashing = false;
     public float sprintMeter = 100f;
+    public float sprintThreshold = 30f;
+    public bool recharge = false;
 
     public int maxJumpsLeft = 2;
     private int jumpsLeft;
 
-    private Rigidbody playerRigidBody;
+    public string deathScreen;
+    public HUD hud;
+    public Rigidbody rigidBody;
     private int weaponIndex = 0;
 
     // Start is called before the first frame update
     void Start()
     {
+        maxHealth = 100;
+        health = 100;
+
         jumpsLeft = maxJumpsLeft;
-        playerRigidBody = GetComponent<Rigidbody>();
+        rigidBody = GetComponent<Rigidbody>();
+
+        hud = GetComponent<HUD>();
 
         for (int i = 0; i < weapons.transform.childCount; i++)
         {
@@ -61,16 +69,32 @@ public class PlayerScript : MonoBehaviour
 
     void FixedUpdate()
     {
+        Sprint();
+    }
+
+    void Sprint()
+    {
+        if (sprintMeter == 0) recharge = true;
+
+        if (recharge && sprintMeter < sprintThreshold)
+        {
+            sprintMeter += sprintRegenerationSpeed;
+            hud.updateEnergy();
+            return;
+        }
+
+        recharge = false;
+
         if (isRunning)
         {
             sprintMeter -= sprintDegenerationSpeed;
-        }
-        else
+        } else
         {
             sprintMeter += sprintRegenerationSpeed;
         }
 
-        sprintMeter = Mathf.Clamp(sprintMeter, 0, 1);
+        sprintMeter = Mathf.Clamp(sprintMeter, 0, 100);
+        hud.updateEnergy();
     }
 
     void Pause()
@@ -108,12 +132,12 @@ public class PlayerScript : MonoBehaviour
 
         // Set the player speed depending on if we are sprinting or not.
         float speed = movementSpeed;
-        isRunning = Input.GetKey(KeyCode.LeftShift) && isWalking;
+        isRunning = Input.GetKey(KeyCode.LeftShift) && isWalking && !recharge;
 
         // Player can dash if starts moving while holding shift.
         bool wantsToDash = Input.GetKeyDown(KeyCode.Q) && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D));
 
-        if (isRunning && sprintMeter > 0)
+        if (isRunning)
             speed *= sprintFactor;
 
         // Jumping.
@@ -121,7 +145,7 @@ public class PlayerScript : MonoBehaviour
         {
             isJumping = true;
             jumpsLeft--;
-            playerRigidBody.AddRelativeForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            rigidBody.AddRelativeForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
         }
 
         if (wantsToDash && !isDashing && isJumping)
@@ -129,22 +153,22 @@ public class PlayerScript : MonoBehaviour
             // Dashing movement.
             if (horizontal > 0)
             {
-                playerRigidBody.AddForce(Camera.main.transform.forward * dashSpeed, ForceMode.Impulse);
+                rigidBody.AddForce(Camera.main.transform.forward * dashSpeed, ForceMode.Impulse);
             }
 
             if (horizontal < 0)
             {
-                playerRigidBody.AddForce(Camera.main.transform.forward * -dashSpeed, ForceMode.Impulse);
+                rigidBody.AddForce(Camera.main.transform.forward * -dashSpeed, ForceMode.Impulse);
             }
 
             if (vertical > 0)
             {
-                playerRigidBody.AddForce(Camera.main.transform.forward * dashSpeed, ForceMode.Impulse);
+                rigidBody.AddForce(Camera.main.transform.forward * dashSpeed, ForceMode.Impulse);
             }
 
             if (vertical < 0)
             {
-                playerRigidBody.AddForce(Camera.main.transform.forward * -dashSpeed, ForceMode.Impulse);
+                rigidBody.AddForce(Camera.main.transform.forward * -dashSpeed, ForceMode.Impulse);
             }
 
             isDashing = true;
@@ -153,33 +177,33 @@ public class PlayerScript : MonoBehaviour
         // Flat movement.
         if (horizontal > 0)
         {
-            playerRigidBody.AddRelativeForce(new Vector3(speed, 0, 0), ForceMode.Force);
+            rigidBody.AddRelativeForce(new Vector3(speed, 0, 0), ForceMode.Force);
         }
 
         if (horizontal < 0)
         {
-            playerRigidBody.AddRelativeForce(new Vector3(-speed, 0, 0), ForceMode.Force);
+            rigidBody.AddRelativeForce(new Vector3(-speed, 0, 0), ForceMode.Force);
         }
 
         if (vertical > 0)
         {
-            playerRigidBody.AddRelativeForce(new Vector3(0, 0, speed), ForceMode.Force);
+            rigidBody.AddRelativeForce(new Vector3(0, 0, speed), ForceMode.Force);
         }
 
         if (vertical < 0)
         {
-            playerRigidBody.AddRelativeForce(new Vector3(0, 0, -speed), ForceMode.Force);
+            rigidBody.AddRelativeForce(new Vector3(0, 0, -speed), ForceMode.Force);
         }
 
         // Add drag to make movement feel natural.
-        playerRigidBody.drag = isJumping ? airDrag : groundDrag;
+        rigidBody.drag = isJumping ? airDrag : groundDrag;
 
         // Limit velocity.
-        Vector3 velocity = new(playerRigidBody.velocity.x, 0, playerRigidBody.velocity.z);
+        Vector3 velocity = new(rigidBody.velocity.x, 0, rigidBody.velocity.z);
         if (velocity.magnitude > maxSpeed)
         {
             Vector3 limitedVelocity = velocity.normalized * movementSpeed;
-            playerRigidBody.velocity = new(limitedVelocity.x, playerRigidBody.velocity.y, limitedVelocity.z);
+            rigidBody.velocity = new(limitedVelocity.x, rigidBody.velocity.y, limitedVelocity.z);
         }
     }
 
@@ -196,6 +220,12 @@ public class PlayerScript : MonoBehaviour
         currentWeapon.SetActive(true);
     }
 
+    public void damageTaken(float damage)
+    {
+        TakeDamage(damage);
+        hud.updateHealth();
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Floor" && isJumping)
@@ -204,8 +234,6 @@ public class PlayerScript : MonoBehaviour
             isDashing = false;
             jumpsLeft = 2;
         }
-<<<<<<< Updated upstream:Assets/Scripts/PlayerScript.cs
-=======
 
         if (collision.gameObject.tag == "EnemyBullet")
         {
@@ -217,6 +245,7 @@ public class PlayerScript : MonoBehaviour
 
     public override void Die()
     {
+        Time.timeScale = 0f;
         SceneManager.LoadScene(deathScreen);
     }
 
@@ -237,6 +266,5 @@ public class PlayerScript : MonoBehaviour
 
             rigidBody.AddForce(knockbackDirection * AxeScript.knockbackForce, ForceMode.Impulse);
         }
->>>>>>> Stashed changes:Assets/Scripts/Entity/PlayerScript.cs
     }
 }

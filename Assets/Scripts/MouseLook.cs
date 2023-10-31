@@ -35,6 +35,16 @@ public class MouseLook : MonoBehaviour {
 
     void Update ()
     {
+
+        if (Time.timeScale == 0)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            return;
+        } else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
         if (axes == RotationAxes.MouseXAndY)
         {
             // Read the mouse input axis

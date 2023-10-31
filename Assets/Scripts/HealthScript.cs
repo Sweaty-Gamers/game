@@ -11,11 +11,6 @@ public class HealthScript : MonoBehaviour {
 
     /// Max health points;
     public float maxHealth;
-
-    private GameObject healthUi;
-    private GameObject healthBarUi;
-    private TextMeshProUGUI healthText;
-    public Slider healthBar;
     private Rigidbody playerRigidbody;
     public string gameover;
     public Slider playerHealthBar;
@@ -23,28 +18,10 @@ public class HealthScript : MonoBehaviour {
 
     void Start() {
         playerRigidbody = GetComponent<Rigidbody>();
-        healthUi = GameObject.Find("Health");
-        healthText = healthUi.GetComponent<TextMeshProUGUI>();
-
-        healthBarUi = GameObject.Find("HealthBar");
-        healthBar = healthBarUi.GetComponent<Slider>();
 
         // Health bar max now depends on player
         // TODO ~~ take health from player specifically for UI, Create UI Script which will only take in player health
         // Have less if statements making sure player stats are being shown.
-        if (gameObject.tag == "Player")
-        {
-            healthBar.maxValue = maxHealth;
-        }
-
-    }
-
-    void Update() {
-        if (gameObject.tag == "Player") {
-            healthText.text = health.ToString() + " / " + maxHealth.ToString();
-            healthBar.value = health;
-        }
-        
 
     }
 
