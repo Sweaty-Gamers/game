@@ -1,6 +1,3 @@
-using Unity.VisualScripting;
-using TMPro;
-
 using UnityEngine;
 
 public class HealthScript : MonoBehaviour {

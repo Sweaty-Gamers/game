@@ -125,7 +125,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2836004475591695743, guid: f432554f564e69242897607d34218939, type: 3}
       propertyPath: m_Name
-      value: PBRCharacter Variant
+      value: PBRCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 2836004475591695743, guid: f432554f564e69242897607d34218939, type: 3}
       propertyPath: m_IsActive
@@ -165,10 +165,10 @@ PrefabInstance:
       addedObject: {fileID: 7402077405198737417}
     - targetCorrespondingSourceObject: {fileID: 2836004475591695743, guid: f432554f564e69242897607d34218939, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8670991810397221584}
+      addedObject: {fileID: 8694540315242942957}
     - targetCorrespondingSourceObject: {fileID: 2836004475591695743, guid: f432554f564e69242897607d34218939, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8694540315242942957}
+      addedObject: {fileID: 8950295193612070285}
   m_SourcePrefab: {fileID: 100100000, guid: f432554f564e69242897607d34218939, type: 3}
 --- !u!4 &4261412638913807623 stripped
 Transform:
@@ -276,23 +276,6 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &8670991810397221584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4261412638914173223}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 552bc1b915621ef5e9c91bea6d26085a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 400
-  maxHealth: 400
-  healthBar: {fileID: 0}
-  gameover: 
-  playerHealthBar: {fileID: 0}
 --- !u!114 &8694540315242942957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +288,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89c5b8b7ce4987a1ba649b6ae174bb10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8950295193612070285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4261412638914173223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ffef58070f4a2479b14d61d0b376c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 400
+  maxHealth: 400
+  movementSpeed: 0.5
+  agent: {fileID: 3636204821866505459}
+  pathFindScript: {fileID: 732785427481706409}
 --- !u!1001 &5237769505930952023
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -18,6 +18,9 @@ public class HUD : MonoBehaviour
     public TextMeshProUGUI energyText;
     public Slider energyBar;
 
+    public GameObject weaponUI;
+    public TextMeshProUGUI ammo;
+
     void Start()
     {
         healthUi = GameObject.Find("Health");
@@ -31,6 +34,9 @@ public class HUD : MonoBehaviour
         energyBar = energyBarUI.GetComponent<Slider>();
 
 
+        weaponUI = GameObject.Find("Ammo");
+        ammo = weaponUI.GetComponent<TextMeshProUGUI>();
+
 
         playerStats = FindObjectOfType<PlayerScript>();
         healthBar.maxValue = playerStats.maxHealth;
@@ -39,6 +45,12 @@ public class HUD : MonoBehaviour
         energyBar.value = playerStats.sprintMeter;
         updateEnergy();
         updateHealth();
+        updateAmmo();
+    }
+
+    public void updateAmmo()
+    {
+
     }
 
     public void updateEnergy()
