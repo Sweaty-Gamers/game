@@ -23,7 +23,7 @@ public class GameMasterScript : MonoBehaviour
     {
         roundUi = GameObject.Find("Round");
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
-
+        StartCoroutine(EnemyDrop());
         StartNextRound();
 
         // Test modifiers:
@@ -83,5 +83,27 @@ public class GameMasterScript : MonoBehaviour
     {
         roundStarted = false;
         currentRound += 1;
+    }
+    public GameObject enemy;
+    public int xPos;
+    public int zPos;
+    public int enemyCount;
+
+    IEnumerator EnemyDrop()
+    {
+        var pairs = new (int, int)[4];
+        pairs[0] = (256, 277);
+        pairs[1] = (268, 250);
+        pairs[2] = (249, 230);
+        pairs[3] = (220, 230);
+        while (enemyCount < 20)
+        {
+            int randomNumber = Random.Range(0, 5);
+            xPos = pairs[randomNumber].Item1;
+            zPos = pairs[randomNumber].Item2;
+            Instantiate(enemy, new Vector3(xPos, 0, zPos), Quaternion.identity);
+            yield return new WaitForSeconds(0.1f);
+            enemyCount += 1;
+        }
     }
 }
