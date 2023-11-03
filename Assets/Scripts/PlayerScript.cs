@@ -39,7 +39,7 @@ public class PlayerScript : Entity
     public string deathScreen;
     public HUD hud;
     public Rigidbody rigidBody;
-    private int weaponIndex = 0;
+    public int weaponIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -220,6 +220,7 @@ public class PlayerScript : Entity
         weaponIndex = nextWeaponIndex;
         GameObject currentWeapon = weapons.transform.GetChild(weaponIndex).gameObject;
         currentWeapon.SetActive(true);
+        hud.updateAmmo();
     }
 
     public void damageTaken(float damage)

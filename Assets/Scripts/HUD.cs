@@ -18,6 +18,8 @@ public class HUD : MonoBehaviour
     public TextMeshProUGUI energyText;
     public Slider energyBar;
 
+    public GameObject weapon; 
+    public WeaponScript weaponStats;
     public GameObject weaponUI;
     public TextMeshProUGUI ammo;
 
@@ -50,7 +52,9 @@ public class HUD : MonoBehaviour
 
     public void updateAmmo()
     {
-
+        weapon = playerStats.weapons.transform.GetChild(playerStats.weaponIndex).gameObject;
+        weaponStats = weapon.GetComponent<WeaponScript>();
+        ammo.text = weaponStats.bulletsLeftInMag + "/" + weaponStats.reserveBullets;
     }
 
     public void updateEnergy()

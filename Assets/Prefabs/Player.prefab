@@ -375,6 +375,7 @@ MonoBehaviour:
   deathScreen: 
   hud: {fileID: 0}
   rigidBody: {fileID: 0}
+  weaponIndex: 0
 --- !u!114 &7606864552337583877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,6 +417,8 @@ MonoBehaviour:
   energyUI: {fileID: 0}
   energyText: {fileID: 0}
   energyBar: {fileID: 0}
+  weaponUI: {fileID: 0}
+  ammo: {fileID: 0}
 --- !u!1001 &828362967671917014
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -886,7 +886,7 @@ MonoBehaviour:
   agent: {fileID: 8342801282060077371}
   pathFindScript: {fileID: 6718280069403681621}
   weapon: {fileID: 1869133834603279346}
-  weaponDamage: 50
+  weaponDamage: 10
   knockBackForce: 0.5
 --- !u!1 &612802165944191715 stripped
 GameObject:
