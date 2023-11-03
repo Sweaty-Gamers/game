@@ -30,6 +30,16 @@ public class FlyingDragonScript : MonoBehaviour
         enemy = GetComponent<EnemyStateController>() ?? GetComponentInChildren<EnemyStateController>();
         timeSinceLastDestinationChange = 0f;
 
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+        else
+        {
+            Debug.LogError("No GameObject with the tag 'Player' found.");
+        }
+
         // Set an initial random destination
         SetRandomDestinationAroundPlayer();
     }
