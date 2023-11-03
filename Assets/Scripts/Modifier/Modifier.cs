@@ -2,7 +2,12 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-abstract class Modifier {    
+abstract class Modifier {
+
+    public bool permanent;
+    public bool forRound;
+    public int sec;
+
     protected abstract IEnumerator start();
     protected abstract IEnumerator end();
     

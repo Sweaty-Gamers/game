@@ -15,7 +15,7 @@ public class Entity : MonoBehaviour
         CheckHealth();
     }
 
-    void heal(float healAmount)
+    public virtual void heal(float healAmount)
     {
         SetNewHealth(health + healAmount);
         CheckHealth();

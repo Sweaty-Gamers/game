@@ -27,7 +27,7 @@ public class GameMasterScript : MonoBehaviour
         StartNextRound();
 
         // Test modifiers:
-        ApplyModifier(new PlayerGrowModifier());
+        ApplyModifier(new HealingModifier(60, 10.5f));
     }
 
     // Update is called once per frame
