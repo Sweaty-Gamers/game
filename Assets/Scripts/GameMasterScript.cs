@@ -18,7 +18,6 @@ public class GameMasterScript : MonoBehaviour
     public GameObject ranged;
     public int xPos;
     public int zPos;
-    public int enemyCount;
     private GameObject roundUi;
     private TextMeshProUGUI roundText;
     private GameObject modifiersUi;
@@ -34,14 +33,13 @@ public class GameMasterScript : MonoBehaviour
         modifiersUi = GameObject.Find("Modifiers");
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
         modifiersText = modifiersUi.GetComponent<TextMeshProUGUI>();
-        StartCoroutine(EnemyDrop());
         StartNextRound();
         
         // Test modifiers:
         //ApplyModifier(new HealingModifier(5, 10.5f));
         //ApplyModifier(new PlayerFovModifier());
         //ApplyModifier(new TreeGrowModifier());
-        ApplyModifier(new SunColorModifier());
+        // ApplyModifier(new SunColorModifier());
     }
 
     private string GetModifiersString() {
@@ -53,7 +51,6 @@ public class GameMasterScript : MonoBehaviour
     {
         roundText.text = currentRound.ToString();
         modifiersText.text = GetModifiersString();
-
         CheckRoundEnd();
     }
 
@@ -67,9 +64,9 @@ public class GameMasterScript : MonoBehaviour
         StartCoroutine(InternalApplyModifier(modifier));
     }
 
-    GameObject[] GetActiveEnemies()
-    {
-        return GameObject.FindGameObjectsWithTag("Enemy");
+    int GetActiveEnemies()
+    {   
+        return GameObject.FindGameObjectsWithTag("Enemy_Melee").Length + GameObject.FindGameObjectsWithTag("Enemy_Ranged").Length;
     }
 
     // Check if the current round shound end.
@@ -79,10 +76,10 @@ public class GameMasterScript : MonoBehaviour
         if (!roundStarted) return;
 
         // Get number of active enemies.
-        GameObject[] activeEnemies = GetActiveEnemies();
-
+        int activeEnemies = GetActiveEnemies();
+ 
         // When no enemies left, end the round.
-        if (activeEnemies.Length == 0)
+        if (activeEnemies== 0)
         {
             EndRound();
             StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
@@ -97,9 +94,10 @@ public class GameMasterScript : MonoBehaviour
 
     // Start the next round and spawn enemies.
     void StartNextRound()
-    {
+    {   
         roundStarted = true;
-
+        StartCoroutine(EnemyDrop());
+        Debug.Log(GetActiveEnemies());
         // Spawn new enemies.
     }
 
@@ -116,14 +114,13 @@ public class GameMasterScript : MonoBehaviour
         pairs[1] = (268, 250);
         pairs[2] = (249, 230);
         pairs[3] = (220, 230);
-        while (enemyCount < 20)
-        {
+        for(int i =0; i<currentRound; i++){
             int randomNumber = Random.Range(0, 4);
             xPos = pairs[randomNumber].Item1;
             zPos = pairs[randomNumber].Item2;
             Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
             yield return new WaitForSeconds(0.1f);
-            enemyCount += 1;
         }
+            
     }
 }
