@@ -33,7 +33,8 @@ public class GameMasterScript : MonoBehaviour
         StartNextRound();
 
         // Test modifiers:
-        ApplyModifier(new HealingModifier(5, 10.5f));
+        //ApplyModifier(new HealingModifier(5, 10.5f));
+        ApplyModifier(new PlayerFovModifier());
     }
 
     private string GetModifiersString() {
