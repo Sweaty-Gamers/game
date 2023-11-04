@@ -53,4 +53,8 @@ class SunColorModifier : Modifier
     {
         yield return null;
     }
+    protected override IEnumerator permanentMod()
+    {
+        yield return null;
+    }
 }
