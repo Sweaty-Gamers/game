@@ -77,7 +77,7 @@ public class EnemyPathfindScript : MonoBehaviour
             }
             else
             {
-                Debug.Log("WHAT?");
+                //Debug.Log("WHAT?");
             }
         }
         else

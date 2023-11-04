@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 7319430863965890064}
   - component: {fileID: 598029333193642417}
   - component: {fileID: 7606864552337583877}
-  - component: {fileID: -6276141655868253301}
+  - component: {fileID: 645708793871609781}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -351,6 +351,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c66141e17a5a0838ade9bbcecec3f2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
   movementSpeed: 20
   dashSpeed: 30
   jumpForce: 7
@@ -367,6 +369,13 @@ MonoBehaviour:
   isJumping: 0
   isDashing: 0
   sprintMeter: 100
+  sprintThreshold: 30
+  recharge: 0
+  maxJumpsLeft: 2
+  deathScreen: 
+  hud: {fileID: 0}
+  rigidBody: {fileID: 0}
+  weaponIndex: 0
 --- !u!114 &7606864552337583877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,7 +395,7 @@ MonoBehaviour:
   maximumX: 360
   minimumY: -60
   maximumY: 60
---- !u!114 &-6276141655868253301
+--- !u!114 &645708793871609781
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -395,11 +404,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 5443323960298137777}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 552bc1b915621ef5e9c91bea6d26085a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a9b6db6bc2be604e9bce1ff531be3ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
+  healthUi: {fileID: 0}
+  healthBarUi: {fileID: 0}
+  healthText: {fileID: 0}
+  healthBar: {fileID: 0}
+  playerStats: {fileID: 0}
+  player: {fileID: 0}
+  energyBarUI: {fileID: 0}
+  energyUI: {fileID: 0}
+  energyText: {fileID: 0}
+  energyBar: {fileID: 0}
+  weaponUI: {fileID: 0}
+  ammo: {fileID: 0}
 --- !u!1001 &828362967671917014
 PrefabInstance:
   m_ObjectHideFlags: 0

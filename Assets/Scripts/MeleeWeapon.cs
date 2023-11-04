@@ -12,7 +12,6 @@ public class MeleeWeapon : MonoBehaviour
         {
             Debug.Log("Player got attacked");
 
-            // Attempt to get the HealthScript component on the player
             PlayerScript player = other.GetComponent<PlayerScript>();
 
             // If the player has a HealthScript component, apply damage

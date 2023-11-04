@@ -13,33 +13,58 @@ public class GameMasterScript : MonoBehaviour
     public int currentRound = 1;
     public bool roundStarted = false;
 
-
+    public GameObject minotaur;
+    public GameObject dragon;
+    public GameObject ranged;
+    public int xPos;
+    public int zPos;
+    public int enemyCount;
     private GameObject roundUi;
     private TextMeshProUGUI roundText;
+    private GameObject modifiersUi;
+    private TextMeshProUGUI modifiersText;
+
+    private readonly List<string> activeModifiersNames = new();
 
 
     // Start is called before the first frame update
     void Start()
     {
         roundUi = GameObject.Find("Round");
+        modifiersUi = GameObject.Find("Modifiers");
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
-
+        modifiersText = modifiersUi.GetComponent<TextMeshProUGUI>();
+        StartCoroutine(EnemyDrop());
         StartNextRound();
-
+        
         // Test modifiers:
-        ApplyModifier(new PlayerGrowModifier());
+        //ApplyModifier(new HealingModifier(5, 10.5f));
+        //ApplyModifier(new PlayerFovModifier());
+        //ApplyModifier(new TreeGrowModifier());
+        ApplyModifier(new SunColorModifier());
+    }
+
+    private string GetModifiersString() {
+        return string.Join('\n', activeModifiersNames);
     }
 
     // Update is called once per frame
     void Update()
     {
         roundText.text = currentRound.ToString();
+        modifiersText.text = GetModifiersString();
 
         CheckRoundEnd();
     }
 
+    private IEnumerator InternalApplyModifier(Modifier modifier) {
+        activeModifiersNames.Add(modifier.name);
+        yield return modifier.apply(this);
+        activeModifiersNames.Remove(modifier.name);
+    }
+
     void ApplyModifier(Modifier modifier) {
-        StartCoroutine(modifier.apply(this));
+        StartCoroutine(InternalApplyModifier(modifier));
     }
 
     GameObject[] GetActiveEnemies()
@@ -83,5 +108,22 @@ public class GameMasterScript : MonoBehaviour
     {
         roundStarted = false;
         currentRound += 1;
+    }
+      IEnumerator EnemyDrop()
+    {
+        var pairs = new (int, int)[4];
+        pairs[0] = (256, 277);
+        pairs[1] = (268, 250);
+        pairs[2] = (249, 230);
+        pairs[3] = (220, 230);
+        while (enemyCount < 20)
+        {
+            int randomNumber = Random.Range(0, 4);
+            xPos = pairs[randomNumber].Item1;
+            zPos = pairs[randomNumber].Item2;
+            Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
+            yield return new WaitForSeconds(0.1f);
+            enemyCount += 1;
+        }
     }
 }

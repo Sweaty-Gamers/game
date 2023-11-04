@@ -39,7 +39,7 @@ public class PlayerScript : Entity
     public string deathScreen;
     public HUD hud;
     public Rigidbody rigidBody;
-    private int weaponIndex = 0;
+    public int weaponIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -220,11 +220,18 @@ public class PlayerScript : Entity
         weaponIndex = nextWeaponIndex;
         GameObject currentWeapon = weapons.transform.GetChild(weaponIndex).gameObject;
         currentWeapon.SetActive(true);
+        hud.updateAmmo();
     }
 
-    public void damageTaken(float damage)
+    public override void heal(float health_increase)
     {
-        TakeDamage(damage);
+        base.heal(health_increase);
+        hud.updateHealth();
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
         hud.updateHealth();
     }
 
@@ -240,7 +247,7 @@ public class PlayerScript : Entity
         if (collision.gameObject.tag == "EnemyBullet")
         {
             BulletScript bullet = collision.gameObject.GetComponent<BulletScript>();
-            damageTaken(bullet.damage);
+            TakeDamage(bullet.damage);
             print(gameObject.tag + " -> " + collision.gameObject.tag);
         }
     }
@@ -255,7 +262,7 @@ public class PlayerScript : Entity
     public void TakeMeleeDamage(float damage, float knockBack)
     {
         // Applies damage to player
-        damageTaken(damage);
+        TakeDamage(damage);
         // Applies Knockback
         if (rigidBody != null)
         {

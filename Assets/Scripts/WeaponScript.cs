@@ -29,42 +29,27 @@ public class WeaponScript : MonoBehaviour
     /// How many bullets come with the weapon as backup ammo.
     public float reserveBullets;
     /// How many bullets are currently in the mag.
-    private float bulletsLeftInMag = 0;
+    public float bulletsLeftInMag = 0;
 
     private bool isReloading = false;
     private float timestampLastBulletFired = -1;
 
-    private TextMeshProUGUI ammoText;
     private Animator animator;
     private PlayerScript playerScript;
     private Transform bulletSpawn;
-    private GameObject ammoUi;
 
     // Start is called before the first frame update
     void Start()
     {
         bulletsLeftInMag = magSize;
-        ammoUi = GameObject.Find("Ammo");
-        ammoText = ammoUi.GetComponent<TextMeshProUGUI>();
         animator = GetComponent<Animator>();
         playerScript = GetComponentInParent<PlayerScript>();
         bulletSpawn = transform.Find("Spawn");
     }
 
-    void OnEnable()
-    {
-        UpdateAmmoUi();
-    }
-
     void OnDisable()
     {
         isReloading = false;
-    }
-
-    void UpdateAmmoUi()
-    {
-        if (ammoText == null) return;
-        ammoText.text = bulletsLeftInMag + "/" + reserveBullets;
     }
 
     void Shoot()
@@ -104,7 +89,7 @@ public class WeaponScript : MonoBehaviour
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletSpeed;
 
         bulletsLeftInMag--;
-        UpdateAmmoUi();
+        playerScript.hud.updateAmmo();
 
         RecoilObject.recoil += 0.1f;
     }
@@ -115,7 +100,6 @@ public class WeaponScript : MonoBehaviour
         if (reserveBullets == 0) yield break;
 
         isReloading = true;
-        UpdateAmmoUi();
         animator.SetFloat("ReloadSpeed", reloadAnimationLength / reloadTime);
         animator.SetBool("Reload", true);
         yield return new WaitForSeconds(reloadTime);
@@ -142,7 +126,7 @@ public class WeaponScript : MonoBehaviour
         animator.SetBool("Reload", false);
         isReloading = false;
 
-        UpdateAmmoUi();
+        playerScript.hud.updateAmmo();
     }
 
     // Update is called once per frame
