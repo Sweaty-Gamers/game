@@ -49,8 +49,9 @@ class TreeGrowModifier : Modifier
     {
         yield return null;
     }
-      protected override IEnumerator permanentMod()
+
+    protected override IEnumerator permanentMod()
     {
-        yield return null;
+        throw new System.NotImplementedException();
     }
 }

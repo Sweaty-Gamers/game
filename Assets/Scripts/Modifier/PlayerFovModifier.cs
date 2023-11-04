@@ -37,4 +37,9 @@ class PlayerFovModifier : Modifier
     {
         yield return null;
     }
+
+    protected override IEnumerator permanentMod()
+    {
+        throw new System.NotImplementedException();
+    }
 }
