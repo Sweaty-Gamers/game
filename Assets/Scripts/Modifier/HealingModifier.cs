@@ -10,11 +10,12 @@ class HealingModifier : Modifier
 
     public HealingModifier(float healAmount, int sec, bool permanent = false)
     {
+        this.name = "Healing";
+        this.sec = sec;
         this.permanent = permanent;
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<PlayerScript>();
         this.healAmount = healAmount;
-        this.sec = sec;
     }
     protected override IEnumerator end()
     {

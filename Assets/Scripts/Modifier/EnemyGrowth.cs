@@ -9,6 +9,7 @@ class EnemyGrowth : Modifier
 
     public EnemyGrowth(int sec = 10, bool permanent = false)
     {
+        this.name = "Enemy growth";
         this.permanent = permanent;
         this.sec = sec;
         enemies = Object.FindObjectsByType<Enemy>(FindObjectsSortMode.None);

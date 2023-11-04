@@ -5,7 +5,10 @@ class PlayerGrowModifier : Modifier
 {
     private GameObject player;
 
-    public PlayerGrowModifier(int sec = 10, bool permanent = false) {
+
+    public PlayerGrowModifier(int sec = 10, bool permanent = false)
+    {
+        this.name = "Player growth";
         this.sec = sec;
         this.permanent = permanent;
         player = GameObject.Find("Player");

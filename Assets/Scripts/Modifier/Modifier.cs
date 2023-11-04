@@ -4,6 +4,7 @@ using UnityEngine;
 
 abstract class Modifier {
 
+    public String name;
     public bool permanent;
     public bool forRound;
     public int sec;
