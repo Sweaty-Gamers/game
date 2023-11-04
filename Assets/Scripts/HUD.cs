@@ -59,13 +59,13 @@ public class HUD : MonoBehaviour
 
     public void updateEnergy()
     {
-        energyText.text = playerStats.sprintMeter.ToString() + " / " + "100";
+        //energyText.text = playerStats.sprintMeter.ToString() + " / " + "100";
         energyBar.value = playerStats.sprintMeter;
     }
 
     public void updateHealth()
     {
-        healthText.text = playerStats.health.ToString() + " / " + playerStats.maxHealth.ToString();
+        //healthText.text = playerStats.health.ToString() + " / " + playerStats.maxHealth.ToString();
         healthBar.value = playerStats.health;
     }
 }
