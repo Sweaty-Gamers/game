@@ -34,7 +34,8 @@ public class GameMasterScript : MonoBehaviour
 
         // Test modifiers:
         //ApplyModifier(new HealingModifier(5, 10.5f));
-        ApplyModifier(new PlayerFovModifier());
+        //ApplyModifier(new PlayerFovModifier());
+        ApplyModifier(new TreeGrowModifier());
     }
 
     private string GetModifiersString() {
@@ -46,7 +47,6 @@ public class GameMasterScript : MonoBehaviour
     {
         roundText.text = currentRound.ToString();
         modifiersText.text = GetModifiersString();
-        print(GetModifiersString());
 
         CheckRoundEnd();
     }
