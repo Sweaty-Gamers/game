@@ -10,9 +10,15 @@ abstract class Modifier {
 
     protected abstract IEnumerator start();
     protected abstract IEnumerator end();
+
+    protected abstract IEnumerator permanentMod();
     
     public IEnumerator apply(MonoBehaviour monoBehaviour) {
         yield return monoBehaviour.StartCoroutine(start());
-        yield return monoBehaviour.StartCoroutine(end());
+    }
+
+    public IEnumerator permanentApply(MonoBehaviour monoBehaviour)
+    {
+        yield return monoBehaviour.StartCoroutine(permanentMod());
     }
 }

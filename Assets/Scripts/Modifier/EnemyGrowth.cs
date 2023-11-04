@@ -7,9 +7,9 @@ class EnemyGrowth : Modifier
 {
     public Enemy[] enemies;
 
-    public EnemyGrowth(int sec = 10)
+    public EnemyGrowth(int sec = 10, bool permanent = false)
     {
-        new WaitForSeconds(10);
+        this.permanent = permanent;
         this.sec = sec;
         enemies = Object.FindObjectsByType<Enemy>(FindObjectsSortMode.None);
     }
@@ -24,15 +24,33 @@ class EnemyGrowth : Modifier
         yield return null;
     }
 
-    protected override IEnumerator start()
+    private void transform()
     {
         foreach (Enemy enemy in enemies)
         {
             enemy.transform.localScale *= 3f;
         }
+    }
 
-        yield return new WaitForSeconds(sec);
-
+    protected override IEnumerator permanentMod()
+    {
         yield return null;
+    }
+
+    protected override IEnumerator start()
+    {
+
+        transform();
+
+        if (permanent)
+        {
+            yield return permanentMod();
+        }
+        else
+        {
+            yield return new WaitForSeconds(sec);
+            yield return end();
+        }
+
     }
 }
