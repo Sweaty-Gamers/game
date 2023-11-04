@@ -68,11 +68,16 @@ public class EnemyBossScript : MonoBehaviour
             // Perform charge attack
             Debug.Log("Charge Attack!");
             agent.speed = 150f;
+
             // Calculate the direction from the enemy to the player
             Vector3 chargeDirection = (player.position - transform.position).normalized;
 
-            // Set the NavMeshAgent's destination to the player's position
-            agent.SetDestination(player.position);
+            // Calculate the destination point slightly past the player's position
+            float chargeDistance = 50f; // Adjust this value to control how far past the player to charge
+            Vector3 chargeDestination = player.position + chargeDirection * (attackDistance);
+
+            // Set the NavMeshAgent's destination to the calculated destination point
+            agent.SetDestination(chargeDestination);
 
             // Increase the NavMeshAgent's acceleration for the charge attack
             agent.acceleration = 50f; // You can adjust this value to control acceleration
@@ -80,6 +85,13 @@ public class EnemyBossScript : MonoBehaviour
             // Start the charge cooldown coroutine
             canCharge = false;
             StartCoroutine(ChargeCooldown());
+        }
+        else
+        {
+            // Player is out of range, reset agent values and destination
+            agent.speed = 10f; // Set the default speed
+            agent.acceleration = 20f; // Set the default acceleration
+            agent.ResetPath(); // Clear the current path
         }
 
     }
@@ -115,9 +127,9 @@ public class EnemyBossScript : MonoBehaviour
     {
         if (player != null)
         {
-            Debug.Log(Vector3.Distance(transform.position, player.position) < attackDistance);
-            Debug.Log(Vector3.Distance(transform.position, player.position));
-            Debug.Log(attackDistance);
+            //Debug.Log(Vector3.Distance(transform.position, player.position) < attackDistance);
+            //Debug.Log(Vector3.Distance(transform.position, player.position));
+            //Debug.Log(attackDistance);
             return Vector3.Distance(transform.position, player.position) < attackDistance;
         }
 
