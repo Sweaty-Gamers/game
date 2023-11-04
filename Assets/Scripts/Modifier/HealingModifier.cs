@@ -10,6 +10,7 @@ class HealingModifier : Modifier
 
     public HealingModifier(int sec, float healAmount) 
     {
+        this.name = "Healing";
         this.sec = sec;
         player = GameObject.Find("Player");
         playerScript = player.GetComponent<PlayerScript>();

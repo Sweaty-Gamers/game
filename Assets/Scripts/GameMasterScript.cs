@@ -16,30 +16,48 @@ public class GameMasterScript : MonoBehaviour
 
     private GameObject roundUi;
     private TextMeshProUGUI roundText;
+    private GameObject modifiersUi;
+    private TextMeshProUGUI modifiersText;
+
+    private readonly List<string> activeModifiersNames = new();
 
 
     // Start is called before the first frame update
     void Start()
     {
         roundUi = GameObject.Find("Round");
+        modifiersUi = GameObject.Find("Modifiers");
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
+        modifiersText = modifiersUi.GetComponent<TextMeshProUGUI>();
 
         StartNextRound();
 
         // Test modifiers:
-        ApplyModifier(new HealingModifier(60, 10.5f));
+        ApplyModifier(new HealingModifier(5, 10.5f));
+    }
+
+    private string GetModifiersString() {
+        return string.Join('\n', activeModifiersNames);
     }
 
     // Update is called once per frame
     void Update()
     {
         roundText.text = currentRound.ToString();
+        modifiersText.text = GetModifiersString();
+        print(GetModifiersString());
 
         CheckRoundEnd();
     }
 
+    private IEnumerator InternalApplyModifier(Modifier modifier) {
+        activeModifiersNames.Add(modifier.name);
+        yield return modifier.apply(this);
+        activeModifiersNames.Remove(modifier.name);
+    }
+
     void ApplyModifier(Modifier modifier) {
-        StartCoroutine(modifier.apply(this));
+        StartCoroutine(InternalApplyModifier(modifier));
     }
 
     GameObject[] GetActiveEnemies()

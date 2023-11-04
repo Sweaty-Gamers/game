@@ -9,6 +9,7 @@ class EnemyGrowth : Modifier
 
     public EnemyGrowth(int sec = 10)
     {
+        this.name = "Enemy growth";
         new WaitForSeconds(10);
         this.sec = sec;
         enemies = Object.FindObjectsByType<Enemy>(FindObjectsSortMode.None);

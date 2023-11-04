@@ -6,6 +6,7 @@ class PlayerGrowModifier : Modifier
     private GameObject player;
 
     public PlayerGrowModifier() {
+        this.name = "Player growth";
         player = GameObject.Find("Player");
     }
 
