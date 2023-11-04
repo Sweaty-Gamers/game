@@ -35,7 +35,8 @@ public class GameMasterScript : MonoBehaviour
         // Test modifiers:
         //ApplyModifier(new HealingModifier(5, 10.5f));
         //ApplyModifier(new PlayerFovModifier());
-        ApplyModifier(new TreeGrowModifier());
+        //ApplyModifier(new TreeGrowModifier());
+        ApplyModifier(new SunColorModifier());
     }
 
     private string GetModifiersString() {
