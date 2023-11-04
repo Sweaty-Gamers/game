@@ -109,7 +109,6 @@ public class GameMasterScript : MonoBehaviour
     }
       IEnumerator EnemyDrop()
     {
-
         var pairs = new (int, int)[4];
         pairs[0] = (256, 277);
         pairs[1] = (268, 250);
