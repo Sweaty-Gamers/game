@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.AI.Navigation;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,17 +7,21 @@ public class EnemyBossScript : MonoBehaviour
 {
     public Transform player;
     public float chargeSpeed = 200f;
-    public float jumpForce = 10f;
+    public float jumpForce = 500f;
     public float attackDistance = 70f;  //change later
     public float chargeCooldown = 5f;
     public float jumpCooldown = 8f;
     public float meleeCooldown = 2f;
+    public float jumpHeight = 50f;
+    public float jumpDuration = 2.5f;
 
     private bool canCharge = true;
     private bool canJump = true;
     private bool canMelee = true;
 
     public NavMeshAgent agent;
+
+    public NavMeshLink navMeshLink;
 
     void Start()
     {
@@ -26,6 +31,7 @@ public class EnemyBossScript : MonoBehaviour
         }
 
         agent = GetComponent<NavMeshAgent>();
+        navMeshLink = GetComponent<NavMeshLink>();
         //agent.speed = 40f;
     }
 
@@ -35,18 +41,26 @@ public class EnemyBossScript : MonoBehaviour
         {
             MoveTowardsPlayer();
         }
-        else if (canCharge)
+        /*else if (canCharge)
         {
             ChargeAttack();
-        }
-        /*else if (canJump)
+        } */
+        else if (canJump)
         {
             JumpAttack();
-        }
+        } /*
         else if (canMelee)
         {
             MeleeAttack();
         } */
+
+        // Set the start and end positions of the NavMeshLink
+        navMeshLink.startPoint = transform.position;
+        navMeshLink.endPoint = player.position;
+
+        // Activate the NavMeshLink to make it valid for pathfinding
+        navMeshLink.enabled = true;
+
     }
 
     private void MoveTowardsPlayer()
@@ -73,7 +87,7 @@ public class EnemyBossScript : MonoBehaviour
             Vector3 chargeDirection = (player.position - transform.position).normalized;
 
             // Calculate the destination point slightly past the player's position
-            float chargeDistance = 50f; // Adjust this value to control how far past the player to charge
+            //float chargeDistance = 50f; // Adjust this value to control how far past the player to charge
             Vector3 chargeDestination = player.position + chargeDirection * (attackDistance);
 
             // Set the NavMeshAgent's destination to the calculated destination point
@@ -102,14 +116,27 @@ public class EnemyBossScript : MonoBehaviour
         // Check if the player is in range
         if (IsPlayerInRange())
         {
-            // Perform jump attack
-            Debug.Log("Jump Attack!");
-            Rigidbody rb = GetComponent<Rigidbody>();
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            // Calculate the direction from the enemy to the player
+            Vector3 jumpDirection = (player.position - transform.position).normalized;
+
+            // Calculate the destination point slightly above the player's position
+            Vector3 jumpDestination = player.position + jumpDirection * 10f; // Adjust jump distance as needed
+
+            // Set the NavMeshAgent's destination to the calculated jump destination
+            agent.SetDestination(jumpDestination);
+
+            // Start the jump cooldown coroutine
             canJump = false;
             StartCoroutine(JumpCooldown());
+
+            // Start the parabola jump coroutine
+            StartCoroutine(Parabola2(agent, jumpHeight, jumpDuration)); // Adjust duration as needed
         }
     }
+
+
+
+
 
     private void MeleeAttack()
     {
@@ -153,4 +180,55 @@ public class EnemyBossScript : MonoBehaviour
         yield return new WaitForSeconds(meleeCooldown);
         canMelee = true;
     }
+
+    /*IEnumerator Parabola(NavMeshAgent agent, float height, float duration)
+    {
+        OffMeshLinkData data = agent.currentOffMeshLinkData;
+        Vector3 startPos = agent.transform.position;
+
+        // Raise the end position to avoid going through the ground
+        Vector3 endPos = player.position + Vector3.up * agent.baseOffset + Vector3.up * height;
+
+        float normalizedTime = 0.0f;
+
+        while (normalizedTime < 1.15f)
+        {
+            // Adjust the yOffset to make the jump smoother
+            float yOffset = height * Mathf.Sin(normalizedTime * Mathf.PI);
+
+            agent.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
+            normalizedTime += Time.deltaTime / duration;
+            yield return null;
+        }
+
+        // Jump is complete, reset the coroutine and NavMeshAgent
+        agent.CompleteOffMeshLink();
+    } */
+
+    IEnumerator Parabola2(NavMeshAgent agent, float height, float duration)
+    {
+        OffMeshLinkData data = agent.currentOffMeshLinkData;
+        Vector3 startPos = agent.transform.position;
+        Vector3 endPos = player.position; // Use the end position from OffMeshLinkData
+
+        float normalizedTime = 0.0f;
+
+        while (normalizedTime < 1.0f) // Adjust the loop condition
+        {
+            // Calculate the perfect parabola using Quadratic Bezier curve
+            float yOffset = height * 4.0f * normalizedTime * (1.0f - normalizedTime);
+
+            agent.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
+            normalizedTime += Time.deltaTime / duration;
+            yield return null;
+        }
+
+        // Jump is complete, reset the coroutine and NavMeshAgent
+        agent.CompleteOffMeshLink();
+    }
+
+
+
+
+
 }
