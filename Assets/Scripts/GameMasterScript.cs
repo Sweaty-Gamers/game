@@ -4,20 +4,22 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class GameMasterScript : MonoBehaviour
+  
 {
     // ------------ Game Configuration -------------
     public float secondsBeforeNextRound = 5;
 
-
-    // ------------ Current State ------------------
+    // ------------ Round Spawn Variables -------------
+    public int numOfDragons = 0;
     public int currentRound = 1;
     public bool roundStarted = false;
-
+    public int enemies = 10;
     public GameObject minotaur;
     public GameObject dragon;
     public GameObject ranged;
     public int xPos;
     public int zPos;
+    // ------------ Current State ------------------
     private GameObject roundUi;
     private TextMeshProUGUI roundText;
     private GameObject modifiersUi;
@@ -114,13 +116,103 @@ public class GameMasterScript : MonoBehaviour
         pairs[1] = (268, 250);
         pairs[2] = (249, 230);
         pairs[3] = (220, 230);
-        for(int i =0; i<currentRound; i++){
+        if(currentRound<=10){
+             for(int i =0; i<enemies; i++){
             int randomNumber = Random.Range(0, 4);
             xPos = pairs[randomNumber].Item1;
             zPos = pairs[randomNumber].Item2;
             Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
             yield return new WaitForSeconds(0.1f);
         }
-            
+
+        }
+        else if(currentRound==11){
+            for(int i =0; i<20; i++){
+            int randomNumber = Random.Range(0, 4);
+            xPos = pairs[randomNumber].Item1;
+            zPos = pairs[randomNumber].Item2;
+            Instantiate(ranged, new Vector3(xPos, 0, zPos), Quaternion.identity);
+            yield return new WaitForSeconds(0.1f);
+        }
+        }
+        else if(currentRound<=20){
+            for(int i =0; i<enemies/2; i++){
+            int randomNumber = Random.Range(0, 4);
+            xPos = pairs[randomNumber].Item1;
+            zPos = pairs[randomNumber].Item2;
+            Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
+            yield return new WaitForSeconds(0.1f);
+        }
+            for(int i =0; i<enemies/2; i++){
+            int randomNumber = Random.Range(0, 4);
+            xPos = pairs[randomNumber].Item1;
+            zPos = pairs[randomNumber].Item2;
+            Instantiate(ranged, new Vector3(xPos, 0, zPos), Quaternion.identity);
+            yield return new WaitForSeconds(0.1f);
+        }
+        }
+        else if (currentRound==21){
+            for(int i =0; i<5; i++){
+            int randomNumber = Random.Range(0, 4);
+            xPos = pairs[randomNumber].Item1;
+            zPos = pairs[randomNumber].Item2;
+            Instantiate(dragon, new Vector3(xPos, 0, zPos), Quaternion.identity);
+            yield return new WaitForSeconds(0.1f);
+            }
+            numOfDragons++;
+        }
+        else if (currentRound<50){
+            for(int i =0; i<numOfDragons; i++){
+            int randomNumber = Random.Range(0, 4);
+            xPos = pairs[randomNumber].Item1;
+            zPos = pairs[randomNumber].Item2;
+            Instantiate(dragon, new Vector3(xPos, 0, zPos), Quaternion.identity);
+            yield return new WaitForSeconds(0.1f);
+            }
+            for(int i =0; i<enemies/2; i++){
+            int randomNumber = Random.Range(0, 4);
+            xPos = pairs[randomNumber].Item1;
+            zPos = pairs[randomNumber].Item2;
+            Instantiate(ranged, new Vector3(xPos, 0, zPos), Quaternion.identity);
+            yield return new WaitForSeconds(0.1f);
+        }
+            for(int i =0; i<enemies/2; i++){
+            int randomNumber = Random.Range(0, 4);
+            xPos = pairs[randomNumber].Item1;
+            zPos = pairs[randomNumber].Item2;
+            Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
+            yield return new WaitForSeconds(0.1f);
+            }
+            numOfDragons++;
+        }
+        else if (currentRound==50){
+            //Spawn Boss
+        }
+        else{
+             for(int i =0; i<numOfDragons; i++){
+            int randomNumber = Random.Range(0, 4);
+            xPos = pairs[randomNumber].Item1;
+            zPos = pairs[randomNumber].Item2;
+            Instantiate(dragon, new Vector3(xPos, 0, zPos), Quaternion.identity);
+            yield return new WaitForSeconds(0.1f);
+            }
+            for(int i =0; i<enemies/2; i++){
+            int randomNumber = Random.Range(0, 4);
+            xPos = pairs[randomNumber].Item1;
+            zPos = pairs[randomNumber].Item2;
+            Instantiate(ranged, new Vector3(xPos, 0, zPos), Quaternion.identity);
+            yield return new WaitForSeconds(0.1f);
+        }
+            for(int i =0; i<enemies/2; i++){
+            int randomNumber = Random.Range(0, 4);
+            xPos = pairs[randomNumber].Item1;
+            zPos = pairs[randomNumber].Item2;
+            Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
+            yield return new WaitForSeconds(0.1f);
+            }
+            numOfDragons++;
+        }
+
+        enemies += 2;
     }
 }
