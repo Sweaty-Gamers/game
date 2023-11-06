@@ -36,6 +36,7 @@ public class GameMasterScript : MonoBehaviour
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
         modifiersText = modifiersUi.GetComponent<TextMeshProUGUI>();
         StartNextRound();
+        roundText.text = currentRound.ToString();
         
         // Test modifiers:
         //ApplyModifier(new HealingModifier(5, 10.5f));
@@ -51,7 +52,6 @@ public class GameMasterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        roundText.text = currentRound.ToString();
         modifiersText.text = GetModifiersString();
         CheckRoundEnd();
     }
@@ -108,6 +108,7 @@ public class GameMasterScript : MonoBehaviour
     {
         roundStarted = false;
         currentRound += 1;
+        roundText.text = currentRound.ToString();
     }
       IEnumerator EnemyDrop()
     {

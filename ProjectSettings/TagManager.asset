@@ -14,6 +14,7 @@ TagManager:
   - Blade
   - Enemy_Flying
   - Fire
+  - Consumable
   layers:
   - Default
   - TransparentFX

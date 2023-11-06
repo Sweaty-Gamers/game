@@ -250,6 +250,11 @@ public class PlayerScript : Entity
             TakeDamage(bullet.damage);
             print(gameObject.tag + " -> " + collision.gameObject.tag);
         }
+
+        if (collision.gameObject.tag == "Consumable")
+        {
+            Destroy(collision.gameObject);
+        }
     }
 
     public override void Die()
