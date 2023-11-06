@@ -2,6 +2,8 @@ public class Minotaur : Enemy
 {
     // Start is called before the first frame update
     public MeleeWeapon weapon;
+    public static float health;
+    public static float maxHealth;
     public float weaponDamage = 10f;
     public float knockBackForce = .4f;
 
