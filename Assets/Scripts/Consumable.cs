@@ -13,7 +13,7 @@ public abstract class Consumable : MonoBehaviour
         speed = 2.0f;
         amp = .25f;
         rotate = new Vector3(0, 25, 0); 
-        originalPosition = this.transform.position.y;
+        originalPosition = transform.position.y;
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         player = playerObject.GetComponent<PlayerScript>();
     }
@@ -21,18 +21,19 @@ public abstract class Consumable : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.Rotate(speed * Time.deltaTime * rotate);
-        transform.position = new Vector3 (this.transform.position.x, Mathf.Sin(Time.time)*amp + originalPosition, this.transform.position.z);
+        transform.Rotate(speed * Time.deltaTime * rotate);
+        transform.position = new Vector3 (transform.position.x, Mathf.Sin(Time.time)*amp + originalPosition, transform.position.z);
     }
 
     public abstract void ApplyEffect();
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("huh");
         if (collision.gameObject.CompareTag("Player"))
         {
             ApplyEffect();
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }

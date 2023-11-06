@@ -885,9 +885,11 @@ MonoBehaviour:
   movementSpeed: 2
   agent: {fileID: 8342801282060077371}
   pathFindScript: {fileID: 6718280069403681621}
+  dropRate: 0
   weapon: {fileID: 1869133834603279346}
   weaponDamage: 10
   knockBackForce: 0.5
+  Medkit: {fileID: 327753672244410496, guid: 998392ad4a9491d448808fc8c4419e1c, type: 3}
 --- !u!1 &612802165944191715 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4414871117353324497, guid: aef9a3e063e740f4d8100584de73ceb4, type: 3}

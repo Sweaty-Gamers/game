@@ -1,5 +1,10 @@
 public class PBRScript : Enemy
 {
+    public override void DropConsumable()
+    {
+        throw new System.NotImplementedException();
+    }
+
     void Start()
     {
         health = 400f;
