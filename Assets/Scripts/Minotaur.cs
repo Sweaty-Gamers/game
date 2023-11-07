@@ -7,15 +7,15 @@ public class Minotaur : Enemy
     public static float newHealth;
     public float weaponDamage = 10f;
     public float knockBackForce = .4f;
-    public static float healthCap = 100f;
+    public static float healthCap = 600f;
 
     new void Start()
     {
         base.Start();
         weapon = gameObject.GetComponentInChildren<MeleeWeapon>();
         newHealth = Mathf.Min(healthCap, newHealth);
-        maxHealth = newHealth;
-        health = maxHealth;
+        maxHealth = healthCap;
+        health = newHealth;
         agent.speed = movementSpeed;
         dropRate = .5f;
 

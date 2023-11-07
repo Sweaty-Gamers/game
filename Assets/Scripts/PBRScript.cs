@@ -3,14 +3,14 @@ using System;
 public class PBRScript : Enemy
 {
     public static float newHealth = 15f;
-    public static float healthCap = 80f;
+    public static float healthCap = 350f;
     new void Start()
     {
         base.Start();
 
         health = 400f;
-        maxHealth = MathF.Min(healthCap, newHealth);
-        health = maxHealth;
+        maxHealth = healthCap;
+        health = MathF.Min(healthCap, newHealth);
         agent.speed = movementSpeed;
 
         pathFindScript.stoppingDistance = 6;

@@ -13,7 +13,7 @@ public class GameMasterScript : MonoBehaviour
     public int numOfDragons = 0;
     public int currentRound = 1;
     public bool roundStarted = false;
-    public int enemies = 10;
+    public int enemies = 1;
     public GameObject minotaur;
     public GameObject dragon;
     public GameObject ranged;
@@ -74,7 +74,7 @@ public class GameMasterScript : MonoBehaviour
 
     int GetActiveEnemies()
     {   
-        return GameObject.FindGameObjectsWithTag("Enemy_Melee").Length + GameObject.FindGameObjectsWithTag("Enemy_Ranged").Length;
+        return GameObject.FindGameObjectsWithTag("Enemy_Melee").Length + GameObject.FindGameObjectsWithTag("Enemy_Ranged").Length + GameObject.FindGameObjectsWithTag("Enemy_Flying").Length;
     }
 
     // Check if the current round shound end.
@@ -227,7 +227,7 @@ public class GameMasterScript : MonoBehaviour
         if (currentRound > 10)
             rangedHealth += 15f;
         if (currentRound > 20)
-            dragonHealth += 75f;
+         dragonHealth += 75f;
         enemies += 2;
     }
 }
