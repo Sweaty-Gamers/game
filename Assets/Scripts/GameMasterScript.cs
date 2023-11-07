@@ -11,7 +11,7 @@ public class GameMasterScript : MonoBehaviour
 
     // ------------ Round Spawn Variables -------------
     public int numOfDragons = 0;
-    public int currentRound = 1;
+    public static int currentRound = 1;
     public bool roundStarted = false;
     public int enemies = 1;
     public GameObject minotaur;
