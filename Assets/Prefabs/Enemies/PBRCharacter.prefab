@@ -305,6 +305,11 @@ MonoBehaviour:
   movementSpeed: 0.5
   agent: {fileID: 3636204821866505459}
   pathFindScript: {fileID: 732785427481706409}
+  dropRate: 0.5
+  medkit: {fileID: 0}
+  nuke: {fileID: 0}
+  ammo: {fileID: 0}
+  consumables: []
 --- !u!1001 &5237769505930952023
 PrefabInstance:
   m_ObjectHideFlags: 0

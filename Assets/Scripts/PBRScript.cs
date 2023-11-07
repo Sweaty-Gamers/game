@@ -1,12 +1,9 @@
 public class PBRScript : Enemy
 {
-    public override void DropConsumable()
-    {
-        throw new System.NotImplementedException();
-    }
-
     void Start()
     {
+        base.Start();
+
         health = 400f;
         maxHealth = 400f;
         agent.speed = movementSpeed;
