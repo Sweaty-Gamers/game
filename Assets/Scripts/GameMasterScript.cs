@@ -167,7 +167,7 @@ public class GameMasterScript : MonoBehaviour
             xPos = pairs[randomNumber].Item1;
             zPos = pairs[randomNumber].Item2;
             Instantiate(dragon, new Vector3(xPos, 0, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(5f);
             }
             numOfDragons++;
         }
@@ -177,21 +177,21 @@ public class GameMasterScript : MonoBehaviour
             xPos = pairs[randomNumber].Item1;
             zPos = pairs[randomNumber].Item2;
             Instantiate(dragon, new Vector3(xPos, 0, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(5f);
             }
             for(int i =0; i<enemies/2; i++){
             int randomNumber = Random.Range(0, 4);
             xPos = pairs[randomNumber].Item1;
             zPos = pairs[randomNumber].Item2;
             Instantiate(ranged, new Vector3(xPos, 0, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.3f);
         }
             for(int i =0; i<enemies/2; i++){
             int randomNumber = Random.Range(0, 4);
             xPos = pairs[randomNumber].Item1;
             zPos = pairs[randomNumber].Item2;
             Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.3f);
             }
             numOfDragons++;
         }
@@ -204,21 +204,21 @@ public class GameMasterScript : MonoBehaviour
             xPos = pairs[randomNumber].Item1;
             zPos = pairs[randomNumber].Item2;
             Instantiate(dragon, new Vector3(xPos, 0, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(5f);
             }
             for(int i =0; i<enemies/2; i++){
             int randomNumber = Random.Range(0, 4);
             xPos = pairs[randomNumber].Item1;
             zPos = pairs[randomNumber].Item2;
             Instantiate(ranged, new Vector3(xPos, 0, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.3f);
         }
             for(int i =0; i<enemies/2; i++){
             int randomNumber = Random.Range(0, 4);
             xPos = pairs[randomNumber].Item1;
             zPos = pairs[randomNumber].Item2;
             Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.3f);
             }
             numOfDragons++;
         }
