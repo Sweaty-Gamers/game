@@ -17,7 +17,7 @@ public class Minotaur : Enemy
         maxHealth = healthCap;
         health = newHealth;
         agent.speed = movementSpeed;
-        dropRate = .5f;
+        dropRate = .2f;
 
         weapon.damage = weaponDamage;
         weapon.knockBack = knockBackForce;
