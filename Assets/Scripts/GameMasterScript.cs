@@ -17,7 +17,9 @@ public class GameMasterScript : MonoBehaviour
     public GameObject minotaur;
     public GameObject dragon;
     public GameObject ranged;
-    public float health;
+    public float minotaurHealth;
+    public float dragonHealth;
+    public float rangedHealth;
     public int xPos;
     public int zPos;
     // ------------ Current State ------------------
@@ -32,6 +34,9 @@ public class GameMasterScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        dragonHealth = 700;
+        minotaurHealth = 200;
+        rangedHealth = 50;
         roundUi = GameObject.Find("Round");
         modifiersUi = GameObject.Find("Modifiers");
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
@@ -111,7 +116,7 @@ public class GameMasterScript : MonoBehaviour
     }
       IEnumerator EnemyDrop()
     {
-
+        Minotaur.health = minotaurHealth;
         var pairs = new (int, int)[4];
         pairs[0] = (256, 277);
         pairs[1] = (268, 250);
@@ -213,8 +218,8 @@ public class GameMasterScript : MonoBehaviour
             }
             numOfDragons++;
         }
-        Minotaur.health = 100;
         Debug.Log(Minotaur.health);
+        minotaurHealth += 5;
         enemies += 2;
     }
 }
