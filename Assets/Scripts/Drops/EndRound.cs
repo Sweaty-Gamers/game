@@ -8,8 +8,7 @@ public class EndRound : Consumable
         Enemy[] enemies = FindObjectsByType<Enemy>(FindObjectsSortMode.None);
         foreach (Enemy enemy in enemies)
         {
-            Enemy e = enemy.GetComponent<Enemy>();
-            e.Die();
+            Destroy(enemy.gameObject);
         }
 
         yield return null;

@@ -25,6 +25,10 @@ public class HUD : MonoBehaviour
 
     void Start()
     {
+        GameObject ui = GameObject.Find("UI");
+        weaponUI = ui.transform.Find("Ammo").gameObject;
+        ammo = weaponUI.GetComponent<TextMeshProUGUI>();
+
         healthUi = GameObject.Find("Health");
         healthText = healthUi.GetComponent<TextMeshProUGUI>();
         healthBarUi = GameObject.Find("HealthBar");
@@ -34,11 +38,6 @@ public class HUD : MonoBehaviour
         energyText = energyUI.GetComponent<TextMeshProUGUI>();
         energyBarUI = GameObject.Find("EnergyBar");
         energyBar = energyBarUI.GetComponent<Slider>();
-
-
-        weaponUI = GameObject.Find("Ammo");
-        ammo = weaponUI.GetComponent<TextMeshProUGUI>();
-
 
         playerStats = FindObjectOfType<PlayerScript>();
         healthBar.maxValue = playerStats.maxHealth;
@@ -54,7 +53,7 @@ public class HUD : MonoBehaviour
     {
         weapon = playerStats.weapons.transform.GetChild(playerStats.weaponIndex).gameObject;
         weaponStats = weapon.GetComponent<WeaponScript>();
-        ammo.text = weaponStats.bulletsLeftInMag + "/" + weaponStats.reserveBullets;
+        ammo.text = weaponStats.bulletsLeftInMag.ToString() + "/" + weaponStats.reserveBullets.ToString();
     }
 
     public void updateEnergy()

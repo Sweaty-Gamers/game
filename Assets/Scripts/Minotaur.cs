@@ -6,7 +6,6 @@ public class Minotaur : Enemy
     public MeleeWeapon weapon;
     public float weaponDamage = 10f;
     public float knockBackForce = .4f;
-    public GameObject Medkit;
 
     new void Start()
     {
@@ -15,6 +14,7 @@ public class Minotaur : Enemy
         health = 400;
         maxHealth = 400;
         agent.speed = movementSpeed;
+        dropRate = .5f;
 
         weapon.damage = weaponDamage;
         weapon.knockBack = knockBackForce;
@@ -24,12 +24,19 @@ public class Minotaur : Enemy
     }
     public override void DropConsumable()
     {
-        Instantiate(Medkit, new Vector3(transform.position.x, Mathf.Max(transform.position.y, 0.5f), transform.position.z), Quaternion.identity);
+        float drop = Random.Range(0f, 1f);
+        Debug.Log(drop);
+        if (drop > dropRate)
+        {
+            Instantiate(consumables[Random.Range(0, consumables.Length)], new Vector3(transform.position.x, Mathf.Max(transform.position.y, 0.5f), transform.position.z), Quaternion.identity);
+        }
     }
     public override void Die()
     {
         DropConsumable();
         base.Die();
     }
+
+
 
 }
