@@ -35,8 +35,8 @@ public class GameMasterScript : MonoBehaviour
     void Start()
     {
         dragonHealth = 700f;
-        minotaurHealth = 200f;
-        rangedHealth = 50f;
+        minotaurHealth = 25f;
+        rangedHealth = 15f;
         roundUi = GameObject.Find("Round");
         modifiersUi = GameObject.Find("Modifiers");
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
@@ -223,9 +223,9 @@ public class GameMasterScript : MonoBehaviour
             numOfDragons++;
         }
 
-        minotaurHealth += 50f;
+        minotaurHealth += 25f;
         if (currentRound > 10)
-            rangedHealth += 25f;
+            rangedHealth += 15f;
         if (currentRound > 20)
             dragonHealth += 75f;
         enemies += 2;

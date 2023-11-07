@@ -2,8 +2,8 @@ using System;
 
 public class PBRScript : Enemy
 {
-    public static float newHealth = 50f;
-    public static float healthCap = 300f;
+    public static float newHealth = 15f;
+    public static float healthCap = 100f;
     new void Start()
     {
         base.Start();

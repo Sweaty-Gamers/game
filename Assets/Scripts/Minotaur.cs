@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Minotaur : Enemy
@@ -8,7 +7,7 @@ public class Minotaur : Enemy
     public static float newHealth;
     public float weaponDamage = 10f;
     public float knockBackForce = .4f;
-    public static float healthCap = 500f;
+    public static float healthCap = 125f;
 
     new void Start()
     {
