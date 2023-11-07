@@ -216,7 +216,6 @@ public class PlayerScript : Entity
         {
             weapons.transform.GetChild(i).gameObject.SetActive(false);
         }
-
         weaponIndex = nextWeaponIndex;
         GameObject currentWeapon = weapons.transform.GetChild(weaponIndex).gameObject;
         currentWeapon.SetActive(true);

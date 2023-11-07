@@ -17,6 +17,9 @@ public class GameMasterScript : MonoBehaviour
     public GameObject minotaur;
     public GameObject dragon;
     public GameObject ranged;
+    public float minotaurHealth;
+    public float dragonHealth;
+    public float rangedHealth;
     public int xPos;
     public int zPos;
     // ------------ Current State ------------------
@@ -31,6 +34,9 @@ public class GameMasterScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        dragonHealth = 700f;
+        minotaurHealth = 200f;
+        rangedHealth = 50f;
         roundUi = GameObject.Find("Round");
         modifiersUi = GameObject.Find("Modifiers");
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
@@ -99,7 +105,6 @@ public class GameMasterScript : MonoBehaviour
     {   
         roundStarted = true;
         StartCoroutine(EnemyDrop());
-        Debug.Log(GetActiveEnemies());
         // Spawn new enemies.
     }
 
@@ -112,6 +117,10 @@ public class GameMasterScript : MonoBehaviour
     }
       IEnumerator EnemyDrop()
     {
+        Minotaur.newHealth = minotaurHealth;
+        PBRScript.newHealth = rangedHealth;
+        DragonScript.newHealth = dragonHealth;
+        Debug.Log(Minotaur.newHealth);
         var pairs = new (int, int)[4];
         pairs[0] = (256, 277);
         pairs[1] = (268, 250);
@@ -124,7 +133,7 @@ public class GameMasterScript : MonoBehaviour
             zPos = pairs[randomNumber].Item2;
             Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
             yield return new WaitForSeconds(0.1f);
-        }
+            }
 
         }
         else if(currentRound==11){
@@ -214,6 +223,11 @@ public class GameMasterScript : MonoBehaviour
             numOfDragons++;
         }
 
+        minotaurHealth += 50f;
+        if (currentRound > 10)
+            rangedHealth += 25f;
+        if (currentRound > 20)
+            dragonHealth += 75f;
         enemies += 2;
     }
 }

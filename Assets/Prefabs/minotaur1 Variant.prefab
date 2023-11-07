@@ -84,6 +84,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4414871117303439921, guid: aef9a3e063e740f4d8100584de73ceb4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7238057963628452084}
+    - targetCorrespondingSourceObject: {fileID: 4414871117303439921, guid: aef9a3e063e740f4d8100584de73ceb4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8009302790867863357}
   m_SourcePrefab: {fileID: 100100000, guid: aef9a3e063e740f4d8100584de73ceb4, type: 3}
 --- !u!1 &8045600680249871803 stripped
 GameObject:
@@ -158,3 +161,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slowTime: 0.25
   slowFactor: 2
+--- !u!114 &8009302790867863357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8045600680249871803}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b15d7d861afdd6488c65b0a142e0df0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  maxHealth: 0
+  movementSpeed: 0
+  agent: {fileID: 7561710025184879978}
+  pathFindScript: {fileID: 1564433335076214921}
+  weapon: {fileID: 0}
+  weaponDamage: 10
+  knockBackForce: 0.4
