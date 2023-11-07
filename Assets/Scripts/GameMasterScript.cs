@@ -223,7 +223,7 @@ public class GameMasterScript : MonoBehaviour
             numOfDragons++;
         }
 
-        minotaurHealth += 25f;
+        minotaurHealth += 10f;
         if (currentRound > 10)
             rangedHealth += 15f;
         if (currentRound > 20)
