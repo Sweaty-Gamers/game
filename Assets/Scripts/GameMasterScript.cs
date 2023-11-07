@@ -35,7 +35,7 @@ public class GameMasterScript : MonoBehaviour
     void Start()
     {
         dragonHealth = 700;
-        minotaurHealth = 200;
+        minotaurHealth = 200f;
         rangedHealth = 50;
         roundUi = GameObject.Find("Round");
         modifiersUi = GameObject.Find("Modifiers");
@@ -116,7 +116,8 @@ public class GameMasterScript : MonoBehaviour
     }
       IEnumerator EnemyDrop()
     {
-        Minotaur.health = minotaurHealth;
+        Minotaur.newHealth = minotaurHealth;
+        Debug.Log(Minotaur.newHealth);
         var pairs = new (int, int)[4];
         pairs[0] = (256, 277);
         pairs[1] = (268, 250);
@@ -218,8 +219,7 @@ public class GameMasterScript : MonoBehaviour
             }
             numOfDragons++;
         }
-        Debug.Log(Minotaur.health);
-        minotaurHealth += 5;
+        minotaurHealth += 50;
         enemies += 2;
     }
 }

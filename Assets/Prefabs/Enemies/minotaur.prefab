@@ -880,8 +880,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b15d7d861afdd6488c65b0a142e0df0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 400
-  maxHealth: 400
+  health: 0
+  maxHealth: 100
   movementSpeed: 2
   agent: {fileID: 8342801282060077371}
   pathFindScript: {fileID: 6718280069403681621}
