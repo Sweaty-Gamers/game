@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 2737325123870913461}
   - component: {fileID: 8499290411087960348}
   - component: {fileID: 4684850449787466599}
-  - component: {fileID: 5525858539801422688}
   - component: {fileID: 5892092126331275718}
+  - component: {fileID: 7086993021113577216}
   m_Layer: 0
-  m_Name: Medkit
+  m_Name: Nuke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0ae16f119c376a245bebf748697b28f5, type: 2}
+  - {fileID: 2100000, guid: c97afb4657959514babb57ea1f4c8ef4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -107,21 +107,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5525858539801422688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 327753672244410496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8a416f3bab382a4684802ec073cfcae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  amp: 0
-  player: {fileID: 0}
 --- !u!54 &5892092126331275718
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -149,3 +134,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 122
   m_CollisionDetection: 0
+--- !u!114 &7086993021113577216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327753672244410496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c21ced8a730060438bbe18e70ab149e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  amp: 0
+  player: {fileID: 0}

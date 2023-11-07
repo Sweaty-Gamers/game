@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public abstract class Consumable : MonoBehaviour
@@ -10,6 +11,7 @@ public abstract class Consumable : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+
         speed = 2.0f;
         amp = .25f;
         rotate = new Vector3(0, 25, 0); 
@@ -25,14 +27,14 @@ public abstract class Consumable : MonoBehaviour
         transform.position = new Vector3 (transform.position.x, Mathf.Sin(Time.time)*amp + originalPosition, transform.position.z);
     }
 
-    public abstract void ApplyEffect();
+    // Has to destroy gameObject once finished.
+    public abstract IEnumerator ApplyEffect();
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("huh");
         if (collision.gameObject.CompareTag("Player"))
         {
-            ApplyEffect();
+            StartCoroutine(ApplyEffect());
             Destroy(gameObject);
         }
     }

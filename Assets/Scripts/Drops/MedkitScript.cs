@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MedkitScript : Consumable
 {
-    public override void ApplyEffect()
+    public override IEnumerator ApplyEffect()
     {
         player.heal(25f);
+        Destroy(gameObject);
+        yield return null;
     }
 }

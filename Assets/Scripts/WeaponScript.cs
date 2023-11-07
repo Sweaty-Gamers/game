@@ -129,6 +129,12 @@ public class WeaponScript : MonoBehaviour
         playerScript.hud.updateAmmo();
     }
 
+    public void addBullets(float bulletAmount)
+    {
+        reserveBullets += bulletAmount;
+        playerScript.hud.updateAmmo();
+    }
+
     // Update is called once per frame
     void Update()
     {
