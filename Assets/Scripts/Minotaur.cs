@@ -7,7 +7,7 @@ public class Minotaur : Enemy
     public static float newHealth;
     public float weaponDamage = 10f;
     public float knockBackForce = .4f;
-    public static float healthCap = 600f;
+    public static float healthCap = 100f;
 
     new void Start()
     {
