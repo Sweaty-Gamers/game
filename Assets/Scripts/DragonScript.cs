@@ -18,7 +18,7 @@ public class DragonScript : Enemy
         maxHealth = MathF.Min(healthCap, newHealth);
         health = maxHealth;
         agent.speed = movementSpeed; 
-
+        dropRate = 1f;
         fire.damage = damage;
         fire.knockBack = knockBack;
     }
