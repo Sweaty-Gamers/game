@@ -3,16 +3,16 @@ using UnityEngine;
 
 public abstract class Consumable : MonoBehaviour
 {
-    Vector3 rotate;
+    public Vector3 rotate;
     public float speed;
     public float amp;
-    private float originalPosition;
+    public float originalPosition;
     public PlayerScript player;
     public int despawnTime;
     // Start is called before the first frame update
     public void Start()
     {
-        despawnTime = 30;
+        despawnTime = 20;
         speed = 2.0f;
         amp = .25f;
         rotate = new Vector3(0, 25, 0); 

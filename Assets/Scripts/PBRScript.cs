@@ -3,12 +3,11 @@ using System;
 public class PBRScript : Enemy
 {
     public static float newHealth = 15f;
-    public static float healthCap = 350f;
+    public static float healthCap = 80f;
     new void Start()
     {
         base.Start();
 
-        health = 400f;
         maxHealth = healthCap;
         health = MathF.Min(healthCap, newHealth);
         agent.speed = movementSpeed;
