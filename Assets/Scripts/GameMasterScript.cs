@@ -11,7 +11,7 @@ public class GameMasterScript : MonoBehaviour
 
     // ------------ Round Spawn Variables -------------
     public int numOfDragons = 0;
-    public static int currentRound = 1;
+    public int currentRound = 1;
     public bool roundStarted = false;
     public int enemies = 1;
     public GameObject minotaur;
@@ -137,7 +137,7 @@ public class GameMasterScript : MonoBehaviour
             Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
             yield return new WaitForSeconds(0.1f);
             }
-
+            enemies += 2;
         }
         else if(currentRound==11){
             for(int i =0; i<20; i++){
@@ -163,6 +163,7 @@ public class GameMasterScript : MonoBehaviour
             Instantiate(ranged, new Vector3(xPos, 0, zPos), Quaternion.identity);
             yield return new WaitForSeconds(0.1f);
         }
+            enemies += 1;
         }
         else if (currentRound==21){
             for(int i =0; i<5; i++){
@@ -180,7 +181,7 @@ public class GameMasterScript : MonoBehaviour
             xPos = pairs[randomNumber].Item1;
             zPos = pairs[randomNumber].Item2;
             Instantiate(dragon, new Vector3(xPos, 0, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(10f);
             }
             for(int i =0; i<enemies/2; i++){
             int randomNumber = Random.Range(0, 4);
@@ -196,10 +197,11 @@ public class GameMasterScript : MonoBehaviour
             Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
             yield return new WaitForSeconds(0.3f);
             }
-            numOfDragons++;
+            enemies += 1;
         }
         else if (currentRound==50){
             //Spawn Boss
+            numOfDragons++;
         }
         else{
              for(int i =0; i<numOfDragons; i++){
@@ -223,7 +225,11 @@ public class GameMasterScript : MonoBehaviour
             Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
             yield return new WaitForSeconds(0.3f);
             }
-            numOfDragons++;
+            if (currentRound % 2 == 0)
+            {
+                numOfDragons++;
+            }
+            enemies += 1;
         }
 
         Debug.Log(minotaurSpeed);
@@ -233,6 +239,5 @@ public class GameMasterScript : MonoBehaviour
             rangedHealth += 15f;
         if (currentRound > 20)
          dragonHealth += 75f;
-        enemies += 2;
     }
 }
