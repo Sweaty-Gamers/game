@@ -10,17 +10,25 @@ public class EnemyBossScript : MonoBehaviour
     public float jumpForce = 500f;
     public float attackDistance = 70f;  //change later
     public float chargeCooldown = 5f;
-    public float jumpCooldown = 8f;
+    public float jumpCooldown = 20f;
     public float meleeCooldown = 2f;
     public float jumpHeight = 50f;
-    public float jumpDuration = 2.5f;
+    public float jumpDuration = 0.5f;
+    public float meleeRange = 30.0f;
 
     private bool canCharge = true;
     private bool canJump = true;
     private bool canMelee = true;
 
-    public NavMeshAgent agent;
+    private bool isCharge = false;
+    private bool isJump = false;
+    private bool isMelee = false;
 
+    public bool isWalking;
+    public bool isAttacking;
+
+    public EnemyStateController enemy;
+    public NavMeshAgent agent;
     public NavMeshLink navMeshLink;
 
     void Start()
@@ -32,6 +40,8 @@ public class EnemyBossScript : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
         navMeshLink = GetComponent<NavMeshLink>();
+        enemy = GetComponent<EnemyStateController>() ?? GetComponentInChildren<EnemyStateController>();
+
         //agent.speed = 40f;
     }
 
@@ -41,18 +51,23 @@ public class EnemyBossScript : MonoBehaviour
         {
             MoveTowardsPlayer();
         }
-        /*else if (canCharge)
-        {
-            ChargeAttack();
-        } */
-        else if (canJump)
-        {
-            JumpAttack();
-        } /*
-        else if (canMelee)
+        else if (IsMeleeRange())
         {
             MeleeAttack();
-        } */
+        }
+        else if (canCharge)
+        {
+            ChargeAttack();
+        }
+        else if (canJump && !isCharge)
+        {
+            JumpAttack();
+        }
+        else
+        {
+            MoveTowardsPlayer();
+        }
+        
 
         // Set the start and end positions of the NavMeshLink
         navMeshLink.startPoint = transform.position;
@@ -61,6 +76,7 @@ public class EnemyBossScript : MonoBehaviour
         // Activate the NavMeshLink to make it valid for pathfinding
         navMeshLink.enabled = true;
 
+        this.UpdateStateTransition();
     }
 
     private void MoveTowardsPlayer()
@@ -70,6 +86,8 @@ public class EnemyBossScript : MonoBehaviour
         {
             agent.isStopped = false;
             agent.SetDestination(player.position);
+            isWalking = true;
+            isAttacking = false;
         }
     }
 
@@ -79,6 +97,9 @@ public class EnemyBossScript : MonoBehaviour
         // Check if the player is in range
         if (IsPlayerInRange())
         {
+            isWalking = true;
+            isAttacking = false;
+
             // Perform charge attack
             Debug.Log("Charge Attack!");
             agent.speed = 150f;
@@ -116,6 +137,9 @@ public class EnemyBossScript : MonoBehaviour
         // Check if the player is in range
         if (IsPlayerInRange())
         {
+            isWalking = false;
+            isAttacking = false;
+
             // Calculate the direction from the enemy to the player
             Vector3 jumpDirection = (player.position - transform.position).normalized;
 
@@ -143,10 +167,16 @@ public class EnemyBossScript : MonoBehaviour
         // Check if the player is in range
         if (IsPlayerInRange())
         {
+            agent.isStopped = true;
+            agent.destination = transform.position;  //make sure to stop
+
+            isWalking = false;
+            isAttacking = true;
+
             // Perform melee attack
             Debug.Log("Melee Attack!");
-            canMelee = false;
-            StartCoroutine(MeleeCooldown());
+            //canMelee = false;
+            //StartCoroutine(MeleeCooldown());
         }
     }
 
@@ -163,22 +193,39 @@ public class EnemyBossScript : MonoBehaviour
         return false;
     }
 
+    private bool IsMeleeRange()
+    {
+        if (player != null)
+        {
+            //Debug.Log(Vector3.Distance(transform.position, player.position) < attackDistance);
+            //Debug.Log(Vector3.Distance(transform.position, player.position));
+            //Debug.Log(attackDistance);
+            Debug.Log(Vector3.Distance(transform.position, player.position));
+            return Vector3.Distance(transform.position, player.position) < meleeRange;
+        }
+
+        return false;
+    }
+
     private IEnumerator ChargeCooldown()
     {
         yield return new WaitForSeconds(chargeCooldown);
         canCharge = true;
+        isCharge = false;
     }
 
     private IEnumerator JumpCooldown()
     {
         yield return new WaitForSeconds(jumpCooldown);
         canJump = true;
+        isJump = false;
     }
 
     private IEnumerator MeleeCooldown()
     {
         yield return new WaitForSeconds(meleeCooldown);
         canMelee = true;
+        isMelee = false;
     }
 
     /*IEnumerator Parabola(NavMeshAgent agent, float height, float duration)
@@ -227,7 +274,10 @@ public class EnemyBossScript : MonoBehaviour
         agent.CompleteOffMeshLink();
     }
 
-
+    void UpdateStateTransition()
+    {
+        enemy.UpdateState();
+    }
 
 
 
