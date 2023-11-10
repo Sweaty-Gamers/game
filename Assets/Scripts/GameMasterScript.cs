@@ -23,6 +23,7 @@ public class GameMasterScript : MonoBehaviour
     public float rangedHealth;
     public int xPos;
     public int zPos;
+    public int current;
     // ------------ Current State ------------------
     private GameObject roundUi;
     private TextMeshProUGUI roundText;
@@ -59,9 +60,12 @@ public class GameMasterScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        
+        StartCoroutine(EnemyDrop());    
         modifiersText.text = GetModifiersString();
         CheckRoundEnd();
+       
     }
 
     private IEnumerator InternalApplyModifier(Modifier modifier) {
@@ -105,6 +109,7 @@ public class GameMasterScript : MonoBehaviour
     // Start the next round and spawn enemies.
     void StartNextRound()
     {   
+        current = 0;
         roundStarted = true;
         StartCoroutine(EnemyDrop());
         // Spawn new enemies.
@@ -113,6 +118,13 @@ public class GameMasterScript : MonoBehaviour
     // Called when the current round ends, wrap things up.
     void EndRound()
     {
+        minotaurHealth += 10f;
+        minotaurSpeed += .125f;
+        if (currentRound > 10)
+            rangedHealth += 15f;
+        if (currentRound > 20)
+         dragonHealth += 75f;
+        enemies += 2;
         roundStarted = false;
         currentRound += 1;
         roundText.text = currentRound.ToString();
@@ -123,21 +135,22 @@ public class GameMasterScript : MonoBehaviour
         Minotaur.newSpeed = minotaurSpeed;
         PBRScript.newHealth = rangedHealth;
         DragonScript.newHealth = dragonHealth;
-        Debug.Log(Minotaur.newSpeed);
+        // Debug.Log(Minotaur.newSpeed);
         var pairs = new (int, int)[4];
         pairs[0] = (256, 277);
         pairs[1] = (268, 250);
         pairs[2] = (249, 230);
         pairs[3] = (220, 230);
         if(currentRound<=10){
-             for(int i =0; i<enemies; i++){
+             while(GetActiveEnemies()<25 && current<enemies){
+            current++;
+            Debug.Log(current);
             int randomNumber = Random.Range(0, 4);
             xPos = pairs[randomNumber].Item1;
             zPos = pairs[randomNumber].Item2;
             Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
             yield return new WaitForSeconds(0.1f);
-            }
-            enemies += 2;
+             }
         }
         else if(currentRound==11){
             for(int i =0; i<20; i++){
@@ -231,13 +244,5 @@ public class GameMasterScript : MonoBehaviour
             }
             enemies += 1;
         }
-
-        Debug.Log(minotaurSpeed);
-        minotaurHealth += 10f;
-        minotaurSpeed += .125f;
-        if (currentRound > 10)
-            rangedHealth += 15f;
-        if (currentRound > 20)
-         dragonHealth += 75f;
     }
 }
