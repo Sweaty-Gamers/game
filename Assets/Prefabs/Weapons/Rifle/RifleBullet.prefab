@@ -89,7 +89,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletMarkPrefab: {fileID: 4032720450056389536, guid: 153be60e2c6d47348b934d7f4a7bd91d, type: 3}
   bulletDespawnTime: 1
-  damage: 100
+  damage: 10000
 --- !u!54 &5636972773908220145
 Rigidbody:
   m_ObjectHideFlags: 0

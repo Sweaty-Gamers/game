@@ -22,12 +22,6 @@ public class BulletScript : MonoBehaviour
         StartCoroutine(Despawn(gameObject, bulletDespawnTime));
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     IEnumerator Despawn(GameObject gameObject, int seconds)
     {
         yield return new WaitForSeconds(seconds);
