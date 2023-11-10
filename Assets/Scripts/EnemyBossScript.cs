@@ -6,15 +6,16 @@ using UnityEngine.AI;
 public class EnemyBossScript : MonoBehaviour
 {
     public Transform player;
-    public float chargeSpeed = 200f;
+    public float chargeSpeed = 20f;
     public float jumpForce = 500f;
-    public float attackDistance = 70f;  //change later
+    public float attackDistance = 10f;  //change later
     public float chargeCooldown = 5f;
     public float jumpCooldown = 20f;
     public float meleeCooldown = 2f;
-    public float jumpHeight = 50f;
+    public float jumpHeight = 2f;
     public float jumpDuration = 0.5f;
-    public float meleeRange = 30.0f;
+    public float meleeRange = 2f;
+    public float rotationSpeed = 5f;
 
     private bool canCharge = true;
     private bool canJump = true;
@@ -88,6 +89,12 @@ public class EnemyBossScript : MonoBehaviour
             agent.SetDestination(player.position);
             isWalking = true;
             isAttacking = false;
+
+            Vector3 directionToPlayer = player.position - transform.position;
+            Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+
+            // Smoothly rotate the NavMeshAgent towards the player
+            agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
     }
 
@@ -102,7 +109,7 @@ public class EnemyBossScript : MonoBehaviour
 
             // Perform charge attack
             Debug.Log("Charge Attack!");
-            agent.speed = 150f;
+            agent.speed = 20f;
 
             // Calculate the direction from the enemy to the player
             Vector3 chargeDirection = (player.position - transform.position).normalized;
@@ -115,7 +122,7 @@ public class EnemyBossScript : MonoBehaviour
             agent.SetDestination(chargeDestination);
 
             // Increase the NavMeshAgent's acceleration for the charge attack
-            agent.acceleration = 50f; // You can adjust this value to control acceleration
+            agent.acceleration = 100f; // You can adjust this value to control acceleration
 
             // Start the charge cooldown coroutine
             canCharge = false;
@@ -124,8 +131,8 @@ public class EnemyBossScript : MonoBehaviour
         else
         {
             // Player is out of range, reset agent values and destination
-            agent.speed = 10f; // Set the default speed
-            agent.acceleration = 20f; // Set the default acceleration
+            agent.speed = 20f; // Set the default speed
+            agent.acceleration = 35f; // Set the default acceleration
             agent.ResetPath(); // Clear the current path
         }
 
@@ -167,6 +174,12 @@ public class EnemyBossScript : MonoBehaviour
         // Check if the player is in range
         if (IsPlayerInRange())
         {
+            Vector3 directionToPlayer = player.position - transform.position;
+            Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+
+            // Smoothly rotate the NavMeshAgent towards the player
+            agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
             agent.isStopped = true;
             agent.destination = transform.position;  //make sure to stop
 
