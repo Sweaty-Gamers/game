@@ -10,7 +10,7 @@ public class EnemyBossScript : MonoBehaviour
     public float jumpForce = 500f;
     public float attackDistance = 50f;  //change later
     public float chargeCooldown = 2f;
-    public float jumpCooldown = 6f;
+    public float jumpCooldown = 7f;
     public float meleeCooldown = 2f;
     public float jumpHeight = 2f;
     public float jumpDuration = 0.5f;
@@ -87,6 +87,8 @@ public class EnemyBossScript : MonoBehaviour
                 agent.acceleration = 20f;
                 canJump = false;
                 canCharge = true;
+                isCharge = false;
+                ChargeAttack();
             }
 
             navMeshLink.startPoint = transform.position;
@@ -120,7 +122,7 @@ public class EnemyBossScript : MonoBehaviour
         {
             MoveTowardsPlayer();
             agent.speed = 7f;
-            agent.acceleration = 20f;
+            agent.acceleration = 100f;
         }
 
         else if (IsMeleeRange())
@@ -135,13 +137,6 @@ public class EnemyBossScript : MonoBehaviour
             isCharge = true;
             canJump = false;
         }
-        else if (canJump && !isCharge)
-        {
-            JumpAttack();
-            agent.speed = 7f;
-            agent.acceleration = 20f;
-        }
-
         else
         {
             MoveTowardsPlayer();
@@ -479,17 +474,29 @@ public class EnemyBossScript : MonoBehaviour
 
     void PreventPlayerThroughFloor(Rigidbody playerRigidbody)
     {
-        // Raycast to check for the ground beneath the player
+        // Raycast to check for the ground beneath and to the left of the player
         RaycastHit hit;
         float raycastDistance = 1.0f; // Adjust this value based on your player's size
+        float offset = 0.1f; // Adjust this value to set the player just above the ground
 
-        if (Physics.Raycast(playerRigidbody.position, Vector3.down, out hit, raycastDistance))
+        Vector3 downDirection = Vector3.down;
+        Vector3 leftDirection = Vector3.left;
+
+        if (Physics.Raycast(playerRigidbody.position, downDirection, out hit, raycastDistance))
         {
-            // Adjust the player's position just above the ground
-            float offset = 0.1f; // Adjust this value to set the player just above the ground
-            playerRigidbody.position = new Vector3(playerRigidbody.position.x, Mathf.Min(hit.point.y + offset, maxPlayerHeight), playerRigidbody.position.z);
+            // Check if the boss is above the player
+            if (transform.position.y > playerRigidbody.position.y)
+            {
+                // Adjust the player's position just above the ground
+                playerRigidbody.position = new Vector3(playerRigidbody.position.x, Mathf.Min(hit.point.y + offset, maxPlayerHeight), playerRigidbody.position.z);
+
+                // Push the player out from under the boss in the horizontal direction
+                float pushForce = 10f; // Adjust this value based on your needs
+                playerRigidbody.AddForce(leftDirection * pushForce, ForceMode.Impulse);
+            }
         }
     }
+
 
 }
 

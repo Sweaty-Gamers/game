@@ -200,6 +200,19 @@ public class PlayerScript : Entity
         // Add drag to make movement feel natural.
         rigidBody.drag = isJumping ? airDrag : groundDrag;
 
+        // Apply stronger gravity if the player is above a certain height
+        float strongerGravityHeight = 20f; // Adjust this value based on your needs
+        if (transform.position.y > strongerGravityHeight)
+        {
+            float strongerGravityForce = 100f; // Adjust this value based on your needs
+            rigidBody.AddForce(Vector3.down * strongerGravityForce, ForceMode.Force);
+        }
+        else if (transform.position.y > 5f)
+        {
+            float strongerGravityForce = 50f; // Adjust this value based on your needs
+            rigidBody.AddForce(Vector3.down * strongerGravityForce, ForceMode.Force);
+        }
+
         // Limit velocity.
         Vector3 velocity = new(rigidBody.velocity.x, 0, rigidBody.velocity.z);
         if (velocity.magnitude > maxSpeed)
