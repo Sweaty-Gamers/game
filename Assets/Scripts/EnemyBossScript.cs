@@ -32,6 +32,7 @@ public class EnemyBossScript : MonoBehaviour
     public EnemyStateController enemy;
     public NavMeshAgent agent;
     public NavMeshLink navMeshLink;
+    public Boss bossScript;
 
     private Vector3 initialPlayerPosition;
 
@@ -53,6 +54,7 @@ public class EnemyBossScript : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
         navMeshLink = GetComponent<NavMeshLink>();
+        bossScript = GetComponent<Boss>();
         enemy = GetComponent<EnemyStateController>() ?? GetComponentInChildren<EnemyStateController>();
 
         //agent.speed = 40f;
@@ -60,6 +62,8 @@ public class EnemyBossScript : MonoBehaviour
 
     void Update()
     {
+        HUD.updateBossHealth(bossScript.getBossHealth());
+
         if (isCharge)
         {
             if (!startedJumpCoolDown)

@@ -7,7 +7,6 @@ public class Boss : Enemy
     //public static float newSpeed;
     public static float healthCap = 1000f;
     //public static float maxSpeed = 4f;
-
     public float damage = 10f; // Set the damage amount in the Inspector
     public float knockBack = .4f; // Adjust the force based on your preference
 
@@ -37,5 +36,10 @@ public class Boss : Enemy
         health = newHealth;
         //agent.speed = movementSpeed;
         dropRate = .2f;
+    }
+
+    public float getBossHealth()
+    {
+        return health;
     }
 }
