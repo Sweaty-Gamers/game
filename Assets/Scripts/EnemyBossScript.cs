@@ -64,7 +64,7 @@ public class EnemyBossScript : MonoBehaviour
                 agent.speed = 7f;
                 agent.acceleration = 20f;
                 isCharge = false;
-                canCharge = false;
+                //canCharge = false;
             }
             if (canJump)
             {
@@ -78,6 +78,7 @@ public class EnemyBossScript : MonoBehaviour
                 agent.speed = 7f;
                 agent.acceleration = 20f;
                 canJump = false;
+                canCharge = true;
             }
 
             navMeshLink.startPoint = transform.position;
@@ -331,7 +332,7 @@ public class EnemyBossScript : MonoBehaviour
             //Debug.Log(Vector3.Distance(transform.position, player.position) < attackDistance);
             //Debug.Log(Vector3.Distance(transform.position, player.position));
             //Debug.Log(attackDistance);
-            Debug.Log(Vector3.Distance(transform.position, player.position));
+            //Debug.Log(Vector3.Distance(transform.position, player.position));
             return Vector3.Distance(transform.position, player.position) < meleeRange;
         }
 
