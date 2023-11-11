@@ -6,17 +6,18 @@ using UnityEngine.AI;
 public class EnemyBossScript : MonoBehaviour
 {
     public Transform player;
-    public float chargeSpeed = 20f;
+    public float chargeSpeed = 15f;
     public float jumpForce = 500f;
-    public float attackDistance = 10f;  //change later
-    public float chargeCooldown = 5f;
-    public float jumpCooldown = 20f;
+    public float attackDistance = 50f;  //change later
+    public float chargeCooldown = 2f;
+    public float jumpCooldown = 10f;
     public float meleeCooldown = 2f;
     public float jumpHeight = 2f;
     public float jumpDuration = 0.5f;
-    public float meleeRange = 2f;
+    public float meleeRange = 4f;
     public float rotationSpeed = 5f;
 
+    private bool startedJumpCoolDown = false;
     private bool canCharge = true;
     private bool canJump = true;
     private bool canMelee = true;
@@ -31,6 +32,9 @@ public class EnemyBossScript : MonoBehaviour
     public EnemyStateController enemy;
     public NavMeshAgent agent;
     public NavMeshLink navMeshLink;
+
+    private Vector3 initialPlayerPosition;
+
 
     void Start()
     {
@@ -48,25 +52,63 @@ public class EnemyBossScript : MonoBehaviour
 
     void Update()
     {
-        if (!IsPlayerInRange())
+        if (isCharge)
+        {
+            if (!startedJumpCoolDown)
+            {
+                StartCoroutine(JumpCooldown());
+                startedJumpCoolDown = true;
+            }
+            if (IsMeleeRange()) {
+                MeleeAttack();
+                agent.speed = 7f;
+                agent.acceleration = 20f;
+                isCharge = false;
+                canCharge = false;
+            }
+            if (canJump)
+            {
+                Debug.Log("huh??");
+                JumpAttack();
+                agent.speed = 7f;
+                agent.acceleration = 20f;
+                canJump = false;
+            }
+            
+            return;
+        }
+
+        if (!IsPlayerInRange() && !isCharge)
         {
             MoveTowardsPlayer();
+            agent.speed = 7f;
+            agent.acceleration = 20f;
         }
+
         else if (IsMeleeRange())
         {
             MeleeAttack();
+            agent.speed = 7f;
+            agent.acceleration = 20f;
         }
         else if (canCharge)
         {
             ChargeAttack();
+            isCharge = true;
+            canJump = false;
         }
         else if (canJump && !isCharge)
         {
             JumpAttack();
+            agent.speed = 7f;
+            agent.acceleration = 20f;
         }
+
         else
         {
             MoveTowardsPlayer();
+            agent.speed = 7f;
+            agent.acceleration = 20f;
         }
         
 
@@ -76,6 +118,16 @@ public class EnemyBossScript : MonoBehaviour
 
         // Activate the NavMeshLink to make it valid for pathfinding
         navMeshLink.enabled = true;
+
+        if (Vector3.Distance(transform.position, player.position) < 1f)
+        {
+            Vector3 pushDirection = (transform.position - player.position).normalized;
+            pushDirection.y = 0f; // Ensure no vertical component
+
+            // Apply the push force
+            float pushForce = 100f; // Adjust this value based on your needs
+            player.GetComponent<Rigidbody>().AddForce(pushDirection * pushForce, ForceMode.Impulse);
+        }
 
         this.UpdateStateTransition();
     }
@@ -98,31 +150,32 @@ public class EnemyBossScript : MonoBehaviour
         }
     }
 
+
     private void ChargeAttack()
     {
-
+        // Check if the player is in range
         // Check if the player is in range
         if (IsPlayerInRange())
         {
             isWalking = true;
             isAttacking = false;
+            isCharge = true;
+
+            // Store the initial player position when starting the charge
 
             // Perform charge attack
             Debug.Log("Charge Attack!");
             agent.speed = 20f;
 
-            // Calculate the direction from the enemy to the player
-            Vector3 chargeDirection = (player.position - transform.position).normalized;
-
             // Calculate the destination point slightly past the player's position
-            //float chargeDistance = 50f; // Adjust this value to control how far past the player to charge
-            Vector3 chargeDestination = player.position + chargeDirection * (attackDistance);
+            Vector3 chargeDirection = (player.position - transform.position).normalized;
+            Vector3 chargeDestination = player.position + chargeDirection * (attackDistance + 5f);
 
             // Set the NavMeshAgent's destination to the calculated destination point
             agent.SetDestination(chargeDestination);
 
             // Increase the NavMeshAgent's acceleration for the charge attack
-            agent.acceleration = 100f; // You can adjust this value to control acceleration
+            agent.acceleration = 50f; // You can adjust this value to control acceleration
 
             // Start the charge cooldown coroutine
             canCharge = false;
@@ -131,12 +184,13 @@ public class EnemyBossScript : MonoBehaviour
         else
         {
             // Player is out of range, reset agent values and destination
-            agent.speed = 20f; // Set the default speed
-            agent.acceleration = 35f; // Set the default acceleration
+            agent.speed = 7f; // Set the default speed
+            agent.acceleration = 20f; // Set the default acceleration
             agent.ResetPath(); // Clear the current path
+            isCharge = false;
         }
-
     }
+
 
 
     private void JumpAttack()
@@ -147,6 +201,12 @@ public class EnemyBossScript : MonoBehaviour
             isWalking = false;
             isAttacking = false;
 
+            Vector3 directionToPlayer = player.position - transform.position;
+            Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+
+            // Smoothly rotate the NavMeshAgent towards the player
+            agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
             // Calculate the direction from the enemy to the player
             Vector3 jumpDirection = (player.position - transform.position).normalized;
 
@@ -156,17 +216,22 @@ public class EnemyBossScript : MonoBehaviour
             // Set the NavMeshAgent's destination to the calculated jump destination
             agent.SetDestination(jumpDestination);
 
+
             // Start the jump cooldown coroutine
             canJump = false;
-            StartCoroutine(JumpCooldown());
-
+            //StartCoroutine(JumpCooldown());
+            Debug.Log("Jump attack");
             // Start the parabola jump coroutine
             StartCoroutine(Parabola2(agent, jumpHeight, jumpDuration)); // Adjust duration as needed
         }
     }
 
-
-
+    // Check if the player is on the same ground level (y-axis)
+    private bool IsOnSameGroundLevel()
+    {
+        float groundCheckDistance = 0.1f; // Adjust this value based on your scene
+        return Mathf.Abs(player.position.y - transform.position.y) < groundCheckDistance;
+    }
 
 
     private void MeleeAttack()
@@ -188,6 +253,17 @@ public class EnemyBossScript : MonoBehaviour
 
             // Perform melee attack
             Debug.Log("Melee Attack!");
+            if (Vector3.Distance(transform.position, player.position) < 1f)
+            {
+                // Apply continuous push force if the player is in melee range and on the same ground level
+                Vector3 pushDirection = (transform.position - player.position).normalized;
+                pushDirection.y = 0f; // Ensure no vertical component
+
+                // Apply the push force
+                float pushForce = 100f; // Adjust this value based on your needs
+                Debug.Log("testtt");
+                player.GetComponent<Rigidbody>().AddForce(pushDirection * pushForce * Time.deltaTime, ForceMode.Impulse);
+            }
             //canMelee = false;
             //StartCoroutine(MeleeCooldown());
         }
@@ -201,6 +277,19 @@ public class EnemyBossScript : MonoBehaviour
             //Debug.Log(Vector3.Distance(transform.position, player.position));
             //Debug.Log(attackDistance);
             return Vector3.Distance(transform.position, player.position) < attackDistance;
+        }
+
+        return false;
+    }
+
+    private bool IsPlayerInJumpRange()
+    {
+        if (player != null)
+        {
+            //Debug.Log(Vector3.Distance(transform.position, player.position) < attackDistance);
+            //Debug.Log(Vector3.Distance(transform.position, player.position));
+            //Debug.Log(attackDistance);
+            return Vector3.Distance(transform.position, player.position) < 25f;
         }
 
         return false;
@@ -232,6 +321,7 @@ public class EnemyBossScript : MonoBehaviour
         yield return new WaitForSeconds(jumpCooldown);
         canJump = true;
         isJump = false;
+        startedJumpCoolDown = false;
     }
 
     private IEnumerator MeleeCooldown()
