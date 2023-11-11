@@ -72,8 +72,8 @@ public class EnemyBossScript : MonoBehaviour
                 Vector3 directionToPlayer = player.position - transform.position;
                 Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
 
-                // Smoothly rotate the NavMeshAgent towards the player
-                agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, targetRotation, 10f * Time.deltaTime);
+                // Set the rotation immediately
+                agent.transform.rotation = targetRotation;
                 JumpAttack();
                 agent.speed = 7f;
                 agent.acceleration = 20f;
