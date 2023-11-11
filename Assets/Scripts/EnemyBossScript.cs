@@ -10,7 +10,7 @@ public class EnemyBossScript : MonoBehaviour
     public float jumpForce = 500f;
     public float attackDistance = 50f;  //change later
     public float chargeCooldown = 2f;
-    public float jumpCooldown = 10f;
+    public float jumpCooldown = 6f;
     public float meleeCooldown = 2f;
     public float jumpHeight = 2f;
     public float jumpDuration = 0.5f;
@@ -69,12 +69,34 @@ public class EnemyBossScript : MonoBehaviour
             if (canJump)
             {
                 Debug.Log("huh??");
+                Vector3 directionToPlayer = player.position - transform.position;
+                Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+
+                // Smoothly rotate the NavMeshAgent towards the player
+                agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, targetRotation, 10f * Time.deltaTime);
                 JumpAttack();
                 agent.speed = 7f;
                 agent.acceleration = 20f;
                 canJump = false;
             }
-            
+
+            navMeshLink.startPoint = transform.position;
+            navMeshLink.endPoint = player.position;
+
+            // Activate the NavMeshLink to make it valid for pathfinding
+            navMeshLink.enabled = true;
+
+            if (Vector3.Distance(transform.position, player.position) < 1f)
+            {
+                Vector3 pushDirection = (transform.position - player.position).normalized;
+                pushDirection.y = 0f; // Ensure no vertical component
+
+                // Apply the push force
+                float pushForce = 100f; // Adjust this value based on your needs
+                player.GetComponent<Rigidbody>().AddForce(pushDirection * pushForce, ForceMode.Impulse);
+            }
+
+            this.UpdateStateTransition();
             return;
         }
 
