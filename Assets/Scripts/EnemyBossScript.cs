@@ -86,7 +86,7 @@ public class EnemyBossScript : MonoBehaviour
             // Activate the NavMeshLink to make it valid for pathfinding
             navMeshLink.enabled = true;
 
-            if (Vector3.Distance(transform.position, player.position) < 1f)
+            if (Vector3.Distance(transform.position, player.position) < 2f)
             {
                 Vector3 pushDirection = (transform.position - player.position).normalized;
                 pushDirection.y = 0f; // Ensure no vertical component
@@ -96,11 +96,18 @@ public class EnemyBossScript : MonoBehaviour
                 player.GetComponent<Rigidbody>().AddForce(pushDirection * pushForce, ForceMode.Impulse);
             }
 
+            if (!IsPlayerInRange())
+            {
+                MoveTowardsPlayer();
+                agent.speed = 7f;
+                agent.acceleration = 20f;
+            }
+
             this.UpdateStateTransition();
             return;
         }
 
-        if (!IsPlayerInRange() && !isCharge)
+        if (!IsPlayerInRange())
         {
             MoveTowardsPlayer();
             agent.speed = 7f;
@@ -187,7 +194,7 @@ public class EnemyBossScript : MonoBehaviour
 
             // Perform charge attack
             Debug.Log("Charge Attack!");
-            agent.speed = 20f;
+            agent.speed = 30f;
 
             // Calculate the destination point slightly past the player's position
             Vector3 chargeDirection = (player.position - transform.position).normalized;
