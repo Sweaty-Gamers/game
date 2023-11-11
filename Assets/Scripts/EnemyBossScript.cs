@@ -35,6 +35,14 @@ public class EnemyBossScript : MonoBehaviour
 
     private Vector3 initialPlayerPosition;
 
+    // Adjust these force values based on the desired pushback strength
+    public float pushbackForce = 30f;
+    public float upwardForce = 2f;
+    public float maxPlayerHeight = 20f;
+
+    // Flag to track if the player is currently colliding with the boss
+    private bool isCollidingWithPlayer = false;
+
 
     void Start()
     {
@@ -140,7 +148,8 @@ public class EnemyBossScript : MonoBehaviour
             agent.speed = 7f;
             agent.acceleration = 20f;
         }
-        
+
+        player.position = new Vector3(player.position.x, Mathf.Clamp(player.position.y, 0f, maxPlayerHeight), player.position.z);
 
         // Set the start and end positions of the NavMeshLink
         navMeshLink.startPoint = transform.position;
@@ -412,6 +421,75 @@ public class EnemyBossScript : MonoBehaviour
         enemy.UpdateState();
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isCollidingWithPlayer = true;
 
+            // Get the Rigidbody component of the player
+            Rigidbody playerRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+
+            // Check if the player has a Rigidbody
+            if (playerRigidbody != null)
+            {
+                // Calculate the pushback direction (opposite to the collision normal)
+                Vector3 pushbackDirection = -collision.contacts[0].normal;
+
+                // Apply the pushback force to the player
+                playerRigidbody.AddForce(pushbackDirection * 300f, ForceMode.Impulse);
+
+                // Apply an additional upward force to lift the player a bit
+                playerRigidbody.AddForce(Vector3.up * 1000f, ForceMode.Impulse);
+                Debug.Log("force");
+                PreventPlayerThroughFloor(playerRigidbody);
+            }
+        }
+            
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isCollidingWithPlayer = false;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        // Check if the player is currently colliding with the boss
+        if (isCollidingWithPlayer)
+        {
+            Rigidbody playerRigidbody = GetComponent<Rigidbody>();
+
+            if (playerRigidbody != null)
+            {
+                Vector3 pushbackDirection = -transform.forward; // Example: pushback in the opposite direction of the boss
+
+                // Apply the pushback force to the player
+                playerRigidbody.AddForce(Vector3.back * pushbackForce, ForceMode.Impulse);
+
+                // Apply an additional upward force to lift the player a bit
+                playerRigidbody.AddForce(Vector3.up * upwardForce, ForceMode.Impulse);
+                PreventPlayerThroughFloor(playerRigidbody);
+            }
+        }
+    }
+
+    void PreventPlayerThroughFloor(Rigidbody playerRigidbody)
+    {
+        // Raycast to check for the ground beneath the player
+        RaycastHit hit;
+        float raycastDistance = 1.0f; // Adjust this value based on your player's size
+
+        if (Physics.Raycast(playerRigidbody.position, Vector3.down, out hit, raycastDistance))
+        {
+            // Adjust the player's position just above the ground
+            float offset = 0.1f; // Adjust this value to set the player just above the ground
+            playerRigidbody.position = new Vector3(playerRigidbody.position.x, Mathf.Min(hit.point.y + offset, maxPlayerHeight), playerRigidbody.position.z);
+        }
+    }
 
 }
+
