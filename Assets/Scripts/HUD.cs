@@ -16,6 +16,11 @@ public class HUD : MonoBehaviour
     public TextMeshProUGUI bossHealthText;
     public static Slider bossHealthBar;
 
+    public GameObject bossHealthUiOutline;
+    public GameObject bossHealthBarUiOutline;
+    public TextMeshProUGUI bossHealthTextOutline;
+    public static Slider bossHealthBarOutline;
+
     public PlayerScript playerStats;
     public GameObject player;
 
@@ -45,6 +50,11 @@ public class HUD : MonoBehaviour
         bossHealthBarUi = GameObject.Find("BossHealthBar");
         bossHealthBar = bossHealthBarUi.GetComponent<Slider>();
 
+        bossHealthUiOutline = GameObject.Find("Health");
+        bossHealthTextOutline = bossHealthUi.GetComponent<TextMeshProUGUI>();
+        bossHealthBarUiOutline = GameObject.Find("BossHealthBar Outline");
+        bossHealthBarOutline = bossHealthBarUi.GetComponent<Slider>();
+
         energyUI = GameObject.Find("Energy");
         energyText = energyUI.GetComponent<TextMeshProUGUI>();
         energyBarUI = GameObject.Find("EnergyBar");
@@ -69,11 +79,15 @@ public class HUD : MonoBehaviour
             // If the "golem" object doesn't exist, make the boss UI elements inactive
             bossHealthUi.SetActive(false);
             bossHealthBarUi.SetActive(false);
+            bossHealthUiOutline.SetActive(false);
+            bossHealthBarUiOutline.SetActive(false);
         }
         else
         {
             bossHealthUi.SetActive(true);
             bossHealthBarUi.SetActive(true);
+            bossHealthUiOutline.SetActive(true);
+            bossHealthBarUiOutline.SetActive(true);
         }
     }
 
