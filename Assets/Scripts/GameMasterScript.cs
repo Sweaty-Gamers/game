@@ -24,6 +24,8 @@ public class GameMasterScript : MonoBehaviour
     public int xPos;
     public int zPos;
     public int current;
+    public float spawnDelay;
+    private bool needed;
     // ------------ Current State ------------------
     private GameObject roundUi;
     private TextMeshProUGUI roundText;
@@ -60,14 +62,18 @@ public class GameMasterScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
-        
-        StartCoroutine(EnemyDrop());    
+    {
+        Debug.Log("Spawn Delay " + spawnDelay);
+        Debug.Log("Active Enemies: "+ GetActiveEnemies());
+        if (needed)
+        {
+            StartCoroutine(EnemyDrop());
+        }
+           
         modifiersText.text = GetModifiersString();
         CheckRoundEnd();
        
     }
-
     private IEnumerator InternalApplyModifier(Modifier modifier) {
         activeModifiersNames.Add(modifier.name);
         yield return modifier.apply(this);
@@ -93,7 +99,7 @@ public class GameMasterScript : MonoBehaviour
         int activeEnemies = GetActiveEnemies();
  
         // When no enemies left, end the round.
-        if (activeEnemies== 0)
+        if (activeEnemies== 0 && current==enemies)
         {
             EndRound();
             StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
@@ -108,10 +114,12 @@ public class GameMasterScript : MonoBehaviour
 
     // Start the next round and spawn enemies.
     void StartNextRound()
-    {   
+    {
+        spawnDelay = 6f;
         current = 0;
         roundStarted = true;
-        StartCoroutine(EnemyDrop());
+       StartCoroutine(EnemyDrop());
+        needed = false;
         // Spawn new enemies.
     }
 
@@ -143,50 +151,62 @@ public class GameMasterScript : MonoBehaviour
         pairs[3] = (220, 230);
         if(currentRound<=10){
              while(GetActiveEnemies()<25 && current<enemies){
-            current++;
-            Debug.Log(current);
+               spawnDelay -= 1;
+                spawnDelay = Mathf.Max(spawnDelay, 0.5f);
+                current++;
             int randomNumber = Random.Range(0, 4);
             xPos = pairs[randomNumber].Item1;
             zPos = pairs[randomNumber].Item2;
             Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(spawnDelay);
              }
         }
         else if(currentRound==11){
-            for(int i =0; i<20; i++){
-            int randomNumber = Random.Range(0, 4);
-            xPos = pairs[randomNumber].Item1;
-            zPos = pairs[randomNumber].Item2;
-            Instantiate(ranged, new Vector3(xPos, 0, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
-        }
+            while (GetActiveEnemies()<10 &&current<20)
+            {
+                spawnDelay -= 1;
+                spawnDelay = Mathf.Max(spawnDelay, 0.5f);
+                current++;
+                int randomNumber = Random.Range(0, 4);
+                xPos = pairs[randomNumber].Item1;
+                zPos = pairs[randomNumber].Item2;
+                Instantiate(ranged, new Vector3(xPos, 0, zPos), Quaternion.identity);
+                yield return new WaitForSeconds(spawnDelay);
+            }
         }
         else if(currentRound<=20){
-            for(int i =0; i<enemies/2; i++){
-            int randomNumber = Random.Range(0, 4);
-            xPos = pairs[randomNumber].Item1;
-            zPos = pairs[randomNumber].Item2;
-            Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
-        }
-            for(int i =0; i<enemies/2; i++){
-            int randomNumber = Random.Range(0, 4);
-            xPos = pairs[randomNumber].Item1;
-            zPos = pairs[randomNumber].Item2;
-            Instantiate(ranged, new Vector3(xPos, 0, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
-        }
+            while(GetActiveEnemies()<20 && current < enemies)
+            {
+                int seed = Random.Range(0, 2);
+                spawnDelay -= 1;
+                spawnDelay = Mathf.Max(spawnDelay, 1f);
+                int randomNumber = Random.Range(0, 4);
+                xPos = pairs[randomNumber].Item1;
+                zPos = pairs[randomNumber].Item2;
+                if (seed == 0)
+                {
+                    Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
+                    yield return new WaitForSeconds(spawnDelay);
+                }
+                else
+                {
+                    Instantiate(ranged, new Vector3(xPos, 0, zPos), Quaternion.identity);
+                    yield return new WaitForSeconds(spawnDelay);
+                }
+
+            }
+            needed = true;
             enemies += 1;
         }
         else if (currentRound==21){
-            for(int i =0; i<5; i++){
-            int randomNumber = Random.Range(0, 4);
-            xPos = pairs[randomNumber].Item1;
-            zPos = pairs[randomNumber].Item2;
-            Instantiate(dragon, new Vector3(xPos, 0, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(5f);
+            int activeDragons = GameObject.FindGameObjectsWithTag("Enemy_Flying").Length;
+           while(activeDragons<1 && current < 3)
+            {
+                needed = true;
+                current++;
+                Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
+                yield return new WaitForSeconds(100f);
             }
-            numOfDragons++;
         }
         else if (currentRound<50){
             for(int i =0; i<numOfDragons; i++){
@@ -214,7 +234,6 @@ public class GameMasterScript : MonoBehaviour
         }
         else if (currentRound==50){
             //Spawn Boss
-            numOfDragons++;
         }
         else{
              for(int i =0; i<numOfDragons; i++){
