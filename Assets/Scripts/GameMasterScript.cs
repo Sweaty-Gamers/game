@@ -288,7 +288,7 @@ public class GameMasterScript : MonoBehaviour
         }
         else if (currentRound==50){
             currEnemies = 1;
-            Instantiate(boss, new Vector3(0, 0, 0f), Quaternion.identity);
+            Instantiate(boss, new Vector3(305f, 0, 153f), Quaternion.identity);
             yield return new WaitForSeconds(spawnDelay);
         }
         else{
