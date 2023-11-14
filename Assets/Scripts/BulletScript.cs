@@ -15,6 +15,7 @@ public class BulletScript : MonoBehaviour
         // Disable player-fired bullet collisions with the player.
         if (gameObject.tag == "Bullet") {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
+
             Physics.IgnoreCollision(gameObject.GetComponent<Collider>(), player.GetComponent<Collider>());
         }
 
@@ -40,8 +41,8 @@ public class BulletScript : MonoBehaviour
             // Destroy bullet.
             Destroy(gameObject);
         }
-        // If it hit something (except the player themselves), destroy it w/o a bullet impact point.
-        else if (collision.gameObject.tag != "Player")
+        // If it hit something (except the player themselves or other bullets), destroy it w/o a bullet impact point.
+        else if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "Bullet")
         {
             // Destroy bullet.
             Destroy(gameObject);

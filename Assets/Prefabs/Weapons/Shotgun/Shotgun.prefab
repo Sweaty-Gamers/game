@@ -96,10 +96,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 86b02dce0f932004fb0cc294ef8ba5e6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8480373903793097650}
+      addedObject: {fileID: 112472930766903379}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 86b02dce0f932004fb0cc294ef8ba5e6, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 112472930766903379}
+      addedObject: {fileID: 7076751180179991353}
   m_SourcePrefab: {fileID: 100100000, guid: 86b02dce0f932004fb0cc294ef8ba5e6, type: 3}
 --- !u!4 &6280151531869398684 stripped
 Transform:
@@ -111,28 +111,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 86b02dce0f932004fb0cc294ef8ba5e6, type: 3}
   m_PrefabInstance: {fileID: 5813353228960399735}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8480373903793097650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6659772887328832550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa104611aa2d584a1966144ced00d543, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireRate: 0.01
-  reloadTime: 2
-  magSize: 2
-  bulletSpeed: 100
-  semiAuto: 1
-  bulletPrefab: {fileID: 4819610306315137784, guid: 38c8ead106c16b749a3472e42e8dde2c, type: 3}
-  RecoilObject: {fileID: 0}
-  reloadAnimationLength: 1.5
-  fireAnimationLength: 0.667
-  reserveBullets: 24
 --- !u!95 &112472930766903379
 Animator:
   serializedVersion: 5
@@ -154,3 +132,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7076751180179991353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6659772887328832550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f08f81dd38e2d04ba007fc76f8e5818, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireRate: 0.01
+  reloadTime: 1
+  magSize: 8
+  bulletSpeed: 25
+  semiAuto: 1
+  bulletPrefab: {fileID: 4819610306315137784, guid: 38c8ead106c16b749a3472e42e8dde2c, type: 3}
+  RecoilObject: {fileID: 0}
+  reloadAnimationLength: 1
+  fireAnimationLength: 0.33
+  reserveBullets: 64
+  bulletsLeftInMag: 0
+  ConeSize: 0.125
+  pelletAmount: 8
