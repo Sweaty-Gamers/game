@@ -205,7 +205,14 @@ public class GameMasterScript : MonoBehaviour
             Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
             yield return new WaitForSeconds(spawnDelay);
              }
-            needed = true;
+            if (current == enemies)
+            {
+                needed = false;
+            }
+            else
+            {
+                needed = true;
+            }
         }
         else if(currentRound==11){
             currEnemies = 20;
@@ -220,7 +227,14 @@ public class GameMasterScript : MonoBehaviour
                 Instantiate(ranged, new Vector3(xPos, 0, zPos), Quaternion.identity);
                 yield return new WaitForSeconds(spawnDelay);
             }
-            needed = true;
+            if (current == enemies)
+            {
+                needed = false;
+            }
+            else
+            {
+                needed = true;
+            }
         }
         else if(currentRound<=20){
             currEnemies = enemies;
@@ -244,8 +258,14 @@ public class GameMasterScript : MonoBehaviour
                 }
 
             }
-            needed = true;
-            enemies += 1;
+            if (current == enemies)
+            {
+                needed = false;
+            }
+            else
+            {
+                needed = true;
+            }
         }
         else if (currentRound==21){
             currEnemies = 3;
@@ -255,7 +275,14 @@ public class GameMasterScript : MonoBehaviour
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
                 yield return new WaitForSeconds(5f);
             }
-            needed = true;
+            if (current == enemies)
+            {
+                needed = false;
+            }
+            else
+            {
+                needed = true;
+            }
         }
         else if (currentRound<50){
             currEnemies = enemies;
@@ -284,7 +311,14 @@ public class GameMasterScript : MonoBehaviour
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
                 yield return new WaitForSeconds(100f);
             }
-            needed = true;
+            if (current == enemies)
+            {
+                needed = false;
+            }
+            else
+            {
+                needed = true;
+            }
         }
         else if (currentRound==50){
             currEnemies = 1;
@@ -318,7 +352,16 @@ public class GameMasterScript : MonoBehaviour
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
                 yield return new WaitForSeconds(100f);
             }
+            if (current == enemies)
+            {
+                needed = false;
+            }
+            else
+            {
+                needed = true;
+            }
         }
+
 
     }
 }
