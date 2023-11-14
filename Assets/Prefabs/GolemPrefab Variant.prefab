@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GolemPrefab Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8753619234690991416, guid: e812c04705f47d645beb13e90ec0ff93, type: 3}
+      propertyPath: m_TagString
+      value: Enemy_Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 8753619234851411464, guid: e812c04705f47d645beb13e90ec0ff93, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 18.639164
@@ -291,10 +295,15 @@ MonoBehaviour:
   jumpHeight: 50
   jumpDuration: 0.5
   meleeRange: 30
+  rotationSpeed: 5
   isWalking: 0
   isAttacking: 0
   agent: {fileID: 0}
   navMeshLink: {fileID: 0}
+  bossScript: {fileID: 0}
+  pushbackForce: 30
+  upwardForce: 2
+  maxPlayerHeight: 20
 --- !u!114 &7477416058405522217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,10 +433,15 @@ MonoBehaviour:
   jumpHeight: 50
   jumpDuration: 0.5
   meleeRange: 30
+  rotationSpeed: 5
   isWalking: 0
   isAttacking: 0
   agent: {fileID: 0}
   navMeshLink: {fileID: 0}
+  bossScript: {fileID: 0}
+  pushbackForce: 30
+  upwardForce: 2
+  maxPlayerHeight: 20
 --- !u!114 &2968951599362435753
 MonoBehaviour:
   m_ObjectHideFlags: 0

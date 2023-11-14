@@ -80,9 +80,6 @@ public class GameMasterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Active Enemies: " + GetActiveEnemies());
-        Debug.Log("Current " + current);
-        Debug.Log("Dragons: " + currDragons);
         if (needed)
         {
             StartCoroutine(EnemyDrop());
@@ -113,6 +110,7 @@ public class GameMasterScript : MonoBehaviour
     }
     int GetActiveBoss()
     {
+        Debug.Log("get active boss: " + GameObject.FindGameObjectsWithTag("Enemy_Boss").Length);
         return GameObject.FindGameObjectsWithTag("Enemy_Boss").Length;
     }
 

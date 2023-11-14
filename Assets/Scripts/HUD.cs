@@ -75,7 +75,6 @@ public class HUD : MonoBehaviour
         GameObject golem = GameObject.Find("Golem");
         GameObject golem_parent = GameObject.Find("GolemPrefab Variant");
         GameObject golem_parent_clone = GameObject.Find("GolemPrefab Variant Variant(Clone)");
-        Debug.Log("TESTTTT");
         if (golem_parent != null)
         {
             Debug.Log("GOOD");

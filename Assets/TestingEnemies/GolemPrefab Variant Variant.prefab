@@ -258,7 +258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3063092980773271563, guid: ea6ebe416bdc7e54993ffb532e977035, type: 3}
       propertyPath: m_TagString
-      value: Enemy
+      value: Enemy_Boss
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 329503987272523869, guid: ea6ebe416bdc7e54993ffb532e977035, type: 3}
