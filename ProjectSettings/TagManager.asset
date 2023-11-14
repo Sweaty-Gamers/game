@@ -15,7 +15,6 @@ TagManager:
   - Enemy_Flying
   - Fire
   - Consumable
-  - Enemy_Boss
   layers:
   - Default
   - TransparentFX

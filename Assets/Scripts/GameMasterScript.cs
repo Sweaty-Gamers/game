@@ -80,6 +80,7 @@ public class GameMasterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Active Enemies: " + GetActiveEnemies());
         if (needed)
         {
             StartCoroutine(EnemyDrop());
@@ -120,16 +121,24 @@ public class GameMasterScript : MonoBehaviour
         // Round must be started to end.
         if (!roundStarted) return;
 
-        // Get number of active enemies.
-        int activeEnemies = GetActiveEnemies();
-
         // When no enemies left, end the round.
         if (currentRound < 20)
         {
-            if (activeEnemies == 0 && current == currEnemies)
+            if (currentRound == 11)
             {
-                EndRound();
-                StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+                if(GetActiveBoss()==0 && current == 20)
+                {
+                    EndRound();
+                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+                }
+            }
+            else
+            {
+                if (GetActiveEnemies() == 0 && current == enemies)
+                {
+                    EndRound();
+                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+                }
             }
         }
         else
@@ -198,9 +207,9 @@ public class GameMasterScript : MonoBehaviour
             player.transform.position = new Vector3(243.3f, 0.7f, 202.8f);
         }
         currDragons = 0;
-        spawnDelay = 6f;
+        spawnDelay = 2f;
         current = 0;
-        AddRandomModifier();
+        //AddRandomModifier();
         roundStarted = true;
         StartCoroutine(EnemyDrop());
         needed = false;
@@ -210,7 +219,6 @@ public class GameMasterScript : MonoBehaviour
     // Called when the current round ends, wrap things up.
     void EndRound()
     {
-        spawnDelay = 6f;
         minotaurHealth += 10f;
         minotaurSpeed += .125f;
         if (currentRound > 10)
