@@ -39,9 +39,9 @@ public abstract class Consumable : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             StartCoroutine(ApplyEffect());
             Destroy(gameObject);

@@ -36,7 +36,8 @@ public class WeaponScript : MonoBehaviour
 
     private Animator animator;
     private PlayerScript playerScript;
-    private Transform bulletSpawn;
+    
+    protected Transform bulletSpawn;
 
     // Start is called before the first frame update
     void Start()
@@ -71,12 +72,13 @@ public class WeaponScript : MonoBehaviour
             return;
         }
 
+        animator.SetBool("Shoot", true);
         FireBullet();
+        playerScript.hud.updateAmmo();
     }
 
-    void FireBullet()
+    public virtual void FireBullet()
     {
-        animator.SetBool("Shoot", true);
 
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Camera.main.transform.rotation);
         var ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
