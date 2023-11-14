@@ -9,15 +9,17 @@ public class GameMasterScript : MonoBehaviour
     // ------------ Game Configuration -------------
     public float secondsBeforeNextRound = 5;
 
+    // ------------ Game Objects ----------------------
+    public GameObject minotaur;
+    public GameObject dragon;
+    public GameObject ranged;
+    public GameObject boss;
+    public GameObject player;
     // ------------ Round Spawn Variables -------------
     public int numOfDragons = 5;
     public int currentRound = 1;
     public bool roundStarted = false;
     public int enemies = 1;
-    public GameObject minotaur;
-    public GameObject dragon;
-    public GameObject ranged;
-    public GameObject boss;
     public float minotaurHealth;
     public float minotaurSpeed;
     public float dragonHealth;
@@ -66,9 +68,9 @@ public class GameMasterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Spawn Delay " + spawnDelay);
-        Debug.Log("Active Enemies: "+ GetActiveEnemies());
-        Debug.Log("Current: " + current);
+        Debug.Log("Active Enemies: " + GetActiveEnemies());
+        Debug.Log("Current " + current);
+        Debug.Log("Dragons: "+ currDragons);
         if (needed)
         {
             StartCoroutine(EnemyDrop());
@@ -76,7 +78,6 @@ public class GameMasterScript : MonoBehaviour
            
         modifiersText.text = GetModifiersString();
         CheckRoundEnd();
-       
     }
     private IEnumerator InternalApplyModifier(Modifier modifier) {
         activeModifiersNames.Add(modifier.name);
@@ -98,7 +99,7 @@ public class GameMasterScript : MonoBehaviour
     }
     int GetActiveBoss()
     {
-        return GameObject.FindGameObjectsWithTag("Enemy_Melee").Length;
+        return GameObject.FindGameObjectsWithTag("Enemy_Boss").Length;
     }
 
     // Check if the current round shound end.
@@ -123,12 +124,13 @@ public class GameMasterScript : MonoBehaviour
         {
             if (currentRound == 21)
             {
-                if(activeEnemies==0 && currDragons == 3)
+                if(GetActiveEnemies()==0 && currDragons == 3)
                 {
                     EndRound();
                     StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
                 }
-                else if (currentRound==50)
+            }
+            else if (currentRound==50)
                 {
                     if (GetActiveBoss()==0)
                     {
@@ -136,15 +138,15 @@ public class GameMasterScript : MonoBehaviour
                         StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
                     }
                 }
-                else
+            else
                 {
-                    if(activeEnemies==0 && current==currEnemies && currDragons == numOfDragons)
+                    if(GetActiveEnemies()==0 && current==enemies && currDragons == numOfDragons)
                     {
                         EndRound();
                         StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
                     }
                 }
-            }
+    
         }
     }
 
@@ -157,6 +159,12 @@ public class GameMasterScript : MonoBehaviour
     // Start the next round and spawn enemies.
     void StartNextRound()
     {
+        if(currentRound==50){
+            player.transform.position = new Vector3(405.9f, 0.7f, 62.8f);
+        }
+        else if(currentRound==51){
+             player.transform.position = new Vector3(243.3f, 0.7f, 202.8f);
+        }
         currDragons = 0;
         spawnDelay = 6f;
         current = 0;
@@ -288,6 +296,7 @@ public class GameMasterScript : MonoBehaviour
             currEnemies = enemies;
             while(GetActiveEnemies()<25 && current < enemies)
             {
+                current++;
                 int seed = Random.Range(0, 2);
                 spawnDelay -= 1;
                 spawnDelay = Mathf.Max(spawnDelay, 1f);
@@ -309,9 +318,9 @@ public class GameMasterScript : MonoBehaviour
             {
                 currDragons++;
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
-                yield return new WaitForSeconds(100f);
+                yield return new WaitForSeconds(25f);
             }
-            if (current == enemies)
+            if (current == enemies && currDragons==numOfDragons)
             {
                 needed = false;
             }
@@ -329,6 +338,7 @@ public class GameMasterScript : MonoBehaviour
             currEnemies = enemies;
             while (GetActiveEnemies() < 25 && current < enemies)
             {
+                current++;
                 int seed = Random.Range(0, 2);
                 spawnDelay -= 1;
                 spawnDelay = Mathf.Max(spawnDelay, 1f);
@@ -350,7 +360,7 @@ public class GameMasterScript : MonoBehaviour
             {
                 currDragons++;
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
-                yield return new WaitForSeconds(100f);
+                yield return new WaitForSeconds(25f);
             }
             if (current == enemies)
             {
