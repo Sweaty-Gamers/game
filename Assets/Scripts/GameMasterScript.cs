@@ -144,7 +144,7 @@ public class GameMasterScript : MonoBehaviour
                     StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
                 }
             }
-            else if (currentRound == 50)
+            else if (currentRound == 30)
             {
                 if (GetActiveBoss() == 0)
                 {
@@ -191,11 +191,11 @@ public class GameMasterScript : MonoBehaviour
     // Start the next round and spawn enemies.
     void StartNextRound()
     {
-        if (currentRound == 50)
+        if (currentRound == 30)
         {
             player.transform.position = new Vector3(405.9f, 0.7f, 62.8f);
         }
-        else if (currentRound == 51)
+        else if (currentRound == 31)
         {
             player.transform.position = new Vector3(243.3f, 0.7f, 202.8f);
         }
@@ -332,7 +332,7 @@ public class GameMasterScript : MonoBehaviour
                 needed = true;
             }
         }
-        else if (currentRound < 50)
+        else if (currentRound < 30)
         {
             currEnemies = enemies;
             while (GetActiveEnemies() < 25 && current < enemies)
@@ -370,7 +370,7 @@ public class GameMasterScript : MonoBehaviour
                 needed = true;
             }
         }
-        else if (currentRound == 50)
+        else if (currentRound == 30)
         {
             currEnemies = 1;
             Instantiate(boss, new Vector3(305f, 0, 153f), Quaternion.identity);
