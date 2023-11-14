@@ -74,12 +74,13 @@ public class HUD : MonoBehaviour
     {
         GameObject golem = GameObject.Find("Golem");
         GameObject golem_parent = GameObject.Find("GolemPrefab Variant");
+        GameObject golem_parent_clone = GameObject.Find("GolemPrefab Variant Variant(Clone)");
         Debug.Log("TESTTTT");
         if (golem_parent != null)
         {
             Debug.Log("GOOD");
         }
-        if (golem_parent == null)
+        if (golem_parent_clone == null)
         {
             // If the "golem" object doesn't exist or is not active, make the boss UI elements inactive
             bossHealthUi.SetActive(false);
