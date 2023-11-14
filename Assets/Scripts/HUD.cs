@@ -73,10 +73,15 @@ public class HUD : MonoBehaviour
     void Update()
     {
         GameObject golem = GameObject.Find("Golem");
-
-        if (golem == null)
+        GameObject golem_parent = GameObject.Find("GolemPrefab Variant");
+        Debug.Log("TESTTTT");
+        if (golem_parent != null)
         {
-            // If the "golem" object doesn't exist, make the boss UI elements inactive
+            Debug.Log("GOOD");
+        }
+        if (golem_parent == null)
+        {
+            // If the "golem" object doesn't exist or is not active, make the boss UI elements inactive
             bossHealthUi.SetActive(false);
             bossHealthBarUi.SetActive(false);
             bossHealthUiOutline.SetActive(false);
@@ -90,6 +95,7 @@ public class HUD : MonoBehaviour
             bossHealthBarUiOutline.SetActive(true);
         }
     }
+
 
     public void updateAmmo()
     {

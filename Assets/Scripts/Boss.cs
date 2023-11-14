@@ -3,9 +3,9 @@ using UnityEngine;
 public class Boss : Enemy
 {
     // Start is called before the first frame update
-    public static float newHealth = 1000f;
+    public static float newHealth = 2500f;
     //public static float newSpeed;
-    public static float healthCap = 1000f;
+    public static float healthCap = 2500f;
     //public static float maxSpeed = 4f;
     public float damage = 10f; // Set the damage amount in the Inspector
     public float knockBack = .4f; // Adjust the force based on your preference
