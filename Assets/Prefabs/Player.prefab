@@ -411,12 +411,20 @@ MonoBehaviour:
   healthBarUi: {fileID: 0}
   healthText: {fileID: 0}
   healthBar: {fileID: 0}
+  bossHealthUi: {fileID: 0}
+  bossHealthBarUi: {fileID: 0}
+  bossHealthText: {fileID: 0}
+  bossHealthUiOutline: {fileID: 0}
+  bossHealthBarUiOutline: {fileID: 0}
+  bossHealthTextOutline: {fileID: 0}
   playerStats: {fileID: 0}
   player: {fileID: 0}
   energyBarUI: {fileID: 0}
   energyUI: {fileID: 0}
   energyText: {fileID: 0}
   energyBar: {fileID: 0}
+  weapon: {fileID: 0}
+  weaponStats: {fileID: 0}
   weaponUI: {fileID: 0}
   ammo: {fileID: 0}
 --- !u!1001 &828362967671917014

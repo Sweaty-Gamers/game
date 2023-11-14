@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5355852175097247826}
   m_Layer: 0
   m_Name: Ammo
-  m_TagString: Untagged
+  m_TagString: Consumable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,7 +100,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -118,6 +118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ef747992097d874a8626b44870db98e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotate: {x: 0, y: 0, z: 0}
   speed: 0
   amp: 0
+  originalPosition: 0
   player: {fileID: 0}
+  despawnTime: 0

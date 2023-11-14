@@ -12,11 +12,10 @@ GameObject:
   - component: {fileID: 2737325123870913461}
   - component: {fileID: 8499290411087960348}
   - component: {fileID: 4684850449787466599}
-  - component: {fileID: 5892092126331275718}
   - component: {fileID: 7086993021113577216}
   m_Layer: 0
   m_Name: Nuke
-  m_TagString: Untagged
+  m_TagString: Consumable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,39 +100,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &5892092126331275718
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 327753672244410496}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 122
-  m_CollisionDetection: 0
 --- !u!114 &7086993021113577216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,6 +118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c21ced8a730060438bbe18e70ab149e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotate: {x: 0, y: 0, z: 0}
   speed: 0
   amp: 0
+  originalPosition: 0
   player: {fileID: 0}
+  despawnTime: 0
