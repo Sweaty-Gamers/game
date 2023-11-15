@@ -156,4 +156,4 @@ MonoBehaviour:
   reserveBullets: 64
   bulletsLeftInMag: 0
   ConeSize: 0.125
-  pelletAmount: 8
+  pelletAmount: 100

@@ -38,6 +38,12 @@ public class Boss : Enemy
         dropRate = .2f;
     }
 
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+        HUD.updateBossHealth(health);
+    }
+
     public float getBossHealth()
     {
         return health;

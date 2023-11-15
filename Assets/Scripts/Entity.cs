@@ -69,7 +69,6 @@ public class Entity : MonoBehaviour
 
     public virtual void Die()
     {
-        print("entity committed die");
         Destroy(gameObject);
     }
 }
