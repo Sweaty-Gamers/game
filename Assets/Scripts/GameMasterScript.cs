@@ -209,7 +209,7 @@ public class GameMasterScript : MonoBehaviour
         currDragons = 0;
         spawnDelay = 2f;
         current = 0;
-        //AddRandomModifier();
+        AddRandomModifier();
         roundStarted = true;
         StartCoroutine(EnemyDrop());
         needed = false;
