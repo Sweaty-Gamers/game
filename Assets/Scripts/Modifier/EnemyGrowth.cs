@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 // Only grows enemies that have already been spawned, no new enemies
@@ -19,7 +20,8 @@ class EnemyGrowth : Modifier
     {
         foreach (Enemy enemy in enemies)
         {
-            enemy.transform.localScale /= 3f;
+            if (!enemy.IsDestroyed())
+                enemy.transform.localScale /= 3f;
         }
 
         yield return null;
@@ -29,7 +31,8 @@ class EnemyGrowth : Modifier
     {
         foreach (Enemy enemy in enemies)
         {
-            enemy.transform.localScale *= 3f;
+            if (!enemy.IsDestroyed())
+                enemy.transform.localScale *= 3f;
         }
     }
 
