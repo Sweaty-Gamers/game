@@ -81,8 +81,6 @@ public class GameMasterScript : MonoBehaviour
     void Update()
     {
         Debug.Log("Active Enemies: " + GetActiveEnemies());
-        Debug.Log("Current " + current);
-        Debug.Log("Dragons: " + currDragons);
         if (needed)
         {
             StartCoroutine(EnemyDrop());
@@ -113,6 +111,7 @@ public class GameMasterScript : MonoBehaviour
     }
     int GetActiveBoss()
     {
+        Debug.Log("get active boss: " + GameObject.FindGameObjectsWithTag("Enemy_Boss").Length);
         return GameObject.FindGameObjectsWithTag("Enemy_Boss").Length;
     }
 
@@ -122,16 +121,24 @@ public class GameMasterScript : MonoBehaviour
         // Round must be started to end.
         if (!roundStarted) return;
 
-        // Get number of active enemies.
-        int activeEnemies = GetActiveEnemies();
-
         // When no enemies left, end the round.
         if (currentRound < 20)
         {
-            if (activeEnemies == 0 && current == currEnemies)
+            if (currentRound == 11)
             {
-                EndRound();
-                StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+                if(GetActiveBoss()==0 && current == 20)
+                {
+                    EndRound();
+                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+                }
+            }
+            else
+            {
+                if (GetActiveEnemies() == 0 && current == enemies)
+                {
+                    EndRound();
+                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+                }
             }
         }
         else
@@ -144,7 +151,7 @@ public class GameMasterScript : MonoBehaviour
                     StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
                 }
             }
-            else if (currentRound == 50)
+            else if (currentRound == 30)
             {
                 if (GetActiveBoss() == 0)
                 {
@@ -191,18 +198,18 @@ public class GameMasterScript : MonoBehaviour
     // Start the next round and spawn enemies.
     void StartNextRound()
     {
-        if (currentRound == 50)
+        if (currentRound == 30)
         {
             player.transform.position = new Vector3(405.9f, 0.7f, 62.8f);
         }
-        else if (currentRound == 51)
+        else if (currentRound == 31)
         {
             player.transform.position = new Vector3(243.3f, 0.7f, 202.8f);
         }
         currDragons = 0;
-        spawnDelay = 6f;
+        spawnDelay = 2f;
         current = 0;
-        AddRandomModifier();
+        //AddRandomModifier();
         roundStarted = true;
         StartCoroutine(EnemyDrop());
         needed = false;
@@ -212,7 +219,6 @@ public class GameMasterScript : MonoBehaviour
     // Called when the current round ends, wrap things up.
     void EndRound()
     {
-        spawnDelay = 6f;
         minotaurHealth += 10f;
         minotaurSpeed += .125f;
         if (currentRound > 10)
@@ -332,7 +338,7 @@ public class GameMasterScript : MonoBehaviour
                 needed = true;
             }
         }
-        else if (currentRound < 50)
+        else if (currentRound < 30)
         {
             currEnemies = enemies;
             while (GetActiveEnemies() < 25 && current < enemies)
@@ -370,7 +376,7 @@ public class GameMasterScript : MonoBehaviour
                 needed = true;
             }
         }
-        else if (currentRound == 50)
+        else if (currentRound == 30)
         {
             currEnemies = 1;
             Instantiate(boss, new Vector3(305f, 0, 153f), Quaternion.identity);
