@@ -33,11 +33,12 @@ public abstract class Enemy : Entity
 
     public override void Die()
     {
-        if (!isDead)
+        if (isDead)
         {
-            isDead = true;
-            DropConsumable();
-            base.Die();
+            return;
         }
+        isDead = true;
+        DropConsumable();
+        base.Die();
     }
 }
