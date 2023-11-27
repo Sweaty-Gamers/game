@@ -69,6 +69,17 @@ public class Entity : MonoBehaviour
 
     public virtual void Die()
     {
+        print("entity committed die");
+        // Check if the object has the tag "Enemy_boss" and destroy all objects with that tag.
+        if (gameObject.tag == "Enemy_Boss")
+        {
+            GameObject[] enemyBossObjects = GameObject.FindGameObjectsWithTag("Enemy_Boss");
+            foreach (GameObject enemyBossObject in enemyBossObjects)
+            {
+                Destroy(enemyBossObject);
+            }
+        }
         Destroy(gameObject);
+
     }
 }

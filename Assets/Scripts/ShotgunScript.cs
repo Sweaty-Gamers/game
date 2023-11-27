@@ -11,7 +11,6 @@ public class ShotgunScript : WeaponScript
     {
         var xSpread = Random.Range(1f - ConeSize, 1f + ConeSize);
         var ySpread = Random.Range(1f - ConeSize, 1f + ConeSize);
-        Debug.Log("x: " + xSpread + "\ny: " + ySpread);
 
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Camera.main.transform.rotation);
         bullet.transform.localScale = bullet.transform.localScale * .5f;

@@ -1,10 +1,11 @@
 using UnityEngine;
 using TMPro;
-using System.Collections;
 using System.Collections.Generic;
+using System;
+using System.Collections;
 
 public class GameMasterScript : MonoBehaviour
-  
+
 {
     // ------------ Game Configuration -------------
     public float secondsBeforeNextRound = 5;
@@ -39,6 +40,8 @@ public class GameMasterScript : MonoBehaviour
 
     private readonly List<string> activeModifiersNames = new();
 
+    private List<Func<Modifier>> enabledModifiers = new();
+
 
     // Start is called before the first frame update
     void Start()
@@ -51,9 +54,17 @@ public class GameMasterScript : MonoBehaviour
         modifiersUi = GameObject.Find("Modifiers");
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
         modifiersText = modifiersUi.GetComponent<TextMeshProUGUI>();
+
+        enabledModifiers.Add(() => new EnemyGrowth());
+        enabledModifiers.Add(() => new HealingModifier(5, 10, false));
+        enabledModifiers.Add(() => new PlayerFovModifier());
+        enabledModifiers.Add(() => new PlayerGrowModifier());
+        enabledModifiers.Add(() => new SunColorModifier());
+        //enabledModifiers.Add(() => new TreeGrowModifier());
+
         StartNextRound();
         roundText.text = currentRound.ToString();
-        
+
         // Test modifiers:
         //ApplyModifier(new HealingModifier(5, 10.5f));
         //ApplyModifier(new PlayerFovModifier());
@@ -61,7 +72,8 @@ public class GameMasterScript : MonoBehaviour
         // ApplyModifier(new SunColorModifier());
     }
 
-    private string GetModifiersString() {
+    private string GetModifiersString()
+    {
         return string.Join('\n', activeModifiersNames);
     }
 
@@ -69,29 +81,29 @@ public class GameMasterScript : MonoBehaviour
     void Update()
     {
         Debug.Log("Active Enemies: " + GetActiveEnemies());
-        Debug.Log("Current " + current);
-        Debug.Log("Dragons: "+ currDragons);
         if (needed)
         {
             StartCoroutine(EnemyDrop());
         }
-           
+
         modifiersText.text = GetModifiersString();
         CheckRoundEnd();
     }
-    private IEnumerator InternalApplyModifier(Modifier modifier) {
+    private IEnumerator InternalApplyModifier(Modifier modifier)
+    {
         activeModifiersNames.Add(modifier.name);
         yield return modifier.apply(this);
         activeModifiersNames.Remove(modifier.name);
     }
 
-    void ApplyModifier(Modifier modifier) {
+    void ApplyModifier(Modifier modifier)
+    {
         StartCoroutine(InternalApplyModifier(modifier));
     }
 
     int GetActiveEnemies()
-    {   
-        return  GameObject.FindGameObjectsWithTag("Enemy_Melee").Length + GameObject.FindGameObjectsWithTag("Enemy_Ranged").Length + GameObject.FindGameObjectsWithTag("Enemy_Flying").Length;
+    {
+        return GameObject.FindGameObjectsWithTag("Enemy_Melee").Length + GameObject.FindGameObjectsWithTag("Enemy_Ranged").Length + GameObject.FindGameObjectsWithTag("Enemy_Flying").Length;
     }
     int GetActiveDragons()
     {
@@ -99,6 +111,7 @@ public class GameMasterScript : MonoBehaviour
     }
     int GetActiveBoss()
     {
+        Debug.Log("get active boss: " + GameObject.FindGameObjectsWithTag("Enemy_Boss").Length);
         return GameObject.FindGameObjectsWithTag("Enemy_Boss").Length;
     }
 
@@ -108,45 +121,53 @@ public class GameMasterScript : MonoBehaviour
         // Round must be started to end.
         if (!roundStarted) return;
 
-        // Get number of active enemies.
-        int activeEnemies = GetActiveEnemies();
- 
         // When no enemies left, end the round.
-        if(currentRound < 20)
+        if (currentRound < 20)
         {
-            if (activeEnemies == 0 && current == currEnemies)
+            if (currentRound == 11)
             {
-                EndRound();
-                StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+                if (GetActiveBoss() == 0 && current == 20)
+                {
+                    EndRound();
+                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+                }
+            }
+            else
+            {
+                if (GetActiveEnemies() == 0 && current == enemies)
+                {
+                    EndRound();
+                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+                }
             }
         }
         else
         {
             if (currentRound == 21)
             {
-                if(GetActiveEnemies()==0 && currDragons == 3)
+                if (GetActiveEnemies() == 0 && currDragons == 3)
                 {
                     EndRound();
                     StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
                 }
             }
-            else if (currentRound==50)
+            else if (currentRound == 30)
+            {
+                if (GetActiveBoss() == 0)
                 {
-                    if (GetActiveBoss()==0)
-                    {
-                        EndRound();
-                        StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-                    }
+                    EndRound();
+                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
                 }
+            }
             else
+            {
+                if (GetActiveEnemies() == 0 && current == enemies && currDragons == numOfDragons)
                 {
-                    if(GetActiveEnemies()==0 && current==enemies && currDragons == numOfDragons)
-                    {
-                        EndRound();
-                        StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-                    }
+                    EndRound();
+                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
                 }
-    
+            }
+
         }
     }
 
@@ -156,20 +177,41 @@ public class GameMasterScript : MonoBehaviour
         StartNextRound();
     }
 
+    void AddRandomModifier()
+    {
+        while (true)
+        {
+            int modIdx = UnityEngine.Random.Range(0, enabledModifiers.Count);
+            Modifier mod = enabledModifiers[modIdx]();
+            if (!activeModifiersNames.Contains(mod.name))
+            {
+                ApplyModifier(mod);
+                break;
+            }
+            else
+            {
+                continue;
+            }
+        }
+    }
+
     // Start the next round and spawn enemies.
     void StartNextRound()
     {
-        if(currentRound==50){
+        if (currentRound == 30)
+        {
             player.transform.position = new Vector3(405.9f, 0.7f, 62.8f);
         }
-        else if(currentRound==51){
-             player.transform.position = new Vector3(243.3f, 0.7f, 202.8f);
+        else if (currentRound == 31)
+        {
+            player.transform.position = new Vector3(243.3f, 0.7f, 202.8f);
         }
         currDragons = 0;
-        spawnDelay = 6f;
+        spawnDelay = 2f;
         current = 0;
+        //AddRandomModifier();
         roundStarted = true;
-       StartCoroutine(EnemyDrop());
+        StartCoroutine(EnemyDrop());
         needed = false;
         // Spawn new enemies.
     }
@@ -177,19 +219,18 @@ public class GameMasterScript : MonoBehaviour
     // Called when the current round ends, wrap things up.
     void EndRound()
     {
-        spawnDelay = 6f;
         minotaurHealth += 10f;
         minotaurSpeed += .125f;
         if (currentRound > 10)
             rangedHealth += 15f;
         if (currentRound > 20)
-         dragonHealth += 75f;
+            dragonHealth += 75f;
         enemies += 2;
         roundStarted = false;
         currentRound += 1;
         roundText.text = currentRound.ToString();
     }
-      IEnumerator EnemyDrop()
+    IEnumerator EnemyDrop()
     {
         Minotaur.newHealth = minotaurHealth;
         Minotaur.newSpeed = minotaurSpeed;
@@ -201,18 +242,20 @@ public class GameMasterScript : MonoBehaviour
         pairs[1] = (268, 250);
         pairs[2] = (249, 230);
         pairs[3] = (220, 230);
-        if(currentRound<=10){
+        if (currentRound <= 10)
+        {
             currEnemies = enemies;
-             while(GetActiveEnemies()<25 && current<enemies){
-               spawnDelay -= 1;
+            while (GetActiveEnemies() < 25 && current < enemies)
+            {
+                spawnDelay -= 1;
                 spawnDelay = Mathf.Max(spawnDelay, 0.5f);
                 current++;
-            int randomNumber = Random.Range(0, 4);
-            xPos = pairs[randomNumber].Item1;
-            zPos = pairs[randomNumber].Item2;
-            Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
-            yield return new WaitForSeconds(spawnDelay);
-             }
+                int randomNumber = UnityEngine.Random.Range(0, 4);
+                xPos = pairs[randomNumber].Item1;
+                zPos = pairs[randomNumber].Item2;
+                Instantiate(minotaur, new Vector3(xPos, 0, zPos), Quaternion.identity);
+                yield return new WaitForSeconds(spawnDelay);
+            }
             if (current == enemies)
             {
                 needed = false;
@@ -222,14 +265,15 @@ public class GameMasterScript : MonoBehaviour
                 needed = true;
             }
         }
-        else if(currentRound==11){
+        else if (currentRound == 11)
+        {
             currEnemies = 20;
-            while (GetActiveEnemies()<10 &&current<20)
+            while (GetActiveEnemies() < 10 && current < 20)
             {
                 spawnDelay -= 1;
                 spawnDelay = Mathf.Max(spawnDelay, 0.5f);
                 current++;
-                int randomNumber = Random.Range(0, 4);
+                int randomNumber = UnityEngine.Random.Range(0, 4);
                 xPos = pairs[randomNumber].Item1;
                 zPos = pairs[randomNumber].Item2;
                 Instantiate(ranged, new Vector3(xPos, 0, zPos), Quaternion.identity);
@@ -244,14 +288,15 @@ public class GameMasterScript : MonoBehaviour
                 needed = true;
             }
         }
-        else if(currentRound<=20){
+        else if (currentRound <= 20)
+        {
             currEnemies = enemies;
-            while(GetActiveEnemies()<20 && current < enemies)
+            while (GetActiveEnemies() < 20 && current < enemies)
             {
-                int seed = Random.Range(0, 2);
+                int seed = UnityEngine.Random.Range(0, 2);
                 spawnDelay -= 1;
                 spawnDelay = Mathf.Max(spawnDelay, 1f);
-                int randomNumber = Random.Range(0, 4);
+                int randomNumber = UnityEngine.Random.Range(0, 4);
                 xPos = pairs[randomNumber].Item1;
                 zPos = pairs[randomNumber].Item2;
                 if (seed == 0)
@@ -275,9 +320,10 @@ public class GameMasterScript : MonoBehaviour
                 needed = true;
             }
         }
-        else if (currentRound==21){
+        else if (currentRound == 21)
+        {
             currEnemies = 3;
-           while(GetActiveDragons()<1 && currDragons < 3)
+            while (GetActiveDragons() < 1 && currDragons < 3)
             {
                 currDragons++;
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
@@ -292,15 +338,16 @@ public class GameMasterScript : MonoBehaviour
                 needed = true;
             }
         }
-        else if (currentRound<50){
+        else if (currentRound < 30)
+        {
             currEnemies = enemies;
-            while(GetActiveEnemies()<25 && current < enemies)
+            while (GetActiveEnemies() < 25 && current < enemies)
             {
                 current++;
-                int seed = Random.Range(0, 2);
+                int seed = UnityEngine.Random.Range(0, 2);
                 spawnDelay -= 1;
                 spawnDelay = Mathf.Max(spawnDelay, 1f);
-                int randomNumber = Random.Range(0, 4);
+                int randomNumber = UnityEngine.Random.Range(0, 4);
                 xPos = pairs[randomNumber].Item1;
                 zPos = pairs[randomNumber].Item2;
                 if (seed == 0)
@@ -314,13 +361,13 @@ public class GameMasterScript : MonoBehaviour
                     yield return new WaitForSeconds(spawnDelay);
                 }
             }
-            while (GetActiveDragons() < 1 && currDragons<numOfDragons)
+            while (GetActiveDragons() < 1 && currDragons < numOfDragons)
             {
                 currDragons++;
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
                 yield return new WaitForSeconds(25f);
             }
-            if (current == enemies && currDragons==numOfDragons)
+            if (current == enemies && currDragons == numOfDragons)
             {
                 needed = false;
             }
@@ -329,20 +376,22 @@ public class GameMasterScript : MonoBehaviour
                 needed = true;
             }
         }
-        else if (currentRound==50){
+        else if (currentRound == 30)
+        {
             currEnemies = 1;
             Instantiate(boss, new Vector3(305f, 0, 153f), Quaternion.identity);
             yield return new WaitForSeconds(spawnDelay);
         }
-        else{
+        else
+        {
             currEnemies = enemies;
             while (GetActiveEnemies() < 25 && current < enemies)
             {
                 current++;
-                int seed = Random.Range(0, 2);
+                int seed = UnityEngine.Random.Range(0, 2);
                 spawnDelay -= 1;
                 spawnDelay = Mathf.Max(spawnDelay, 1f);
-                int randomNumber = Random.Range(0, 4);
+                int randomNumber = UnityEngine.Random.Range(0, 4);
                 xPos = pairs[randomNumber].Item1;
                 zPos = pairs[randomNumber].Item2;
                 if (seed == 0)
