@@ -62,8 +62,6 @@ public class EnemyBossScript : MonoBehaviour
 
     void Update()
     {
-        HUD.updateBossHealth(bossScript.getBossHealth());
-
         if (isCharge)
         {
             if (!startedJumpCoolDown)

@@ -11,12 +11,14 @@ public abstract class Enemy : Entity
     public GameObject nuke;
     public GameObject ammo;
     public GameObject[] consumables;
+    private bool isDead;
 
     public void Start()
     {
         consumables = new GameObject[] { medkit, nuke, ammo };
         agent = GetComponent<NavMeshAgent>();
         pathFindScript = GetComponent<EnemyPathfindScript>();
+        isDead = false;
     }
 
     public void DropConsumable()
@@ -31,6 +33,11 @@ public abstract class Enemy : Entity
 
     public override void Die()
     {
+        if (isDead)
+        {
+            return;
+        }
+        isDead = true;
         DropConsumable();
         base.Die();
     }
