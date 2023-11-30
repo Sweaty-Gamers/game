@@ -293,6 +293,7 @@ public class GameMasterScript : MonoBehaviour
             currEnemies = enemies;
             while (GetActiveEnemies() < 20 && current < enemies)
             {
+                current++;
                 int seed = UnityEngine.Random.Range(0, 2);
                 spawnDelay -= 1;
                 spawnDelay = Mathf.Max(spawnDelay, 1f);
@@ -329,7 +330,7 @@ public class GameMasterScript : MonoBehaviour
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
                 yield return new WaitForSeconds(5f);
             }
-            if (current == enemies)
+            if (currDragons == enemies)
             {
                 needed = false;
             }
@@ -411,7 +412,7 @@ public class GameMasterScript : MonoBehaviour
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
                 yield return new WaitForSeconds(25f);
             }
-            if (current == enemies)
+            if (current == enemies && currDragons==numOfDragons)
             {
                 needed = false;
             }
