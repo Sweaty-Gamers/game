@@ -59,8 +59,8 @@ public class GameMasterScript : MonoBehaviour
         enabledModifiers.Add(() => new HealingModifier(5, 10, false));
         enabledModifiers.Add(() => new PlayerFovModifier());
         enabledModifiers.Add(() => new PlayerGrowModifier());
-        enabledModifiers.Add(() => new SunColorModifier());
-        //enabledModifiers.Add(() => new TreeGrowModifier());
+        //enabledModifiers.Add(() => new SunColorModifier());
+        enabledModifiers.Add(() => new TreeGrowModifier());
 
         StartNextRound();
         roundText.text = currentRound.ToString();
@@ -80,6 +80,7 @@ public class GameMasterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(activeModifiersNames);
         Debug.Log("Active Enemies: " + GetActiveEnemies());
         if (needed)
         {
@@ -124,9 +125,14 @@ public class GameMasterScript : MonoBehaviour
         // When no enemies left, end the round.
         if (currentRound < 20)
         {
+            if (currentRound == 0)
+            {
+                EndRound();
+                StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+            }
             if (currentRound == 11)
             {
-                if (GetActiveBoss() == 0 && current == 20)
+                if (GetActiveEnemies() == 0 && current == 20)
                 {
                     EndRound();
                     StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
