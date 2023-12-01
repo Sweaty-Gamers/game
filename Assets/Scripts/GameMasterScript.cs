@@ -41,6 +41,8 @@ public class GameMasterScript : MonoBehaviour
     private TextMeshProUGUI newModifierText;
 
     private readonly List<string> activeModifiersNames = new();
+    List<string> activatedModifiers = new();
+    List<Func<Modifier>> availableModifiers = new();
     private List<Func<Modifier>> enabledModifiers = new();
 
 
@@ -53,7 +55,7 @@ public class GameMasterScript : MonoBehaviour
         rangedHealth = 15f;
         roundUi = GameObject.Find("Round");
         modifiersUi = GameObject.Find("Modifiers");
-        newModifierUI = GameObject.Find("NewModifierApplied");
+        newModifierUI = GameObject.Find("NewModifierText");
 
         if (newModifierUI != null)
         {
@@ -65,9 +67,7 @@ public class GameMasterScript : MonoBehaviour
 
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
         modifiersText = modifiersUi.GetComponent<TextMeshProUGUI>();
-        //newModifierText = newModifierUI.GetComponent<TextMeshProUGUI>();
-        //newModifierText.text = "agggg";
-        //Debug.Log(newModifierText.text);
+        newModifierText = newModifierUI.GetComponent<TextMeshProUGUI>();
 
         enabledModifiers.Add(() => new EnemyGrowth());
         enabledModifiers.Add(() => new HealingModifier(5, 10, false));
@@ -76,6 +76,10 @@ public class GameMasterScript : MonoBehaviour
         //enabledModifiers.Add(() => new SunColorModifier());
         enabledModifiers.Add(() => new TreeGrowModifier());
         enabledModifiers.Add(() => new IncreaseHealthModifier(20f));
+
+        availableModifiers.Add(() => new EnemyGrowth());
+        availableModifiers.Add(() => new PlayerGrowModifier());
+        availableModifiers.Add(() => new IncreaseHealthModifier(20f));
 
         StartNextRound();
         roundText.text = currentRound.ToString();
@@ -105,6 +109,12 @@ public class GameMasterScript : MonoBehaviour
         //modifiersText.text = GetModifiersString();
         CheckRoundEnd();
     }
+
+    private void AddToList()
+    {
+
+    }
+
     private IEnumerator InternalApplyModifier(Modifier modifier)
     {
         activeModifiersNames.Add(modifier.name);
@@ -114,8 +124,9 @@ public class GameMasterScript : MonoBehaviour
 
     private IEnumerator ApplyNewModifier(string name)
     {
-        //newModifierText.text = "rawr";
-        yield return new WaitForSeconds(5);
+        newModifierText.text = string.Format("New Modifier:\n{0}", name);
+        yield return new WaitForSeconds(3);
+        newModifierText.text = "";
         yield return null;
     }
 
@@ -207,9 +218,8 @@ public class GameMasterScript : MonoBehaviour
     }
 
     void AddRandomModifier()
-    {
-        while (true)
-        {
+    {   
+        while (true) {
             int modIdx = UnityEngine.Random.Range(0, enabledModifiers.Count);
             Modifier mod = enabledModifiers[modIdx]();
             if (!activeModifiersNames.Contains(mod.name))
@@ -238,12 +248,12 @@ public class GameMasterScript : MonoBehaviour
         currDragons = 0;
         spawnDelay = 2f;
         current = 0;
-        //AddRandomModifier();
+        AddRandomModifier();
         roundStarted = true;
         StartCoroutine(EnemyDrop());
         needed = false;
         // Spawn new enemies.
-        ApplyModifier(enabledModifiers[3]());
+        // ApplyModifier(enabledModifiers[3]());
     }
 
     // Called when the current round ends, wrap things up.
