@@ -33,13 +33,6 @@ class PlayerGrowModifier : Modifier
             yield return new WaitForSeconds(sec);
             yield return end();
         }
-
-        player.transform.localScale *= 2f;
-
-        // Work for 10s...
-        yield return new WaitForSeconds(10);
-
-        yield return null;
     }
 
     protected override IEnumerator end()

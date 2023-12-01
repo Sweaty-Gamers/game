@@ -65,9 +65,9 @@ public class GameMasterScript : MonoBehaviour
 
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
         modifiersText = modifiersUi.GetComponent<TextMeshProUGUI>();
-        newModifierText = newModifierUI.GetComponent<TextMeshProUGUI>();
-        newModifierText.text = "agggg";
-        Debug.Log(newModifierText.text);
+        //newModifierText = newModifierUI.GetComponent<TextMeshProUGUI>();
+        //newModifierText.text = "agggg";
+        //Debug.Log(newModifierText.text);
 
         enabledModifiers.Add(() => new EnemyGrowth());
         enabledModifiers.Add(() => new HealingModifier(5, 10, false));
@@ -114,7 +114,7 @@ public class GameMasterScript : MonoBehaviour
 
     private IEnumerator ApplyNewModifier(string name)
     {
-        newModifierText.text = "rawr";
+        //newModifierText.text = "rawr";
         yield return new WaitForSeconds(5);
         yield return null;
     }
@@ -243,7 +243,7 @@ public class GameMasterScript : MonoBehaviour
         StartCoroutine(EnemyDrop());
         needed = false;
         // Spawn new enemies.
-        ApplyModifier(enabledModifiers[5]());
+        ApplyModifier(enabledModifiers[3]());
     }
 
     // Called when the current round ends, wrap things up.
