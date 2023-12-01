@@ -68,7 +68,8 @@ public class GameMasterScript : MonoBehaviour
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
         modifiersText = modifiersUi.GetComponent<TextMeshProUGUI>();
         newModifierText = newModifierUI.GetComponent<TextMeshProUGUI>();
-
+        
+        /*
         enabledModifiers.Add(() => new EnemyGrowth());
         enabledModifiers.Add(() => new HealingModifier(5, 10, false));
         enabledModifiers.Add(() => new PlayerFovModifier());
@@ -76,7 +77,7 @@ public class GameMasterScript : MonoBehaviour
         //enabledModifiers.Add(() => new SunColorModifier());
         enabledModifiers.Add(() => new TreeGrowModifier());
         enabledModifiers.Add(() => new IncreaseHealthModifier(20f));
-
+        */
         availableModifiers.Add(new EnemyGrowth());
         availableModifiers.Add(new PlayerGrowModifier());
         availableModifiers.Add(new IncreaseHealthModifier(20f));
@@ -228,8 +229,8 @@ public class GameMasterScript : MonoBehaviour
 
     void AddRandomModifier()
     {   
-        int modIdx = UnityEngine.Random.Range(0, enabledModifiers.Count);
-        Modifier mod = enabledModifiers[modIdx]();
+        int modIdx = UnityEngine.Random.Range(0, availableModifiers.Count);
+        Modifier mod = availableModifiers[modIdx];
         
         ApplyModifier(mod);
     }
