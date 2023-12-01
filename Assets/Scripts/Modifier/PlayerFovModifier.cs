@@ -3,7 +3,7 @@ using UnityEngine;
 
 class PlayerFovModifier : Modifier
 {
-    public PlayerFovModifier() {
+    public PlayerFovModifier(int sec = 30) {
         this.name = "FOV";
     }
 

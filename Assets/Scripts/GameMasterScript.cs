@@ -42,7 +42,7 @@ public class GameMasterScript : MonoBehaviour
 
     private readonly List<string> activeModifiersNames = new();
     List<string> activatedModifiers = new();
-    List<Func<Modifier>> availableModifiers = new();
+    List<Modifier> availableModifiers = new();
     private List<Func<Modifier>> enabledModifiers = new();
 
 
@@ -77,9 +77,9 @@ public class GameMasterScript : MonoBehaviour
         enabledModifiers.Add(() => new TreeGrowModifier());
         enabledModifiers.Add(() => new IncreaseHealthModifier(20f));
 
-        availableModifiers.Add(() => new EnemyGrowth());
-        availableModifiers.Add(() => new PlayerGrowModifier());
-        availableModifiers.Add(() => new IncreaseHealthModifier(20f));
+        availableModifiers.Add(new EnemyGrowth());
+        availableModifiers.Add(new PlayerGrowModifier());
+        availableModifiers.Add(new IncreaseHealthModifier(20f));
 
         StartNextRound();
         roundText.text = currentRound.ToString();
@@ -93,7 +93,7 @@ public class GameMasterScript : MonoBehaviour
 
     private string GetModifiersString()
     {
-        return string.Join('\n', activeModifiersNames);
+        return string.Join('\n', activatedModifiers);
     }
 
     // Update is called once per frame
@@ -106,26 +106,35 @@ public class GameMasterScript : MonoBehaviour
             StartCoroutine(EnemyDrop());
         }
 
-        //modifiersText.text = GetModifiersString();
+        modifiersText.text = GetModifiersString();
         CheckRoundEnd();
     }
 
-    private void AddToList()
+    private IEnumerator InternalUpdateActiveList(Modifier modifier)
     {
+        if (modifier.permanent) yield return null;
 
+        activatedModifiers.Add(modifier.name);
+        availableModifiers.Remove(modifier);
+
+        yield return new WaitForSeconds(modifier.sec);
+
+        activatedModifiers.Remove(modifier.name);
+        availableModifiers.Add(modifier);
+
+        yield return null;
     }
 
     private IEnumerator InternalApplyModifier(Modifier modifier)
     {
-        activeModifiersNames.Add(modifier.name);
+        StartCoroutine(InternalUpdateActiveList(modifier));
         yield return modifier.apply(this);
-        activeModifiersNames.Remove(modifier.name);
     }
 
     private IEnumerator ApplyNewModifier(string name)
     {
         newModifierText.text = string.Format("New Modifier:\n{0}", name);
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(2);
         newModifierText.text = "";
         yield return null;
     }
@@ -219,19 +228,10 @@ public class GameMasterScript : MonoBehaviour
 
     void AddRandomModifier()
     {   
-        while (true) {
-            int modIdx = UnityEngine.Random.Range(0, enabledModifiers.Count);
-            Modifier mod = enabledModifiers[modIdx]();
-            if (!activeModifiersNames.Contains(mod.name))
-            {
-                ApplyModifier(mod);
-                break;
-            }
-            else
-            {
-                continue;
-            }
-        }
+        int modIdx = UnityEngine.Random.Range(0, enabledModifiers.Count);
+        Modifier mod = enabledModifiers[modIdx]();
+        
+        ApplyModifier(mod);
     }
 
     // Start the next round and spawn enemies.
