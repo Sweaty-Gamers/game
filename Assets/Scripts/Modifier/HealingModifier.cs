@@ -37,8 +37,8 @@ class HealingModifier : Modifier
         if (permanent)
         {
             permanentMod();
+            yield return null;
         }
-
 
         for (int i = 0; i < sec >> 1; i++)
         {

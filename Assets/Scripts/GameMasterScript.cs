@@ -37,9 +37,10 @@ public class GameMasterScript : MonoBehaviour
     private TextMeshProUGUI roundText;
     private GameObject modifiersUi;
     private TextMeshProUGUI modifiersText;
+    private GameObject newModifierUI;
+    private TextMeshProUGUI newModifierText;
 
     private readonly List<string> activeModifiersNames = new();
-
     private List<Func<Modifier>> enabledModifiers = new();
 
 
@@ -52,14 +53,29 @@ public class GameMasterScript : MonoBehaviour
         rangedHealth = 15f;
         roundUi = GameObject.Find("Round");
         modifiersUi = GameObject.Find("Modifiers");
+        newModifierUI = GameObject.Find("NewModifierApplied");
+
+        if (newModifierUI != null)
+        {
+            Debug.Log("ahhhhhhhhhhhhh");
+        } else
+        {
+            Debug.Log("wack af");
+        }
+
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
         modifiersText = modifiersUi.GetComponent<TextMeshProUGUI>();
+        newModifierText = newModifierUI.GetComponent<TextMeshProUGUI>();
+        newModifierText.text = "agggg";
+        Debug.Log(newModifierText.text);
 
         enabledModifiers.Add(() => new EnemyGrowth());
         enabledModifiers.Add(() => new HealingModifier(5, 10, false));
         enabledModifiers.Add(() => new PlayerFovModifier());
         enabledModifiers.Add(() => new PlayerGrowModifier());
         enabledModifiers.Add(() => new SunColorModifier());
+        enabledModifiers.Add(() => new IncreaseHealthModifier(20f));
+
         //enabledModifiers.Add(() => new TreeGrowModifier());
 
         StartNextRound();
@@ -80,13 +96,13 @@ public class GameMasterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Active Enemies: " + GetActiveEnemies());
+        //Debug.Log("Active Enemies: " + GetActiveEnemies());
         if (needed)
         {
             StartCoroutine(EnemyDrop());
         }
 
-        modifiersText.text = GetModifiersString();
+        //modifiersText.text = GetModifiersString();
         CheckRoundEnd();
     }
     private IEnumerator InternalApplyModifier(Modifier modifier)
@@ -96,8 +112,16 @@ public class GameMasterScript : MonoBehaviour
         activeModifiersNames.Remove(modifier.name);
     }
 
+    private IEnumerator ApplyNewModifier(string name)
+    {
+        newModifierText.text = "rawr";
+        yield return new WaitForSeconds(5);
+        yield return null;
+    }
+
     void ApplyModifier(Modifier modifier)
     {
+        StartCoroutine(ApplyNewModifier(modifier.name));
         StartCoroutine(InternalApplyModifier(modifier));
     }
 
@@ -197,7 +221,7 @@ public class GameMasterScript : MonoBehaviour
 
     // Start the next round and spawn enemies.
     void StartNextRound()
-    {
+    {   
         if (currentRound == 30)
         {
             player.transform.position = new Vector3(405.9f, 0.7f, 62.8f);
@@ -214,6 +238,7 @@ public class GameMasterScript : MonoBehaviour
         StartCoroutine(EnemyDrop());
         needed = false;
         // Spawn new enemies.
+        ApplyModifier(enabledModifiers[5]());
     }
 
     // Called when the current round ends, wrap things up.
