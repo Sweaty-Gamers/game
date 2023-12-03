@@ -30,7 +30,6 @@ public class GameMasterScript : MonoBehaviour
     public int current;
     public float spawnDelay;
     private bool needed;
-    private int currEnemies;
     private int currDragons;
     // ------------ Current State ------------------
     private GameObject roundUi;
@@ -167,7 +166,7 @@ public class GameMasterScript : MonoBehaviour
         if (!roundStarted) return;
 
         // When no enemies left, end the round.
-        if (currentRound < 20)
+        if (currentRound <= 20)
         {
             if (currentRound == 0)
             {
@@ -285,7 +284,6 @@ public class GameMasterScript : MonoBehaviour
         pairs[3] = (220, 230);
         if (currentRound <= 10)
         {
-            currEnemies = enemies;
             while (GetActiveEnemies() < 25 && current < enemies)
             {
                 spawnDelay -= 1;
@@ -308,7 +306,6 @@ public class GameMasterScript : MonoBehaviour
         }
         else if (currentRound == 11)
         {
-            currEnemies = 20;
             while (GetActiveEnemies() < 10 && current < 20)
             {
                 spawnDelay -= 1;
@@ -331,7 +328,6 @@ public class GameMasterScript : MonoBehaviour
         }
         else if (currentRound <= 20)
         {
-            currEnemies = enemies;
             while (GetActiveEnemies() < 20 && current < enemies)
             {
                 current++;
@@ -364,7 +360,6 @@ public class GameMasterScript : MonoBehaviour
         }
         else if (currentRound == 21)
         {
-            currEnemies = 3;
             while (GetActiveDragons() < 1 && currDragons < 3)
             {
                 currDragons++;
@@ -382,7 +377,6 @@ public class GameMasterScript : MonoBehaviour
         }
         else if (currentRound < 30)
         {
-            currEnemies = enemies;
             while (GetActiveEnemies() < 25 && current < enemies)
             {
                 current++;
@@ -420,13 +414,11 @@ public class GameMasterScript : MonoBehaviour
         }
         else if (currentRound == 30)
         {
-            currEnemies = 1;
             Instantiate(boss, new Vector3(305f, 0, 153f), Quaternion.identity);
             yield return new WaitForSeconds(spawnDelay);
         }
         else
         {
-            currEnemies = enemies;
             while (GetActiveEnemies() < 25 && current < enemies)
             {
                 current++;
