@@ -3,7 +3,8 @@ using UnityEngine;
 
 class PlayerFovModifier : Modifier
 {
-    public PlayerFovModifier(int sec = 30) {
+    public PlayerFovModifier(int sec = 30)
+    {
         this.name = "FOV";
     }
 
@@ -12,20 +13,34 @@ class PlayerFovModifier : Modifier
         float initialFov = Camera.main.fieldOfView;
 
         float t = 0;
-        while (t < 1) {
+        while (t < 1)
+        {
             float val = Mathf.Lerp(initialFov, 120, t);
-            Camera.main.fieldOfView = val;
+
+            // If player is scoping in, do not change FOV.
+            if (!Input.GetMouseButton(1))
+            {
+                Camera.main.fieldOfView = val;
+            }
+
             t += 0.001f;
             yield return new WaitForSeconds(0.01f);
         }
 
-        // Work for 10s...
+        // Work for 30s...
         yield return new WaitForSeconds(30);
 
         t = 0;
-        while (t < 1) {
+        while (t < 1)
+        {
             float val = Mathf.Lerp(120, initialFov, t);
-            Camera.main.fieldOfView = val;
+
+            // If player is scoping in, do not change FOV.
+            if (!Input.GetMouseButton(1))
+            {
+                Camera.main.fieldOfView = val;
+            }
+
             t += 0.001f;
             yield return new WaitForSeconds(0.01f);
         }
