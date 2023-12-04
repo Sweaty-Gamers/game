@@ -12,7 +12,6 @@ public abstract class Consumable : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        despawnTime = 20;
         speed = 2.0f;
         amp = .25f;
         rotate = new Vector3(0, 25, 0); 

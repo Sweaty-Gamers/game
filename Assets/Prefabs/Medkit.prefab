@@ -124,7 +124,7 @@ MonoBehaviour:
   amp: 0
   originalPosition: 0
   player: {fileID: 0}
-  despawnTime: 0
+  despawnTime: 30
 --- !u!54 &5892092126331275718
 Rigidbody:
   m_ObjectHideFlags: 0

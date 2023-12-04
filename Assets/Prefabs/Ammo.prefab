@@ -123,4 +123,4 @@ MonoBehaviour:
   amp: 0
   originalPosition: 0
   player: {fileID: 0}
-  despawnTime: 0
+  despawnTime: 30
