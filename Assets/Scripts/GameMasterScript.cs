@@ -59,7 +59,8 @@ public class GameMasterScript : MonoBehaviour
         if (newModifierUI != null)
         {
             Debug.Log("ahhhhhhhhhhhhh");
-        } else
+        }
+        else
         {
             Debug.Log("wack af");
         }
@@ -67,7 +68,7 @@ public class GameMasterScript : MonoBehaviour
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
         modifiersText = modifiersUi.GetComponent<TextMeshProUGUI>();
         newModifierText = newModifierUI.GetComponent<TextMeshProUGUI>();
-        
+
         /*
         enabledModifiers.Add(() => new EnemyGrowth());
         enabledModifiers.Add(() => new HealingModifier(5, 10, false));
@@ -139,7 +140,7 @@ public class GameMasterScript : MonoBehaviour
         yield return null;
     }
 
-    void ApplyModifier(Modifier modifier)
+    public void ApplyModifier(Modifier modifier)
     {
         StartCoroutine(ApplyNewModifier(modifier.name));
         StartCoroutine(InternalApplyModifier(modifier));
@@ -227,16 +228,16 @@ public class GameMasterScript : MonoBehaviour
     }
 
     void AddRandomModifier()
-    {   
+    {
         int modIdx = UnityEngine.Random.Range(0, availableModifiers.Count);
         Modifier mod = availableModifiers[modIdx];
-        
+
         ApplyModifier(mod);
     }
 
     // Start the next round and spawn enemies.
     void StartNextRound()
-    {   
+    {
         if (currentRound == 30)
         {
             player.transform.position = new Vector3(405.9f, 0.7f, 62.8f);
@@ -445,7 +446,7 @@ public class GameMasterScript : MonoBehaviour
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
                 yield return new WaitForSeconds(25f);
             }
-            if (current == enemies && currDragons==numOfDragons)
+            if (current == enemies && currDragons == numOfDragons)
             {
                 needed = false;
             }
