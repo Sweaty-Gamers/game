@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System;
 using System.Collections;
 
-public class CustomGameMaster : MonoBehaviour
+public class CustomMasterScript : MonoBehaviour
 
 {
     // ------------ Game Configuration -------------
@@ -30,18 +30,27 @@ public class CustomGameMaster : MonoBehaviour
     public int current;
     public float spawnDelay;
     private bool needed;
-    private int currEnemies;
     private int currDragons;
     // ------------ Current State ------------------
     private GameObject roundUi;
     private TextMeshProUGUI roundText;
     private GameObject modifiersUi;
     private TextMeshProUGUI modifiersText;
+    private GameObject newModifierUI;
+    private TextMeshProUGUI newModifierText;
+    private int collectedEasterEggs = 0;
 
     private readonly List<string> activeModifiersNames = new();
-
+    List<string> activatedModifiers = new();
+    List<Modifier> availableModifiers = new();
     private List<Func<Modifier>> enabledModifiers = new();
 
+    public void GotEasterEgg()
+    {
+        collectedEasterEggs += 1;
+        ApplyModifier(new SunColorModifier());
+        ApplyModifier(new PlayerFovModifier());
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -52,15 +61,33 @@ public class CustomGameMaster : MonoBehaviour
         rangedHealth = 15f;
         roundUi = GameObject.Find("Round");
         modifiersUi = GameObject.Find("Modifiers");
+        newModifierUI = GameObject.Find("NewModifierText");
+
+        if (newModifierUI != null)
+        {
+            Debug.Log("ahhhhhhhhhhhhh");
+        }
+        else
+        {
+            Debug.Log("wack af");
+        }
+
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
         modifiersText = modifiersUi.GetComponent<TextMeshProUGUI>();
+        newModifierText = newModifierUI.GetComponent<TextMeshProUGUI>();
 
+        /*
         enabledModifiers.Add(() => new EnemyGrowth());
         enabledModifiers.Add(() => new HealingModifier(5, 10, false));
         enabledModifiers.Add(() => new PlayerFovModifier());
         enabledModifiers.Add(() => new PlayerGrowModifier());
         //enabledModifiers.Add(() => new SunColorModifier());
         enabledModifiers.Add(() => new TreeGrowModifier());
+        enabledModifiers.Add(() => new IncreaseHealthModifier(20f));
+        */
+        availableModifiers.Add(new EnemyGrowth());
+        availableModifiers.Add(new PlayerGrowModifier());
+        availableModifiers.Add(new IncreaseHealthModifier(20f));
 
         StartNextRound();
         roundText.text = currentRound.ToString();
@@ -74,14 +101,14 @@ public class CustomGameMaster : MonoBehaviour
 
     private string GetModifiersString()
     {
-        return string.Join('\n', activeModifiersNames);
+        return string.Join('\n', activatedModifiers);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(activeModifiersNames);
-        Debug.Log("Active Enemies: " + GetActiveEnemies());
+        //Debug.Log(activeModifiersNames);
+        //Debug.Log("Active Enemies: " + GetActiveEnemies());
         if (needed)
         {
             StartCoroutine(EnemyDrop());
@@ -90,15 +117,39 @@ public class CustomGameMaster : MonoBehaviour
         modifiersText.text = GetModifiersString();
         CheckRoundEnd();
     }
-    private IEnumerator InternalApplyModifier(Modifier modifier)
+
+    private IEnumerator InternalUpdateActiveList(Modifier modifier)
     {
-        activeModifiersNames.Add(modifier.name);
-        yield return modifier.apply(this);
-        activeModifiersNames.Remove(modifier.name);
+        if (modifier.permanent) yield return null;
+
+        activatedModifiers.Add(modifier.name);
+        availableModifiers.Remove(modifier);
+
+        yield return new WaitForSeconds(modifier.sec);
+
+        activatedModifiers.Remove(modifier.name);
+        availableModifiers.Add(modifier);
+
+        yield return null;
     }
 
-    void ApplyModifier(Modifier modifier)
+    private IEnumerator InternalApplyModifier(Modifier modifier)
     {
+        StartCoroutine(InternalUpdateActiveList(modifier));
+        yield return modifier.apply(this);
+    }
+
+    private IEnumerator ApplyNewModifier(string name)
+    {
+        newModifierText.text = string.Format("New Modifier:\n{0}", name);
+        yield return new WaitForSeconds(2);
+        newModifierText.text = "";
+        yield return null;
+    }
+
+    public void ApplyModifier(Modifier modifier)
+    {
+        StartCoroutine(ApplyNewModifier(modifier.name));
         StartCoroutine(InternalApplyModifier(modifier));
     }
 
@@ -123,39 +174,58 @@ public class CustomGameMaster : MonoBehaviour
         if (!roundStarted) return;
 
         // When no enemies left, end the round.
+        if (currentRound <= 20)
+        {
             if (currentRound == 0)
             {
                 EndRound();
                 StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
             }
-            else if (currentRound == 1  && GetActiveEnemies()==0 && current == 10) 
+            if (currentRound == 11)
             {
-                EndRound();
-                StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+                if (GetActiveEnemies() == 0 && current == 20)
+                {
+                    EndRound();
+                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+                }
             }
-            else if (currentRound==2 && GetActiveEnemies()==0 && current == 10)
+            else
+            {
+                if (GetActiveEnemies() == 0 && current == enemies)
+                {
+                    EndRound();
+                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+                }
+            }
+        }
+        else
         {
-            EndRound();
-            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+            if (currentRound == 21)
+            {
+                if (GetActiveEnemies() == 0 && currDragons == 3)
+                {
+                    EndRound();
+                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+                }
+            }
+            else if (currentRound == 30)
+            {
+                if (GetActiveBoss() == 0)
+                {
+                    EndRound();
+                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+                }
+            }
+            else
+            {
+                if (GetActiveEnemies() == 0 && current == enemies && currDragons == numOfDragons)
+                {
+                    EndRound();
+                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+                }
+            }
 
         }
-            else if (currentRound==3 && GetActiveEnemies()==0 && current == 3)
-        {
-            EndRound();
-            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-        }
-            else if(currentRound==4 && GetActiveBoss() == 0)
-        {
-            EndRound();
-            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-        }
-            else if(GetActiveEnemies()==0 && current==20 && currDragons == 1)
-        {
-            EndRound();
-            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-        }
-  
-            
     }
 
     IEnumerator WaitAndStartNextRound(float seconds)
@@ -166,30 +236,20 @@ public class CustomGameMaster : MonoBehaviour
 
     void AddRandomModifier()
     {
-        while (true)
-        {
-            int modIdx = UnityEngine.Random.Range(0, enabledModifiers.Count);
-            Modifier mod = enabledModifiers[modIdx]();
-            if (!activeModifiersNames.Contains(mod.name))
-            {
-                ApplyModifier(mod);
-                break;
-            }
-            else
-            {
-                continue;
-            }
-        }
+        int modIdx = UnityEngine.Random.Range(0, availableModifiers.Count);
+        Modifier mod = availableModifiers[modIdx];
+
+        ApplyModifier(mod);
     }
 
     // Start the next round and spawn enemies.
     void StartNextRound()
     {
-        if (currentRound == 4)
+        if (currentRound == 30)
         {
             player.transform.position = new Vector3(405.9f, 0.7f, 62.8f);
         }
-        else if (currentRound == 5)
+        else if (currentRound == 31)
         {
             player.transform.position = new Vector3(243.3f, 0.7f, 202.8f);
         }
@@ -201,6 +261,7 @@ public class CustomGameMaster : MonoBehaviour
         StartCoroutine(EnemyDrop());
         needed = false;
         // Spawn new enemies.
+        // ApplyModifier(enabledModifiers[3]());
     }
 
     // Called when the current round ends, wrap things up.
@@ -217,6 +278,7 @@ public class CustomGameMaster : MonoBehaviour
         currentRound += 1;
         roundText.text = currentRound.ToString();
     }
+ 
     IEnumerator EnemyDrop()
     {
         Minotaur.newHealth = minotaurHealth;
