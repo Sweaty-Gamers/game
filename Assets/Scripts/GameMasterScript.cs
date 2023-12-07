@@ -31,6 +31,7 @@ public class GameMasterScript : MonoBehaviour
     public float spawnDelay;
     private bool needed;
     private int currDragons;
+    private bool spawned = false;
     // ------------ Current State ------------------
     private GameObject roundUi;
     private TextMeshProUGUI roundText;
@@ -106,7 +107,9 @@ public class GameMasterScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        Debug.Log("Dragons: " +currDragons);
+        Debug.Log("NumOfDragons: "+ numOfDragons);
         //Debug.Log(activeModifiersNames);
         //Debug.Log("Active Enemies: " + GetActiveEnemies());
         if (needed)
@@ -155,7 +158,7 @@ public class GameMasterScript : MonoBehaviour
 
     int GetActiveEnemies()
     {
-        return GameObject.FindGameObjectsWithTag("Enemy_Melee").Length + GameObject.FindGameObjectsWithTag("Enemy_Ranged").Length + GameObject.FindGameObjectsWithTag("Enemy_Flying").Length;
+        return GameObject.FindGameObjectsWithTag("Enemy_Melee").Length + GameObject.FindGameObjectsWithTag("Enemy_Ranged").Length;
     }
     int GetActiveDragons()
     {
@@ -174,58 +177,41 @@ public class GameMasterScript : MonoBehaviour
         if (!roundStarted) return;
 
         // When no enemies left, end the round.
-        if (currentRound <= 20)
-        {
-            if (currentRound == 0)
-            {
-                EndRound();
-                StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-            }
-            if (currentRound == 11)
-            {
-                if (GetActiveEnemies() == 0 && current == 20)
-                {
-                    EndRound();
-                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-                }
-            }
-            else
-            {
-                if (GetActiveEnemies() == 0 && current == enemies)
-                {
-                    EndRound();
-                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-                }
+        if(currentRound==0){
+            EndRound();
+            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+        }
+        else if(currentRound<=10 && GetActiveEnemies()==0 && current == enemies){
+            EndRound();
+            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+        }
+        else if(currentRound==11 && GetActiveEnemies()==0 && current ==20){
+            EndRound();
+            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+        }
+        else if (currentRound<=20 && GetActiveEnemies()==0){
+            EndRound();
+            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+        }
+        else if(currentRound==21 && GetActiveDragons()==0 && currDragons==3){
+            EndRound();
+            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+        }
+        else if (currentRound<30 && GetActiveDragons()==0 && currDragons==numOfDragons && GetActiveEnemies()==0 && current==enemies){
+            EndRound();
+            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+        }
+        else if(currentRound==30 && GetActiveBoss()==0){
+            EndRound();
+            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+        }
+        else{
+            if(current==enemies && GetActiveEnemies()==0 && currDragons==0 && GetActiveDragons()==0){
+            EndRound();
+            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
             }
         }
-        else
-        {
-            if (currentRound == 21)
-            {
-                if (GetActiveEnemies() == 0 && currDragons == 3)
-                {
-                    EndRound();
-                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-                }
-            }
-            else if (currentRound == 30)
-            {
-                if (GetActiveBoss() == 0)
-                {
-                    EndRound();
-                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-                }
-            }
-            else
-            {
-                if (GetActiveEnemies() == 0 && current == enemies && currDragons == numOfDragons)
-                {
-                    EndRound();
-                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-                }
-            }
-
-        }
+        
     }
 
     IEnumerator WaitAndStartNextRound(float seconds)
@@ -233,6 +219,7 @@ public class GameMasterScript : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         StartNextRound();
     }
+
 
     void AddRandomModifier()
     {
@@ -422,8 +409,9 @@ public class GameMasterScript : MonoBehaviour
         }
         else if (currentRound == 30)
         {
+            needed = false;
             Instantiate(boss, new Vector3(305f, 0, 153f), Quaternion.identity);
-            yield return new WaitForSeconds(spawnDelay);
+            yield return new WaitForSeconds(5f);
         }
         else
         {

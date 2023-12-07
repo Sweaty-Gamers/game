@@ -31,6 +31,7 @@ public class CustomMasterScript : MonoBehaviour
     public float spawnDelay;
     private bool needed;
     private int currDragons;
+    private bool spawned = false;
     // ------------ Current State ------------------
     private GameObject roundUi;
     private TextMeshProUGUI roundText;
@@ -51,6 +52,7 @@ public class CustomMasterScript : MonoBehaviour
         ApplyModifier(new SunColorModifier());
         ApplyModifier(new PlayerFovModifier());
     }
+
 
     // Start is called before the first frame update
     void Start()
@@ -101,7 +103,7 @@ public class CustomMasterScript : MonoBehaviour
 
     private string GetModifiersString()
     {
-        return string.Join('\n', activatedModifiers);
+        return string.Join('\n', activeModifiersNames);
     }
 
     // Update is called once per frame
@@ -117,8 +119,7 @@ public class CustomMasterScript : MonoBehaviour
         modifiersText.text = GetModifiersString();
         CheckRoundEnd();
     }
-
-    private IEnumerator InternalUpdateActiveList(Modifier modifier)
+   private IEnumerator InternalUpdateActiveList(Modifier modifier)
     {
         if (modifier.permanent) yield return null;
 
@@ -132,23 +133,21 @@ public class CustomMasterScript : MonoBehaviour
 
         yield return null;
     }
-
     private IEnumerator InternalApplyModifier(Modifier modifier)
     {
         StartCoroutine(InternalUpdateActiveList(modifier));
         yield return modifier.apply(this);
     }
-
-    private IEnumerator ApplyNewModifier(string name)
+       private IEnumerator ApplyNewModifier(string name)
     {
         newModifierText.text = string.Format("New Modifier:\n{0}", name);
         yield return new WaitForSeconds(2);
         newModifierText.text = "";
         yield return null;
     }
-
-    public void ApplyModifier(Modifier modifier)
+    void ApplyModifier(Modifier modifier)
     {
+        
         StartCoroutine(ApplyNewModifier(modifier.name));
         StartCoroutine(InternalApplyModifier(modifier));
     }
@@ -174,69 +173,51 @@ public class CustomMasterScript : MonoBehaviour
         if (!roundStarted) return;
 
         // When no enemies left, end the round.
-        if (currentRound <= 20)
-        {
             if (currentRound == 0)
             {
                 EndRound();
                 StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
             }
-            if (currentRound == 11)
+            else if (currentRound == 1  && GetActiveEnemies()==0 && current == 10) 
             {
-                if (GetActiveEnemies() == 0 && current == 20)
-                {
-                    EndRound();
-                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-                }
+                EndRound();
+                StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
             }
-            else
-            {
-                if (GetActiveEnemies() == 0 && current == enemies)
-                {
-                    EndRound();
-                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-                }
-            }
-        }
-        else
+            else if (currentRound==2 && GetActiveEnemies()==0 && current == 10)
         {
-            if (currentRound == 21)
-            {
-                if (GetActiveEnemies() == 0 && currDragons == 3)
-                {
-                    EndRound();
-                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-                }
-            }
-            else if (currentRound == 30)
-            {
-                if (GetActiveBoss() == 0)
-                {
-                    EndRound();
-                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-                }
-            }
-            else
-            {
-                if (GetActiveEnemies() == 0 && current == enemies && currDragons == numOfDragons)
-                {
-                    EndRound();
-                    StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-                }
-            }
+            EndRound();
+            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
 
         }
+            else if (currentRound==3 && GetActiveEnemies()==0 && current == 3)
+        {
+            EndRound();
+            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+        }
+            else if(currentRound==4 && GetActiveBoss() == 0 && spawned)
+        {
+            EndRound();
+            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+        }
+            else if(GetActiveEnemies()==0 && current==20 && currDragons == 1)
+        {
+            EndRound();
+            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
+        }
+  
+            
     }
 
     IEnumerator WaitAndStartNextRound(float seconds)
     {
         yield return new WaitForSeconds(seconds);
         StartNextRound();
-    }
+    } 
+
 
     void AddRandomModifier()
     {
-        int modIdx = UnityEngine.Random.Range(0, availableModifiers.Count);
+      int modIdx = UnityEngine.Random.Range(0, availableModifiers.Count);
         Modifier mod = availableModifiers[modIdx];
 
         ApplyModifier(mod);
@@ -245,11 +226,11 @@ public class CustomMasterScript : MonoBehaviour
     // Start the next round and spawn enemies.
     void StartNextRound()
     {
-        if (currentRound == 30)
+        if (currentRound == 4)
         {
             player.transform.position = new Vector3(405.9f, 0.7f, 62.8f);
         }
-        else if (currentRound == 31)
+        else if (currentRound == 5)
         {
             player.transform.position = new Vector3(243.3f, 0.7f, 202.8f);
         }
@@ -258,10 +239,10 @@ public class CustomMasterScript : MonoBehaviour
         current = 0;
         AddRandomModifier();
         roundStarted = true;
-        StartCoroutine(EnemyDrop());
+    StartCoroutine(EnemyDrop());
+        
         needed = false;
         // Spawn new enemies.
-        // ApplyModifier(enabledModifiers[3]());
     }
 
     // Called when the current round ends, wrap things up.
@@ -278,7 +259,6 @@ public class CustomMasterScript : MonoBehaviour
         currentRound += 1;
         roundText.text = currentRound.ToString();
     }
- 
     IEnumerator EnemyDrop()
     {
         Minotaur.newHealth = minotaurHealth;
@@ -330,8 +310,9 @@ public class CustomMasterScript : MonoBehaviour
         }
         else if (currentRound == 4)
         {
+            yield return new WaitForSeconds(5f);
             Instantiate(boss, new Vector3(305f, 0, 153f), Quaternion.identity);
-            yield return new WaitForSeconds(spawnDelay);
+            spawned = true;
         }
         else
         {
