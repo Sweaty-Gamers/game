@@ -38,12 +38,19 @@ public class GameMasterScript : MonoBehaviour
     private TextMeshProUGUI modifiersText;
     private GameObject newModifierUI;
     private TextMeshProUGUI newModifierText;
+    private int collectedEasterEggs = 0;
 
     private readonly List<string> activeModifiersNames = new();
     List<string> activatedModifiers = new();
     List<Modifier> availableModifiers = new();
     private List<Func<Modifier>> enabledModifiers = new();
 
+    public void GotEasterEgg()
+    {
+        collectedEasterEggs += 1;
+        ApplyModifier(new SunColorModifier());
+        ApplyModifier(new PlayerFovModifier());
+    }
 
     // Start is called before the first frame update
     void Start()

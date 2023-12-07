@@ -24,8 +24,7 @@ public class EasterEggScript : MonoBehaviour
             GameObject gameObject = GameObject.Find("GameMaster");
             GameMasterScript script = gameObject.GetComponent<GameMasterScript>();
 
-            script.ApplyModifier(new SunColorModifier());
-            script.ApplyModifier(new PlayerFovModifier());
+            script.GotEasterEgg();
 
             Destroy(gameObject);
         }
