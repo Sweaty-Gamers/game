@@ -17,7 +17,6 @@ public class GameMasterScript : MonoBehaviour
     public GameObject boss;
     public GameObject player;
     // ------------ Round Spawn Variables -------------
-    public int numOfDragons =3;
     public int currentRound = 1;
     public bool roundStarted = false;
     public int enemies = 1;
@@ -108,8 +107,6 @@ public class GameMasterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        Debug.Log("Dragons: " +currDragons);
-        Debug.Log("NumOfDragons: "+ numOfDragons);
         //Debug.Log(activeModifiersNames);
         //Debug.Log("Active Enemies: " + GetActiveEnemies());
         if (needed)
@@ -201,12 +198,12 @@ public class GameMasterScript : MonoBehaviour
             EndRound();
             StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
         }
-        else if(currentRound==30 && GetActiveBoss()==0){
+        else if(currentRound==30 && GetActiveBoss()==0 && spawned){
             EndRound();
             StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
         }
         else{
-            if(current==enemies && GetActiveEnemies()==0 && currDragons==0 && GetActiveDragons()==0){
+            if(current==enemies && GetActiveEnemies()==0 && currDragons==3 && GetActiveDragons()==0){
             EndRound();
             StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
             }
@@ -396,7 +393,7 @@ public class GameMasterScript : MonoBehaviour
             {
                 currDragons++;
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
-                yield return new WaitForSeconds(25f);
+                yield return new WaitForSeconds(5f);
             }
             if (current == enemies && currDragons == 3)
             {
@@ -410,8 +407,9 @@ public class GameMasterScript : MonoBehaviour
         else if (currentRound == 30)
         {
             needed = false;
-            Instantiate(boss, new Vector3(305f, 0, 153f), Quaternion.identity);
             yield return new WaitForSeconds(5f);
+            Instantiate(boss, new Vector3(305f, 0, 153f), Quaternion.identity);
+            spawned = true;
         }
         else
         {
@@ -441,7 +439,7 @@ public class GameMasterScript : MonoBehaviour
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
                 yield return new WaitForSeconds(25f);
             }
-            if (current == enemies && currDragons == numOfDragons)
+            if (current == enemies && currDragons == 3)
             {
                 needed = false;
             }
