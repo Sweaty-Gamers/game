@@ -15,7 +15,7 @@ public class Ammo : Consumable
     }
     public override IEnumerator ApplyEffect()
     {
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < player.weaponCount; i++)
         {
             GameObject currentWeapon = player.weapons.transform.GetChild(i).gameObject;
             WeaponScript weapon = currentWeapon.GetComponent<WeaponScript>();

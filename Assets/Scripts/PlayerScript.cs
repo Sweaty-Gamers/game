@@ -40,6 +40,7 @@ public class PlayerScript : Entity
     public HUD hud;
     public Rigidbody rigidBody;
     public int weaponIndex = 0;
+    public int weaponCount;
 
     // Start is called before the first frame update
     void Start()
@@ -52,8 +53,8 @@ public class PlayerScript : Entity
         rigidBody = GetComponent<Rigidbody>();
 
         hud = GetComponent<HUD>();
-
-        for (int i = 0; i < weapons.transform.childCount; i++)
+        weaponCount = weapons.transform.childCount;
+        for (int i = 0; i < weaponCount; i++)
         {
             weapons.transform.GetChild(i).gameObject.SetActive(false);
         }
