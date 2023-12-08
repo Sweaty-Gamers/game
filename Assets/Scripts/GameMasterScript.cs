@@ -17,7 +17,7 @@ public class GameMasterScript : MonoBehaviour
     public GameObject boss;
     public GameObject player;
     // ------------ Round Spawn Variables -------------
-    public int numOfDragons = 5;
+    public int numOfDragons =3;
     public int currentRound = 1;
     public bool roundStarted = false;
     public int enemies = 1;
@@ -197,7 +197,7 @@ public class GameMasterScript : MonoBehaviour
             EndRound();
             StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
         }
-        else if (currentRound<30 && GetActiveDragons()==0 && currDragons==numOfDragons && GetActiveEnemies()==0 && current==enemies){
+        else if (currentRound<30 && GetActiveDragons()==0 && currDragons==3 && GetActiveEnemies()==0 && current==enemies){
             EndRound();
             StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
         }
@@ -392,17 +392,17 @@ public class GameMasterScript : MonoBehaviour
                     yield return new WaitForSeconds(spawnDelay);
                 }
             }
-            while (GetActiveDragons() < 1 && currDragons < numOfDragons)
+            while (GetActiveDragons() < 1 && currDragons < 3)
             {
                 currDragons++;
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
                 yield return new WaitForSeconds(25f);
             }
-            if (current == enemies && currDragons == numOfDragons)
+            if (current == enemies && currDragons == 3)
             {
                 needed = false;
             }
-            else
+            else 
             {
                 needed = true;
             }
@@ -435,7 +435,7 @@ public class GameMasterScript : MonoBehaviour
                     yield return new WaitForSeconds(spawnDelay);
                 }
             }
-            while (GetActiveDragons() < 1 && currDragons < numOfDragons)
+            while (GetActiveDragons() < 1 && currDragons < 3)
             {
                 currDragons++;
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);

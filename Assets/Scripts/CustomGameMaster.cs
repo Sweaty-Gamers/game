@@ -17,7 +17,7 @@ public class CustomMasterScript : MonoBehaviour
     public GameObject boss;
     public GameObject player;
     // ------------ Round Spawn Variables -------------
-    public int numOfDragons = 5;
+    public int numOfDragons = 3;
     public int currentRound = 1;
     public bool roundStarted = false;
     public int enemies = 1;
