@@ -39,6 +39,7 @@ public class GameMasterScript : MonoBehaviour
     private GameObject newModifierUI;
     private TextMeshProUGUI newModifierText;
     private GameObject shootingMessageUI;
+    private GameObject eggUi;
     private TextMeshProUGUI shootingText;
     private int collectedEasterEggs = 0;
 
@@ -50,8 +51,11 @@ public class GameMasterScript : MonoBehaviour
     public void GotEasterEgg()
     {
         collectedEasterEggs += 1;
-        ApplyModifier(new SunColorModifier());
-        ApplyModifier(new PlayerFovModifier());
+        StartCoroutine(InternalApplyModifier(new SunColorModifier()));
+        StartCoroutine(InternalApplyModifier(new PlayerFovModifier()));
+
+        eggUi = GameObject.Find("EggText");
+        eggUi.GetComponent<TextMeshProUGUI>().SetText(collectedEasterEggs + "/8 easter eggs found ;)");
     }
 
     // Start is called before the first frame update
