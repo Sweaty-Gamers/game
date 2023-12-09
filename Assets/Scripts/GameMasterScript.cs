@@ -91,6 +91,7 @@ public class GameMasterScript : MonoBehaviour
         */
         availableModifiers.Add(new EnemyGrowth());
         availableModifiers.Add(new PlayerGrowModifier());
+        availableModifiers.Add(new PlayerShrinkModifier());
         availableModifiers.Add(new IncreaseHealthModifier(20f));
         StartCoroutine(ApplyShootingMessage());
         EndRound();
