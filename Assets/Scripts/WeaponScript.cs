@@ -55,6 +55,9 @@ public class WeaponScript : MonoBehaviour
 
     void Shoot()
     {
+        if(Time.timeScale == 0){
+            return;
+        }
         if (isReloading) return;
 
         float curTime = Time.time;
