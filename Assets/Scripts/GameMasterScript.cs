@@ -53,12 +53,14 @@ public class GameMasterScript : MonoBehaviour
     {
         collectedEasterEggs += 1;
 
-        int r = UnityEngine.Random.Range(0, 2);
-        if (r == 0) {
-            ApplyModifier(new SunColorModifier());
-        } else {
-            ApplyModifier(new PlayerFovModifier());
-        }
+        // int r = UnityEngine.Random.Range(0, 2);
+        // if (r == 0) {
+        //     ApplyModifier(new SunColorModifier());
+        // } else {
+        //     ApplyModifier(new PlayerFovModifier());
+        // }
+
+        ApplyModifier(new PlayerFovModifier());
 
         eggUi = GameObject.Find("EggText");
         eggUi.GetComponent<TextMeshProUGUI>().SetText(collectedEasterEggs + "/8 easter eggs found ;)");
