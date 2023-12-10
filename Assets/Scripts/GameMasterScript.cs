@@ -106,7 +106,9 @@ public class GameMasterScript : MonoBehaviour
         availableModifiers.Add(new PlayerShrinkModifier());
         availableModifiers.Add(new IncreaseHealthModifier(20f));
         StartCoroutine(ApplyShootingMessage());
-        EndRound();
+        if(currentRound==0){
+             EndRound();
+        }
         StartNextRound();
         roundText.text = currentRound.ToString();
 
@@ -427,10 +429,13 @@ public class GameMasterScript : MonoBehaviour
         }
         else if (currentRound == 30)
         {
+            if(GetActiveBoss()==0 && !spawned){
             needed = false;
             yield return new WaitForSeconds(5f);
             Instantiate(boss, new Vector3(305f, 0, 153f), Quaternion.identity);
             spawned = true;
+            }
+
         }
         else
         {
