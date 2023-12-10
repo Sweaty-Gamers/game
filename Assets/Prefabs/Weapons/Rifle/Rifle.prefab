@@ -119,15 +119,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 1
-  reloadTime: 2
-  magSize: 1
-  bulletSpeed: 200
+  reloadTime: 1
+  magSize: 4
+  bulletSpeed: 100
   semiAuto: 1
   bulletPrefab: {fileID: 4819610306315137784, guid: 66fd8dbb8fd8493aea1da5abd50348b9, type: 3}
   RecoilObject: {fileID: 0}
-  reloadAnimationLength: 1.5
-  fireAnimationLength: 0.667
-  reserveBullets: 16
+  reloadAnimationLength: 1
+  fireAnimationLength: 0.5
+  reserveBullets: 20
+  bulletsLeftInMag: 0
 --- !u!95 &8643492327382463279
 Animator:
   serializedVersion: 5

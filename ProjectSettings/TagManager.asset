@@ -14,12 +14,12 @@ TagManager:
   - Blade
   - Enemy_Flying
   - Fire
-  - Destructible
+  - Consumable
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ignore Bullet
   - Water
   - UI
   - 

@@ -10,6 +10,17 @@ public class HUD : MonoBehaviour
     public GameObject healthBarUi;
     public TextMeshProUGUI healthText;
     public Slider healthBar;
+
+    public GameObject bossHealthUi;
+    public GameObject bossHealthBarUi;
+    public TextMeshProUGUI bossHealthText;
+    public static Slider bossHealthBar;
+
+    public GameObject bossHealthUiOutline;
+    public GameObject bossHealthBarUiOutline;
+    public TextMeshProUGUI bossHealthTextOutline;
+    public static Slider bossHealthBarOutline;
+
     public PlayerScript playerStats;
     public GameObject player;
 
@@ -25,20 +36,29 @@ public class HUD : MonoBehaviour
 
     void Start()
     {
+        GameObject ui = GameObject.Find("UI");
+        weaponUI = ui.transform.Find("Ammo").gameObject;
+        ammo = weaponUI.GetComponent<TextMeshProUGUI>();
+
         healthUi = GameObject.Find("Health");
         healthText = healthUi.GetComponent<TextMeshProUGUI>();
         healthBarUi = GameObject.Find("HealthBar");
         healthBar = healthBarUi.GetComponent<Slider>();
 
+        bossHealthUi = GameObject.Find("Health");
+        bossHealthText = bossHealthUi.GetComponent<TextMeshProUGUI>();
+        bossHealthBarUi = GameObject.Find("BossHealthBar");
+        bossHealthBar = bossHealthBarUi.GetComponent<Slider>();
+
+        bossHealthUiOutline = GameObject.Find("Health");
+        bossHealthTextOutline = bossHealthUi.GetComponent<TextMeshProUGUI>();
+        bossHealthBarUiOutline = GameObject.Find("BossHealthBar Outline");
+        bossHealthBarOutline = bossHealthBarUi.GetComponent<Slider>();
+
         energyUI = GameObject.Find("Energy");
         energyText = energyUI.GetComponent<TextMeshProUGUI>();
         energyBarUI = GameObject.Find("EnergyBar");
         energyBar = energyBarUI.GetComponent<Slider>();
-
-
-        weaponUI = GameObject.Find("Ammo");
-        ammo = weaponUI.GetComponent<TextMeshProUGUI>();
-
 
         playerStats = FindObjectOfType<PlayerScript>();
         healthBar.maxValue = playerStats.maxHealth;
@@ -50,11 +70,38 @@ public class HUD : MonoBehaviour
         updateAmmo();
     }
 
+    void Update()
+    {
+        GameObject golem = GameObject.Find("Golem");
+        GameObject golem_parent = GameObject.Find("GolemPrefab Variant");
+        GameObject golem_parent_clone = GameObject.Find("GolemPrefab Variant Variant(Clone)");
+        if (golem_parent != null)
+        {
+            Debug.Log("GOOD");
+        }
+        if (golem_parent_clone == null)
+        {
+            // If the "golem" object doesn't exist or is not active, make the boss UI elements inactive
+            bossHealthUi.SetActive(false);
+            bossHealthBarUi.SetActive(false);
+            bossHealthUiOutline.SetActive(false);
+            bossHealthBarUiOutline.SetActive(false);
+        }
+        else
+        {
+            bossHealthUi.SetActive(true);
+            bossHealthBarUi.SetActive(true);
+            bossHealthUiOutline.SetActive(true);
+            bossHealthBarUiOutline.SetActive(true);
+        }
+    }
+
+
     public void updateAmmo()
     {
         weapon = playerStats.weapons.transform.GetChild(playerStats.weaponIndex).gameObject;
         weaponStats = weapon.GetComponent<WeaponScript>();
-        ammo.text = weaponStats.bulletsLeftInMag + "/" + weaponStats.reserveBullets;
+        ammo.text = weaponStats.bulletsLeftInMag.ToString() + "/" + weaponStats.reserveBullets.ToString();
     }
 
     public void updateEnergy()
@@ -67,5 +114,10 @@ public class HUD : MonoBehaviour
     {
         //healthText.text = playerStats.health.ToString() + " / " + playerStats.maxHealth.ToString();
         healthBar.value = playerStats.health;
+    }
+    
+    public static void updateBossHealth(float newHealth)
+    {
+        bossHealthBar.value = newHealth;
     }
 }

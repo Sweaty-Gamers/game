@@ -36,7 +36,8 @@ public class WeaponScript : MonoBehaviour
 
     private Animator animator;
     private PlayerScript playerScript;
-    private Transform bulletSpawn;
+    
+    protected Transform bulletSpawn;
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +55,9 @@ public class WeaponScript : MonoBehaviour
 
     void Shoot()
     {
+        if(Time.timeScale == 0){
+            return;
+        }
         if (isReloading) return;
 
         float curTime = Time.time;
@@ -71,12 +75,13 @@ public class WeaponScript : MonoBehaviour
             return;
         }
 
+        animator.SetBool("Shoot", true);
         FireBullet();
+        playerScript.hud.updateAmmo();
     }
 
-    void FireBullet()
+    public virtual void FireBullet()
     {
-        animator.SetBool("Shoot", true);
 
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Camera.main.transform.rotation);
         var ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
@@ -90,8 +95,10 @@ public class WeaponScript : MonoBehaviour
 
         bulletsLeftInMag--;
         playerScript.hud.updateAmmo();
-
-        RecoilObject.recoil += 0.1f;
+        if (RecoilObject != null)
+        {
+            RecoilObject.recoil += 0.1f;
+        }
     }
 
     IEnumerator Reload()
@@ -126,6 +133,12 @@ public class WeaponScript : MonoBehaviour
         animator.SetBool("Reload", false);
         isReloading = false;
 
+        playerScript.hud.updateAmmo();
+    }
+
+    public void addBullets(float bulletAmount)
+    {
+        reserveBullets += bulletAmount;
         playerScript.hud.updateAmmo();
     }
 

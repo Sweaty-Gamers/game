@@ -65,8 +65,14 @@ public class EnemyPathfindScript : MonoBehaviour
             agent.destination = player.position;
             isWalking = true;
             isAttacking = false;
+            bool isPlayerAboveAndClose = (player.position.y > transform.position.y+2f) && distanceToPlayer < 10f;
+            if (isPlayerAboveAndClose)
+            {
+                JumpAttack();
+            }
 
-            if (distanceToPlayer <= shootingDistance && gameObject.tag == "Enemy_Ranged")
+
+                if (distanceToPlayer <= shootingDistance && gameObject.tag == "Enemy_Ranged")
             {
                 timeSinceLastShot += Time.deltaTime;
                 if (timeSinceLastShot >= 3f)
@@ -89,9 +95,9 @@ public class EnemyPathfindScript : MonoBehaviour
             //isAttacking = true;
 
             // Set a new destination to the current position to ensure immediate stopping
-            
-          
-           
+
+
+
             // No valid path found, fallback to the original logic
             //RaycastHit hit;
             if (!HasLineOfSightToPlayer())
@@ -100,6 +106,7 @@ public class EnemyPathfindScript : MonoBehaviour
                 isWalking = true;
                 isAttacking = false;
                 agent.destination = player.position;
+                
                 // Calculate the path to the player
                 //NavMeshPath path = new NavMeshPath();
                 //agent.CalculatePath(player.position, path);
@@ -164,5 +171,58 @@ public class EnemyPathfindScript : MonoBehaviour
     void UpdateStateTransition()
     {
         enemy.UpdateState();
+    }
+
+    private void JumpAttack()
+    {
+        // Check if the player is in range
+        {
+            isWalking = false;
+            isAttacking = false;
+
+            Vector3 directionToPlayer = player.position - transform.position;
+            Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer);
+
+            // Smoothly rotate the NavMeshAgent towards the player
+            agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+            // Calculate the direction from the enemy to the player
+            Vector3 jumpDirection = (player.position - transform.position).normalized;
+
+            // Calculate the destination point slightly above the player's position
+            Vector3 jumpDestination = player.position + jumpDirection; // Adjust jump distance as needed
+
+            // Set the NavMeshAgent's destination to the calculated jump destination
+            agent.SetDestination(jumpDestination);
+
+
+            // Start the jump cooldown coroutine
+            //StartCoroutine(JumpCooldown());
+            Debug.Log("Jump attack");
+            // Start the parabola jump coroutine
+            StartCoroutine(Parabola2(agent, 2.5f, 1f)); // Adjust duration as needed
+        }
+    }
+
+    IEnumerator Parabola2(NavMeshAgent agent, float height, float duration)
+    {
+        OffMeshLinkData data = agent.currentOffMeshLinkData;
+        Vector3 startPos = agent.transform.position;
+        Vector3 endPos = player.position; // Use the end position from OffMeshLinkData
+
+        float normalizedTime = 0.0f;
+
+        while (normalizedTime < 1.0f) // Adjust the loop condition
+        {
+            // Calculate the perfect parabola using Quadratic Bezier curve
+            float yOffset = height * 4.0f * normalizedTime * (1.0f - normalizedTime);
+
+            agent.transform.position = Vector3.Lerp(startPos, endPos, normalizedTime) + yOffset * Vector3.up;
+            normalizedTime += Time.deltaTime / duration;
+            yield return null;
+        }
+
+        // Jump is complete, reset the coroutine and NavMeshAgent
+        agent.CompleteOffMeshLink();
     }
 }

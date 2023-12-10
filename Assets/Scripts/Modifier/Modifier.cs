@@ -2,7 +2,8 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-abstract class Modifier {
+public abstract class Modifier
+{
 
     public String name;
     public bool permanent;
@@ -13,8 +14,9 @@ abstract class Modifier {
     protected abstract IEnumerator end();
 
     protected abstract IEnumerator permanentMod();
-    
-    public IEnumerator apply(MonoBehaviour monoBehaviour) {
+
+    public IEnumerator apply(MonoBehaviour monoBehaviour)
+    {
         yield return monoBehaviour.StartCoroutine(start());
     }
 

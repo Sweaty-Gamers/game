@@ -15,20 +15,33 @@ public class Recoil : MonoBehaviour
 
     void Update()
     {
+        float _maxRecoil_x = maxRecoil_x;
+        float _maxRecoil_y = maxRecoil_y;
+        float _maxTrans_x = maxTrans_x;
+        float _maxTrans_z = maxTrans_z;
+
+        if (Input.GetMouseButton(1))
+        {
+            _maxRecoil_x /= 2;
+            _maxRecoil_y /= 2;
+            _maxTrans_x /= 2;
+            _maxTrans_z /= 2;
+        }
+
         if (recoil > 0)
         {
             var maxRecoil = Quaternion.Euler(
-                Random.Range(transform.localRotation.x, maxRecoil_x),
-                Random.Range(transform.localRotation.y, maxRecoil_y),
+                Random.Range(transform.localRotation.x, _maxRecoil_x),
+                Random.Range(transform.localRotation.y, _maxRecoil_y),
                 transform.localRotation.z);
 
             // Dampen towards the target rotation
             transform.localRotation = Quaternion.Slerp(transform.localRotation, maxRecoil, Time.deltaTime * recoilSpeed);
 
             var maxTranslation = new Vector3(
-                Random.Range(transform.localPosition.x, maxTrans_x),
+                Random.Range(transform.localPosition.x, _maxTrans_x),
                 transform.localPosition.y,
-                Random.Range(transform.localPosition.z, maxTrans_z));
+                Random.Range(transform.localPosition.z, _maxTrans_z));
 
             transform.localPosition = Vector3.Slerp(transform.localPosition, maxTranslation, Time.deltaTime * recoilSpeed);
 
