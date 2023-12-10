@@ -427,10 +427,13 @@ public class GameMasterScript : MonoBehaviour
         }
         else if (currentRound == 30)
         {
+            if(GetActiveBoss()==0 && !spawned){
             needed = false;
             yield return new WaitForSeconds(5f);
             Instantiate(boss, new Vector3(305f, 0, 153f), Quaternion.identity);
             spawned = true;
+            }
+
         }
         else
         {
