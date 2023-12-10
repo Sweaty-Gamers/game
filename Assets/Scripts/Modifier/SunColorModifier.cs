@@ -42,7 +42,7 @@ class SunColorModifier : Modifier
         }
 
         // Work for 10s...
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(10);
 
         sun.color = initialColor;
 

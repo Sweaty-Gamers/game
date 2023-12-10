@@ -27,6 +27,7 @@ public class EasterEggScript : MonoBehaviour
             script.GotEasterEgg();
 
             Destroy(gameObject);
+            Destroy(this);
         }
     }
 }

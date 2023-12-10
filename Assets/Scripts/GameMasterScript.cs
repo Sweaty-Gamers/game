@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections.Generic;
 using System;
 using System.Collections;
+using Unity.Mathematics;
 
 public class GameMasterScript : MonoBehaviour
 
@@ -17,7 +18,6 @@ public class GameMasterScript : MonoBehaviour
     public GameObject boss;
     public GameObject player;
     // ------------ Round Spawn Variables -------------
-    public int numOfDragons =3;
     public int currentRound = 1;
     public bool roundStarted = false;
     public int enemies = 1;
@@ -39,6 +39,9 @@ public class GameMasterScript : MonoBehaviour
     private TextMeshProUGUI modifiersText;
     private GameObject newModifierUI;
     private TextMeshProUGUI newModifierText;
+    private GameObject shootingMessageUI;
+    private GameObject eggUi;
+    private TextMeshProUGUI shootingText;
     private int collectedEasterEggs = 0;
 
     private readonly List<string> activeModifiersNames = new();
@@ -49,13 +52,24 @@ public class GameMasterScript : MonoBehaviour
     public void GotEasterEgg()
     {
         collectedEasterEggs += 1;
-        ApplyModifier(new SunColorModifier());
+
+        // int r = UnityEngine.Random.Range(0, 2);
+        // if (r == 0) {
+        //     ApplyModifier(new SunColorModifier());
+        // } else {
+        //     ApplyModifier(new PlayerFovModifier());
+        // }
+
         ApplyModifier(new PlayerFovModifier());
+
+        eggUi = GameObject.Find("EggText");
+        eggUi.GetComponent<TextMeshProUGUI>().SetText(collectedEasterEggs + "/8 easter eggs found ;)");
     }
 
     // Start is called before the first frame update
     void Start()
     {
+
         dragonHealth = 700f;
         minotaurHealth = 25f;
         minotaurSpeed = 2f;
@@ -63,6 +77,7 @@ public class GameMasterScript : MonoBehaviour
         roundUi = GameObject.Find("Round");
         modifiersUi = GameObject.Find("Modifiers");
         newModifierUI = GameObject.Find("NewModifierText");
+        shootingMessageUI = GameObject.Find("ShootingText");
 
         if (newModifierUI != null)
         {
@@ -72,10 +87,10 @@ public class GameMasterScript : MonoBehaviour
         {
             Debug.Log("wack af");
         }
-
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
         modifiersText = modifiersUi.GetComponent<TextMeshProUGUI>();
         newModifierText = newModifierUI.GetComponent<TextMeshProUGUI>();
+        shootingText =  shootingMessageUI.GetComponent<TextMeshProUGUI>();
 
         /*
         enabledModifiers.Add(() => new EnemyGrowth());
@@ -88,8 +103,10 @@ public class GameMasterScript : MonoBehaviour
         */
         availableModifiers.Add(new EnemyGrowth());
         availableModifiers.Add(new PlayerGrowModifier());
+        availableModifiers.Add(new PlayerShrinkModifier());
         availableModifiers.Add(new IncreaseHealthModifier(20f));
-
+        StartCoroutine(ApplyShootingMessage());
+        EndRound();
         StartNextRound();
         roundText.text = currentRound.ToString();
 
@@ -108,8 +125,6 @@ public class GameMasterScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
-        Debug.Log("Dragons: " +currDragons);
-        Debug.Log("NumOfDragons: "+ numOfDragons);
         //Debug.Log(activeModifiersNames);
         //Debug.Log("Active Enemies: " + GetActiveEnemies());
         if (needed)
@@ -149,6 +164,14 @@ public class GameMasterScript : MonoBehaviour
         newModifierText.text = "";
         yield return null;
     }
+    private IEnumerator ApplyShootingMessage()
+    {
+        shootingText.text ="You can shoot with left click\nYou can scope with Right click";
+        yield return new WaitForSeconds(2);
+        shootingText.text = "";
+        yield return null;
+    }
+    
 
     public void ApplyModifier(Modifier modifier)
     {
@@ -177,11 +200,7 @@ public class GameMasterScript : MonoBehaviour
         if (!roundStarted) return;
 
         // When no enemies left, end the round.
-        if(currentRound==0){
-            EndRound();
-            StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-        }
-        else if(currentRound<=10 && GetActiveEnemies()==0 && current == enemies){
+        if(currentRound<=10 && GetActiveEnemies()==0 && current == enemies){
             EndRound();
             StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
         }
@@ -201,12 +220,12 @@ public class GameMasterScript : MonoBehaviour
             EndRound();
             StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
         }
-        else if(currentRound==30 && GetActiveBoss()==0){
+        else if(currentRound==30 && GetActiveBoss()==0 && spawned){
             EndRound();
             StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
         }
         else{
-            if(current==enemies && GetActiveEnemies()==0 && currDragons==0 && GetActiveDragons()==0){
+            if(current==enemies && GetActiveEnemies()==0 && currDragons==3 && GetActiveDragons()==0){
             EndRound();
             StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
             }
@@ -219,7 +238,6 @@ public class GameMasterScript : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         StartNextRound();
     }
-
 
     void AddRandomModifier()
     {
@@ -396,7 +414,7 @@ public class GameMasterScript : MonoBehaviour
             {
                 currDragons++;
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
-                yield return new WaitForSeconds(25f);
+                yield return new WaitForSeconds(5f);
             }
             if (current == enemies && currDragons == 3)
             {
@@ -410,8 +428,9 @@ public class GameMasterScript : MonoBehaviour
         else if (currentRound == 30)
         {
             needed = false;
-            Instantiate(boss, new Vector3(305f, 0, 153f), Quaternion.identity);
             yield return new WaitForSeconds(5f);
+            Instantiate(boss, new Vector3(305f, 0, 153f), Quaternion.identity);
+            spawned = true;
         }
         else
         {
@@ -441,7 +460,7 @@ public class GameMasterScript : MonoBehaviour
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
                 yield return new WaitForSeconds(25f);
             }
-            if (current == enemies && currDragons == numOfDragons)
+            if (current == enemies && currDragons == 3)
             {
                 needed = false;
             }

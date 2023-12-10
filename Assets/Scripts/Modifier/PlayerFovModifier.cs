@@ -28,7 +28,7 @@ class PlayerFovModifier : Modifier
         }
 
         // Work for 30s...
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(10);
 
         t = 0;
         while (t < 1)

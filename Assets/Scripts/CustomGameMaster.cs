@@ -39,6 +39,8 @@ public class CustomMasterScript : MonoBehaviour
     private TextMeshProUGUI modifiersText;
     private GameObject newModifierUI;
     private TextMeshProUGUI newModifierText;
+    private GameObject shootingMessageUI;
+    private TextMeshProUGUI shootingText;
     private int collectedEasterEggs = 0;
 
     private readonly List<string> activeModifiersNames = new();
@@ -64,6 +66,7 @@ public class CustomMasterScript : MonoBehaviour
         roundUi = GameObject.Find("Round");
         modifiersUi = GameObject.Find("Modifiers");
         newModifierUI = GameObject.Find("NewModifierText");
+        shootingMessageUI = GameObject.Find("ShootingText");
 
         if (newModifierUI != null)
         {
@@ -77,7 +80,7 @@ public class CustomMasterScript : MonoBehaviour
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
         modifiersText = modifiersUi.GetComponent<TextMeshProUGUI>();
         newModifierText = newModifierUI.GetComponent<TextMeshProUGUI>();
-
+        shootingText =  shootingMessageUI.GetComponent<TextMeshProUGUI>();
         /*
         enabledModifiers.Add(() => new EnemyGrowth());
         enabledModifiers.Add(() => new HealingModifier(5, 10, false));
@@ -90,7 +93,8 @@ public class CustomMasterScript : MonoBehaviour
         availableModifiers.Add(new EnemyGrowth());
         availableModifiers.Add(new PlayerGrowModifier());
         availableModifiers.Add(new IncreaseHealthModifier(20f));
-
+       StartCoroutine(ApplyShootingMessage());
+        EndRound();
         StartNextRound();
         roundText.text = currentRound.ToString();
 
@@ -145,6 +149,13 @@ public class CustomMasterScript : MonoBehaviour
         newModifierText.text = "";
         yield return null;
     }
+     private IEnumerator ApplyShootingMessage()
+    {
+        shootingText.text = "Pausing with esc\nYou can shoot with left click\nYou can scope with Right click";
+        yield return new WaitForSeconds(2);
+        shootingText.text = "";
+        yield return null;
+    }
     void ApplyModifier(Modifier modifier)
     {
         
@@ -173,12 +184,8 @@ public class CustomMasterScript : MonoBehaviour
         if (!roundStarted) return;
 
         // When no enemies left, end the round.
-            if (currentRound == 0)
-            {
-                EndRound();
-                StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
-            }
-            else if (currentRound == 1  && GetActiveEnemies()==0 && current == 10) 
+          
+            if (currentRound == 1  && GetActiveEnemies()==0 && current == 10) 
             {
                 EndRound();
                 StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
