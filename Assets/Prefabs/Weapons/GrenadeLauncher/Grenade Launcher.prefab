@@ -149,7 +149,7 @@ MonoBehaviour:
   magSize: 2
   bulletSpeed: 25
   semiAuto: 1
-  bulletPrefab: {fileID: 4819610306315137784, guid: f021423d9362eb446bc75add3cdc41be, type: 3}
+  bulletPrefab: {fileID: 8547096936215637792, guid: 8629299a03b46e44892e5ea799c8089e, type: 3}
   RecoilObject: {fileID: 0}
   reloadAnimationLength: 0.5
   fireAnimationLength: 0.3
