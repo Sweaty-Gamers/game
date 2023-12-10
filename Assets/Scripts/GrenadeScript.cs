@@ -9,6 +9,8 @@ public class GrenadeScript : MonoBehaviour
     public float damage;
     public float radius;
     public float explosionDamage;
+    [SerializeField] private ParticleSystem explosionParticles;
+    private ParticleSystem explosionParticlesInstance;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +62,9 @@ public class GrenadeScript : MonoBehaviour
             StartCoroutine(GetEnemies(c));
         }
 
+        explosionParticlesInstance = Instantiate(explosionParticles, transform.position, Quaternion.identity);
+        
+        Destroy(explosionParticlesInstance);
         Destroy(gameObject);
     }
 }
