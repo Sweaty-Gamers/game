@@ -20,7 +20,14 @@ public class PlayerScript : Entity
     public float sprintDegenerationSpeed;
     /// How much drag to apply on the floor.
     public float groundDrag;
-    /// How much drag to apply on the air.
+    /// How much drag to apply on the air. 
+    
+    //Pause Panel
+    public GameObject PausePanel;
+    
+    //Settings Panel
+    public GameObject SettingsPanel;
+
     public float airDrag;
 
     public bool iceSkates;
@@ -103,7 +110,15 @@ public class PlayerScript : Entity
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            Time.timeScale = Time.timeScale == 0 ? 1f : 0f;
+            if(Time.timeScale==0){
+                SettingsPanel.SetActive(false);
+                PausePanel.SetActive(false);
+                Time.timeScale = 1f;
+            }
+            else{
+                PausePanel.SetActive(true);
+                Time.timeScale = 0;
+            }
             Cursor.lockState = Time.timeScale == 1f ? CursorLockMode.Locked : CursorLockMode.None;
         }
     }
@@ -111,6 +126,9 @@ public class PlayerScript : Entity
     /// Switch weapons using the number keys or the mouse wheel.
     void SwitchWeapons()
     {
+        if(Time.timeScale==0){
+            return;
+        }
         int len = weapons.transform.childCount;
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0) SwitchWeapon(Math.Min(weaponIndex + 1, len - 1));

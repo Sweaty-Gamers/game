@@ -23,4 +23,7 @@ public class SetController : MonoBehaviour
         
 
     }
+    void Start(){
+        slider.value = currSens/100;
+    }
 }

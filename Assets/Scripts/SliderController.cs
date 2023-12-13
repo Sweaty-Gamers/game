@@ -10,4 +10,7 @@ public class SliderController : MonoBehaviour
         float localValue = value*maxSliderAmount;
         sliderText.text = localValue.ToString("0.0");
     }
+    void Start(){
+        sliderText.text = MouseLook.sensitivityX.ToString("0.0");
+    }
 }
