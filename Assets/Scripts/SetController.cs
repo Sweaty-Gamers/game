@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 public class SetController : MonoBehaviour
-{
+{   private float temp = 1.0f;
     public TextMeshProUGUI output;
     public TMP_InputField sens;
     public float currSens = MouseLook.sensitivityX;
@@ -14,12 +14,13 @@ public class SetController : MonoBehaviour
             MouseLook.sensitivityX = float.Parse(output.text);
             MouseLook.sensitivityY = float.Parse(output.text);
         }
-        else{
+        else if(float.TryParse(sens.text, out temp)) {
         output.text = sens.text;
         slider.value = float.Parse(sens.text)/100;
          MouseLook.sensitivityX = float.Parse(output.text);
         MouseLook.sensitivityY = float.Parse(output.text);
         }
+        
 
     }
 }
