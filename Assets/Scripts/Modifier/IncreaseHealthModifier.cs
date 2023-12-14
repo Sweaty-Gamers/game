@@ -39,6 +39,7 @@ class IncreaseHealthModifier : Modifier
         {
             playerScript.maxHealth += healthIncreaseAmount;
             playerScript.health += healthIncreaseAmount;
+            playerScript.hud.UpdateMaxHealth();
         }
         yield return null;
     }

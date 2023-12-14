@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GrenadeScript : MonoBehaviour
@@ -65,6 +66,7 @@ public class GrenadeScript : MonoBehaviour
         explosionParticlesInstance = Instantiate(explosionParticles, transform.position, Quaternion.identity);
         
         Destroy(explosionParticlesInstance);
+        explosionParticlesInstance.AddComponent<Explosion>();
         Destroy(gameObject);
     }
 }
