@@ -7,7 +7,7 @@ using System.Collections;
 public class CustomMasterScript : MonoBehaviour
 
 {
-    // ------------ Game Configuration -------------
+       // ------------ Game Configuration -------------
     public float secondsBeforeNextRound = 5;
 
     // ------------ Game Objects ----------------------
@@ -17,7 +17,6 @@ public class CustomMasterScript : MonoBehaviour
     public GameObject boss;
     public GameObject player;
     // ------------ Round Spawn Variables -------------
-    public int numOfDragons = 3;
     public int currentRound = 1;
     public bool roundStarted = false;
     public int enemies = 1;
@@ -40,6 +39,7 @@ public class CustomMasterScript : MonoBehaviour
     private GameObject newModifierUI;
     private TextMeshProUGUI newModifierText;
     private GameObject shootingMessageUI;
+    private GameObject eggUi;
     private TextMeshProUGUI shootingText;
     private int collectedEasterEggs = 0;
 
@@ -48,18 +48,26 @@ public class CustomMasterScript : MonoBehaviour
     List<Modifier> availableModifiers = new();
     private List<Func<Modifier>> enabledModifiers = new();
 
-    public void GotEasterEgg()
+      public void GotEasterEgg()
     {
         collectedEasterEggs += 1;
-        ApplyModifier(new SunColorModifier());
-        ApplyModifier(new PlayerFovModifier());
-    }
 
+        // int r = UnityEngine.Random.Range(0, 2);
+        // if (r == 0) {
+        //     ApplyModifier(new SunColorModifier());
+        // } else {
+        //     ApplyModifier(new PlayerFovModifier());
+        // }
+
+        ApplyModifier(new PlayerFovModifier());
+        eggUi = GameObject.Find("EggText");
+        eggUi.GetComponent<TextMeshProUGUI>().SetText(collectedEasterEggs + "/8 easter eggs found ;)");
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        dragonHealth = 700f;
+       dragonHealth = 700f;
         minotaurHealth = 25f;
         minotaurSpeed = 2f;
         rangedHealth = 15f;
@@ -76,11 +84,11 @@ public class CustomMasterScript : MonoBehaviour
         {
             Debug.Log("wack af");
         }
-
         roundText = roundUi.GetComponent<TextMeshProUGUI>();
         modifiersText = modifiersUi.GetComponent<TextMeshProUGUI>();
         newModifierText = newModifierUI.GetComponent<TextMeshProUGUI>();
         shootingText =  shootingMessageUI.GetComponent<TextMeshProUGUI>();
+
         /*
         enabledModifiers.Add(() => new EnemyGrowth());
         enabledModifiers.Add(() => new HealingModifier(5, 10, false));
@@ -92,9 +100,12 @@ public class CustomMasterScript : MonoBehaviour
         */
         availableModifiers.Add(new EnemyGrowth());
         availableModifiers.Add(new PlayerGrowModifier());
+        availableModifiers.Add(new PlayerShrinkModifier());
         availableModifiers.Add(new IncreaseHealthModifier(20f));
-       StartCoroutine(ApplyShootingMessage());
-        EndRound();
+        StartCoroutine(ApplyShootingMessage());
+        if(currentRound==0){
+             EndRound();
+        }
         StartNextRound();
         roundText.text = currentRound.ToString();
 
@@ -246,8 +257,7 @@ public class CustomMasterScript : MonoBehaviour
         current = 0;
         AddRandomModifier();
         roundStarted = true;
-    StartCoroutine(EnemyDrop());
-        
+        StartCoroutine(EnemyDrop());
         needed = false;
         // Spawn new enemies.
     }

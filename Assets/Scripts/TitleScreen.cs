@@ -37,6 +37,8 @@ public class TitleScreen : MenuScreens
     // Selected when exit game is clicked.
     public void ExitGame()
     {
+        //if in unity editor  
+        // UnityEditor.EditorApplication.isPlaying = false;
         Application.Quit();
     }
 }

@@ -43,17 +43,22 @@ public class GameMasterScript : MonoBehaviour
     private GameObject eggUi;
     private TextMeshProUGUI shootingText;
     private int collectedEasterEggs = 0;
+    private bool added = false;
 
     private readonly List<string> activeModifiersNames = new();
     List<string> activatedModifiers = new();
     List<Modifier> availableModifiers = new();
     private List<Func<Modifier>> enabledModifiers = new();
 
-    public void Test(){
-        Debug.Log("Test");
-    }
     public void GotEasterEgg()
     {
+        if(!added){
+        availableModifiers.Add(new SunColorModifier());
+        availableModifiers.Add(new PlayerFovModifier());
+        added = true;
+        ApplyModifier(new PlayerFovModifier());
+        ApplyModifier(new SunColorModifier());
+        }
         collectedEasterEggs += 1;
 
         // int r = UnityEngine.Random.Range(0, 2);
@@ -63,7 +68,6 @@ public class GameMasterScript : MonoBehaviour
         //     ApplyModifier(new PlayerFovModifier());
         // }
 
-        ApplyModifier(new PlayerFovModifier());
         eggUi = GameObject.Find("EggText");
         eggUi.GetComponent<TextMeshProUGUI>().SetText(collectedEasterEggs + "/8 easter eggs found ;)");
     }
@@ -106,6 +110,7 @@ public class GameMasterScript : MonoBehaviour
         availableModifiers.Add(new PlayerGrowModifier());
         availableModifiers.Add(new PlayerShrinkModifier());
         availableModifiers.Add(new IncreaseHealthModifier(20f));
+
         StartCoroutine(ApplyShootingMessage());
         if(currentRound==0){
              EndRound();

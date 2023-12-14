@@ -24,9 +24,6 @@ public class EasterEggScript : MonoBehaviour
             GameObject gameObject = GameObject.Find("GameMaster");
             GameMasterScript script = gameObject.GetComponent<GameMasterScript>();
             script.GotEasterEgg();
-            // script.Test();
-
-
             Destroy(this);
         }
     }
