@@ -1,2 +1,2 @@
-# game
+# Nodifier Mayhem
 Unity project.
