@@ -7,6 +7,7 @@ public class PauseMenu : MonoBehaviour
 {   
     public GameObject settings;
     public GameObject PausePanel;
+    public GameObject confirmation;
     public string titleScreen = "Title";
     public void Resume(){
         settings.SetActive(false);
@@ -18,11 +19,16 @@ public class PauseMenu : MonoBehaviour
         PausePanel.SetActive(false);
         settings.SetActive(true);
     }
+    public void Confirm(){
+        confirmation.SetActive(true);
+        PausePanel.SetActive(false);
+    }
     public void Exit(){
         SceneManager.LoadScene("Title");
     }
     public void Back(){
         PausePanel.SetActive(true);
         settings.SetActive(false);
+        confirmation.SetActive(false);
     }
 }
