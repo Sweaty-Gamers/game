@@ -103,7 +103,7 @@ public class GameMasterScript : MonoBehaviour
         availableModifiers.Add(new PlayerGrowModifier());
         availableModifiers.Add(new PlayerShrinkModifier());
         availableModifiers.Add(new IncreaseHealthModifier(20f));
-
+        ApplyModifier(new PlayerFovModifier());
         StartCoroutine(ApplyShootingMessage());
         if(currentRound==0){
              EndRound();

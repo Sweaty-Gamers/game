@@ -19,7 +19,7 @@ class PlayerFovModifier : Modifier
             float val = Mathf.Lerp(initialFov, 120, t);
 
             // If player is scoping in, do not change FOV.
-            if (!Input.GetMouseButton(1))
+            if(!Input.GetMouseButton(1))
             {
                 Camera.main.fieldOfView = val;
             }
