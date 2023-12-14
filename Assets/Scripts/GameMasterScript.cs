@@ -52,9 +52,15 @@ public class GameMasterScript : MonoBehaviour
 
     public void GotEasterEgg()
     {
-        availableModifiers.Add(new SunColorModifier());
-        availableModifiers.Add(new PlayerFovModifier());
         collectedEasterEggs += 1;
+        if(collectedEasterEggs==1){
+              availableModifiers.Add(new SunColorModifier());
+            StartCoroutine(EasterEggMessage());
+        }
+        else if(collectedEasterEggs==2){
+            availableModifiers.Add(new PlayerFovModifier());
+            StartCoroutine(EasterEggMessage());
+        }
         eggUi = GameObject.Find("EggText");
         eggUi.GetComponent<TextMeshProUGUI>().SetText(collectedEasterEggs + "/8 easter eggs found ;)");
     }
@@ -164,6 +170,19 @@ public class GameMasterScript : MonoBehaviour
         shootingText.text ="You can shoot with left click\nYou can scope with Right click";
         yield return new WaitForSeconds(2);
         shootingText.text = "";
+        yield return null;
+    }
+    private IEnumerator EasterEggMessage()
+    {
+        if(collectedEasterEggs==1){
+            newModifierText.text = string.Format("New Modifier added: Sun Color");
+        }
+        else if(collectedEasterEggs==2){
+            newModifierText.text = string.Format("New Modifier added: FOV");
+        }
+        
+        yield return new WaitForSeconds(2);
+        newModifierText.text = "";
         yield return null;
     }
     

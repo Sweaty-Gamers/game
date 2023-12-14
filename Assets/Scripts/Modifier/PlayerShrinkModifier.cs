@@ -4,7 +4,7 @@ using UnityEngine;
 class PlayerShrinkModifier : Modifier
 {
     private GameObject player;
-
+    private PlayerScript play;
     public PlayerShrinkModifier(int sec = 10, bool permanent = false)
     {
         this.name = "Player shrinkage";
@@ -21,7 +21,8 @@ class PlayerShrinkModifier : Modifier
 
     protected override IEnumerator start()
     {
-
+       play = player.GetComponent<PlayerScript>();
+       play.shrink();
         transform(0.5f);
         if (permanent)
         {
@@ -36,6 +37,7 @@ class PlayerShrinkModifier : Modifier
 
     protected override IEnumerator end()
     {
+        play.normal();
         transform(2f);
         yield return null;
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 class PlayerGrowModifier : Modifier
 {
     private GameObject player;
-
+    private PlayerScript play;
 
     public PlayerGrowModifier(int sec = 10, bool permanent = false)
     {
@@ -21,7 +21,8 @@ class PlayerGrowModifier : Modifier
 
     protected override IEnumerator start()
     {
-
+         play = player.GetComponent<PlayerScript>();
+         play.big();
         transform(2f);
 
         if (permanent)
@@ -37,6 +38,7 @@ class PlayerGrowModifier : Modifier
 
     protected override IEnumerator end()
     {
+        play.normal();
         transform(.5f);
         yield return null;
     }

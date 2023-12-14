@@ -48,6 +48,8 @@ public class PlayerScript : Entity
     public Rigidbody rigidBody;
     public int weaponIndex = 0;
     public int weaponCount;
+    private bool shrinker = false;
+    private bool bigger = false;
 
     // Start is called before the first frame update
     void Start()
@@ -80,7 +82,26 @@ public class PlayerScript : Entity
     {
         Sprint();
     }
-
+    public void shrink(){
+        shrinker=true;
+        movementSpeed *=1.5f;
+    }
+    public void big(){
+        bigger = true;
+        movementSpeed*=2f;
+        movementSpeed /=3f;
+    }
+    public void normal(){
+        if(shrinker){
+            movementSpeed /=1.5f;
+        }
+        else{
+            movementSpeed *=3f;
+            movementSpeed /=2f;
+        }
+        shrinker = false;
+        bigger = false;
+    }
     void Sprint()
     {
         if (sprintMeter == 0) recharge = true;
