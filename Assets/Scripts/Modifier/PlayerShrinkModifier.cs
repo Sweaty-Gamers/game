@@ -5,7 +5,6 @@ class PlayerShrinkModifier : Modifier
 {
     private GameObject player;
 
-
     public PlayerShrinkModifier(int sec = 10, bool permanent = false)
     {
         this.name = "Player shrinkage";
@@ -16,6 +15,7 @@ class PlayerShrinkModifier : Modifier
 
     private void transform(float scale)
     {
+
         player.transform.localScale *= scale;
     }
 
@@ -23,7 +23,6 @@ class PlayerShrinkModifier : Modifier
     {
 
         transform(0.5f);
-
         if (permanent)
         {
             yield return permanentMod();

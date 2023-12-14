@@ -5,6 +5,7 @@ public class CameraZoom : MonoBehaviour
     public float zoomSpeed = 0.2f;
     public float minFOV;
     private float defaultFOV;
+    private float saved;
     private Camera cam;
 
     void Start()
@@ -16,6 +17,7 @@ public class CameraZoom : MonoBehaviour
 
     void Update()
     {
+        
         if (Input.GetMouseButton(1)) // Right mouse button is down
         {
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, minFOV, zoomSpeed * Time.deltaTime);
@@ -25,4 +27,5 @@ public class CameraZoom : MonoBehaviour
             cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, defaultFOV, zoomSpeed * Time.deltaTime);
         }
     }
+    
 }

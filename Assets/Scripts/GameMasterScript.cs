@@ -49,6 +49,9 @@ public class GameMasterScript : MonoBehaviour
     List<Modifier> availableModifiers = new();
     private List<Func<Modifier>> enabledModifiers = new();
 
+    public void Test(){
+        Debug.Log("Test");
+    }
     public void GotEasterEgg()
     {
         collectedEasterEggs += 1;
@@ -61,7 +64,6 @@ public class GameMasterScript : MonoBehaviour
         // }
 
         ApplyModifier(new PlayerFovModifier());
-
         eggUi = GameObject.Find("EggText");
         eggUi.GetComponent<TextMeshProUGUI>().SetText(collectedEasterEggs + "/8 easter eggs found ;)");
     }
@@ -69,7 +71,6 @@ public class GameMasterScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         dragonHealth = 700f;
         minotaurHealth = 25f;
         minotaurSpeed = 2f;
@@ -158,7 +159,7 @@ public class GameMasterScript : MonoBehaviour
         StartCoroutine(InternalUpdateActiveList(modifier));
         yield return modifier.apply(this);
     }
-
+    
     private IEnumerator ApplyNewModifier(string name)
     {
         newModifierText.text = string.Format("New Modifier:\n{0}", name);
@@ -227,7 +228,7 @@ public class GameMasterScript : MonoBehaviour
             StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
         }
         else{
-            if(current==enemies && GetActiveEnemies()==0 && currDragons==3 && GetActiveDragons()==0){
+            if(current==enemies && GetActiveEnemies()==0 && currDragons==5 && GetActiveDragons()==0){
             EndRound();
             StartCoroutine(WaitAndStartNextRound(secondsBeforeNextRound));
             }
@@ -332,7 +333,7 @@ public class GameMasterScript : MonoBehaviour
                 Instantiate(ranged, new Vector3(xPos, 0, zPos), Quaternion.identity);
                 yield return new WaitForSeconds(spawnDelay);
             }
-            if (current == enemies)
+            if (current == 20)
             {
                 needed = false;
             }
@@ -381,7 +382,7 @@ public class GameMasterScript : MonoBehaviour
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);
                 yield return new WaitForSeconds(5f);
             }
-            if (currDragons == enemies)
+            if (currDragons == 3)
             {
                 needed = false;
             }
@@ -459,7 +460,7 @@ public class GameMasterScript : MonoBehaviour
                     yield return new WaitForSeconds(spawnDelay);
                 }
             }
-            while (GetActiveDragons() < 1 && currDragons < 3)
+            while (GetActiveDragons() < 1 && currDragons < 5)
             {
                 currDragons++;
                 Instantiate(dragon, new Vector3(300f, 0, 390f), Quaternion.identity);

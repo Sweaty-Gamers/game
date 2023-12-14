@@ -2,15 +2,16 @@ using System.Collections;
 using UnityEngine;
 
 class PlayerFovModifier : Modifier
-{
-    public PlayerFovModifier(int sec = 30)
+{   
+    public float initialFov;
+    public PlayerFovModifier(int sec = 30, bool permanent = false)
     {
         this.name = "FOV";
     }
 
     protected override IEnumerator start()
     {
-        float initialFov = Camera.main.fieldOfView;
+        initialFov = Camera.main.fieldOfView;
 
         float t = 0;
         while (t < 1)
@@ -31,30 +32,19 @@ class PlayerFovModifier : Modifier
         yield return new WaitForSeconds(10);
 
         t = 0;
-        while (t < 1)
-        {
-            float val = Mathf.Lerp(120, initialFov, t);
 
-            // If player is scoping in, do not change FOV.
-            if (!Input.GetMouseButton(1))
-            {
-                Camera.main.fieldOfView = val;
-            }
-
-            t += 0.001f;
-            yield return new WaitForSeconds(0.01f);
-        }
-
-        yield return null;
+        yield return end();
     }
 
     protected override IEnumerator end()
     {
+        
+        Camera.main.fieldOfView = initialFov;
         yield return null;
     }
 
     protected override IEnumerator permanentMod()
     {
-        throw new System.NotImplementedException();
+        yield return null;
     }
 }
