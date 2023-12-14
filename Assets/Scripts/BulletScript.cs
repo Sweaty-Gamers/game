@@ -36,7 +36,9 @@ public class BulletScript : MonoBehaviour
         {
             ContactPoint firstContact = collision.contacts.First();
             GameObject decalObject = Instantiate(bulletMarkPrefab, firstContact.point + (firstContact.normal * 0.025f), Quaternion.identity);
+
             decalObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, firstContact.normal);
+            decalObject.AddComponent<Explosion>().length = 10;
 
             // Destroy bullet.
             Destroy(gameObject);

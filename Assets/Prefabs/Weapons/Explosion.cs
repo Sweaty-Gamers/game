@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
+    public int length = 5;
+
     private void Start()
     {
         StartCoroutine(Destroy());
@@ -11,7 +13,7 @@ public class Explosion : MonoBehaviour
 
     IEnumerator Destroy()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(length);
         Destroy(gameObject);
     }
 }
