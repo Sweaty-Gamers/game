@@ -115,6 +115,12 @@ public class HUD : MonoBehaviour
         //healthText.text = playerStats.health.ToString() + " / " + playerStats.maxHealth.ToString();
         healthBar.value = playerStats.health;
     }
+
+    public void UpdateMaxHealth()
+    {
+        healthBar.maxValue = playerStats.maxHealth;
+        healthBar.value = playerStats.health;
+    }
     
     public static void updateBossHealth(float newHealth)
     {

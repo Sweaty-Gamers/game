@@ -133,7 +133,7 @@ public class GameMasterScript : MonoBehaviour
         {
             StartCoroutine(EnemyDrop());
         }
-        Debug.Log(MouseLook.sensitivityX);
+        //Debug.Log(MouseLook.sensitivityX);
         modifiersText.text = GetModifiersString();
         CheckRoundEnd();
     }
